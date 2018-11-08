@@ -7,4 +7,18 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/search_title"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom" />
+    <item
+        android:id="@+id/action_user"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="@string/order_by"
+        android:visible="true"
+        app:actionViewClass="android.widget.Button"
+        app:showAsAction="ifRoom|collapseActionView" />
 </menu>

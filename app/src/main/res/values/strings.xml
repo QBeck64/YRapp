@@ -6,4 +6,6 @@
     <string name="tab_text_3">Gare</string>
     <string name="action_settings">Impostazioni</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="search_title">Cerca…</string>
+    <string name="order_by">Ordina per</string>
 </resources>
