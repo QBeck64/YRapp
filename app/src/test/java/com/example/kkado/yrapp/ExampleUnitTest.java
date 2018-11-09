@@ -14,4 +14,17 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    public void testAddressFormat(Address address) {
+        assertEquals(address.getZipCode().length(), 5);
+        assertEquals(address.getProvince().length(), 2);
+    }
+
+    public void testEmailFormat(Email email) {
+        assertTrue(email.getAddress().contains("@"));
+    }
+
+    public void testCellPhoneFormat(Phone phone) {
+        assertEquals(phone.getNumber().length(), 10);
+    }
 }
