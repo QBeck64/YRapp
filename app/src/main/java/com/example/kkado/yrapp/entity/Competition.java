@@ -2,25 +2,35 @@ package com.example.kkado.yrapp.entity;
 
 import  java.util.Date;
 
-public class Target {
+public class Competition {
 
-	private int idTarget;
+	/**
+	 * Members
+	 */
+	private int idCompetition;
 	private String description;
-	private int goal;
+	private String goal;
 	private Date  initialDate;
 	private Date finalDate;
 
-	public Target() {
+	/**
+	 * Constructor
+	 */
+	public Competition() {
 
 	}
 
-	public int getIdTarget() {
-		return idTarget;
+	/**
+	 *Gets
+	 */
+	public int getIdCompetition() {
+		return idCompetition;
 	}
+
 	public String getDescription() {
 		return description;
 	}
-	public int getGoal() {
+	public String getGoal() {
 		return goal;
 	}
 	public Date getInitialDate() {
@@ -30,13 +40,16 @@ public class Target {
 		return finalDate;
 	}
 
-	public void setIdTarget(int idTarget) {
-		this.idTarget = idTarget;
+	/**
+	 * Sets
+	 */
+	public void setIdCompetition(int idCompetition) {
+		this.idCompetition = idCompetition;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public void setGoal(int goal) {
+	public void setGoal(String goal) {
 		this.goal = goal;
 	}
 	public void setInitialDate(Date initialDate) {
@@ -45,6 +58,7 @@ public class Target {
 	public void setFinalDate(Date finalDate) {
 		this.finalDate = finalDate;
 	}
+
 
 
 }

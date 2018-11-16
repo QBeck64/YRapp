@@ -8,4 +8,5 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="search_title">Cerca…</string>
     <string name="order_by">Ordina per</string>
+    <string name="action_test_Lis">Test Lis</string>
 </resources>

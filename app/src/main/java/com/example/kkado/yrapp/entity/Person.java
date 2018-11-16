@@ -4,13 +4,18 @@ import com.example.kkado.yrapp.Enum.Gender;
 import  java.util.Date;
 
 public class Person {
-
+	/**
+	 * Members
+	 */
 	private int idPerson;
 	private String name;
 	private String surname;
 	private Date birthday;
 	private Gender gender;
 
+	/**
+	 * Constructor
+	 */
 	public Person() {
 
 	}
@@ -23,6 +28,9 @@ public class Person {
 		this.gender=gender;
 	}
 
+	/**
+	 * Gets
+	 */
 	public int getIdPerson() {
 		return this.idPerson;
 	}
@@ -39,6 +47,9 @@ public class Person {
 		return this.gender;
 	}
 
+	/**
+	 * Sets
+	 */
 	public void setIdPerson(int idPerson) {
 		this.idPerson = idPerson;
 	}
@@ -54,4 +65,6 @@ public class Person {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+
+
 }

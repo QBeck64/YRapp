@@ -13,6 +13,7 @@
         android:title="@string/search_title"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom" />
+
     <item
         android:id="@+id/action_user"
         android:enabled="true"

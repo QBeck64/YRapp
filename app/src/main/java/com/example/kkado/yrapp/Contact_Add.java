@@ -14,7 +14,7 @@ public class Contact_Add extends AppCompatActivity {
     EditText edit1, edit2, edit3;
     Button b1, b2;
 
-    public static final String MyPREFERENCES = "myPrefs"
+    public static final String MyPREFERENCES = "myPrefs";
 
     SharedPreferences sharedPreferences;
 
@@ -31,16 +31,6 @@ public class Contact_Add extends AppCompatActivity {
         b1 = (Button)findViewById(R.id.floatingActionButton2);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                newContact.setName(edit1.getText().toString());
-                SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                editor.put
-            }
-        }) {
-
-        }
     }
 }

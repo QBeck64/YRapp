@@ -4,15 +4,25 @@ import com.example.kkado.yrapp.Enum.TypePhone;
 
 public class Phone {
 
+	/**
+	 * Members
+	 */
 	private int idPhone;
 	private TypePhone type;
 	private String phoneNumber;
 	private Person person;
+	private int idPerson;
 
+	/**
+	 * Constructor
+	 */
 	public Phone() {
 
 	}
 
+	/**
+	 * Gets
+	 */
 	public int getIdPhone() {
 		return idPhone;
 	}
@@ -25,7 +35,13 @@ public class Phone {
 	public Person getPerson() {
 		return this.person;
 	}
+	public int getIdPerson() {
+		return idPerson;
+	}
 
+	/**
+	 * Sets
+	 */
 	public void setIdPhone(int idPhone) {
 		this.idPhone = idPhone;
 	}
@@ -38,4 +54,8 @@ public class Phone {
 	public void setPerson(Person person) {
 		this.person = person;
 	}
+	public void setIdPerson(int idPerson) {
+		this.idPerson = idPerson;
+	}
+
 }
