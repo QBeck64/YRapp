@@ -8,4 +8,19 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="search_title">Cerca…</string>
     <string name="order_by">Ordina per</string>
+    <string name="lastName">Last Name</string>
+    <string name="firstName">First Name</string>
+    <string name="birthday">Date of Birth</string>
+    <string name="streetAddress">Address</string>
+    <string name="addressCity">City</string>
+    <string name="addressProvince">Province</string>
+    <string name="addressZip">Postal Code</string>
+    <string name="emailAddress">Email Address</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="addContact">addContact</string>
+    <string name="gender_prompt">Gender</string>
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

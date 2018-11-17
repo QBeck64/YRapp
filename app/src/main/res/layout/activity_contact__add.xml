@@ -37,12 +37,13 @@
         android:id="@+id/firstName"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="First Name"
+        android:text="@string/firstName"
         app:layout_constraintEnd_toStartOf="@+id/lastName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
@@ -56,7 +57,7 @@
         android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Last Name"
+        android:text="@string/lastName"
         app:layout_constraintBottom_toTopOf="@+id/gender"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/firstName"
@@ -72,7 +73,7 @@
         android:ems="10"
         android:inputType="date"
         android:selectAllOnFocus="false"
-        android:text="Date of Birth"
+        android:text="@string/birthday"
         app:layout_constraintEnd_toStartOf="@+id/gender"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstName" />
@@ -80,12 +81,17 @@
     <Spinner
         android:id="@+id/gender"
         android:layout_width="180dp"
-        android:layout_height="46dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:dropDownWidth="match_parent"
+        android:entries="@array/gender_array"
+        android:spinnerMode="dropdown"
         app:layout_constraintStart_toEndOf="@+id/birthday"
-        app:layout_constraintTop_toBottomOf="@+id/lastName" />
+        app:layout_constraintTop_toBottomOf="@+id/lastName"
+        tools:prompt="@string/gender_prompt" />
 
     <android.support.constraint.Barrier
         android:id="@+id/barrier"
@@ -100,9 +106,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPostalAddress"
-        android:text="Address"
+        android:text="@string/streetAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/birthday" />
@@ -114,7 +121,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPostalAddress"
-        android:text="City"
+        android:text="@string/addressCity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/streetAddress" />
 
@@ -129,7 +136,7 @@
         android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="textPostalAddress"
-        android:text="Province"
+        android:text="@string/addressProvince"
         app:layout_constraintEnd_toStartOf="@+id/addressZip"
         app:layout_constraintStart_toEndOf="@+id/addressCity"
         app:layout_constraintTop_toBottomOf="@+id/streetAddress" />
@@ -143,42 +150,47 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
-        android:text="Postal Code"
+        android:text="@string/addressZip"
         app:layout_constraintStart_toEndOf="@+id/addressProvince"
         app:layout_constraintTop_toBottomOf="@+id/streetAddress" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/emailAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="Email Address"
+        android:text="@string/emailAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addressCity" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/phoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="phone"
-        android:text="Phone Number"
+        android:text="@string/phoneNumber"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+    <ImageButton
+        android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="336dp"
+        android:layout_marginLeft="336dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:clickable="true"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressZip"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
 </android.support.constraint.ConstraintLayout>
