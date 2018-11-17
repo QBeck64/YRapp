@@ -20,6 +20,14 @@ public class Competition {
 
     }
 
+    public Competition(int idCompetition, String description, String goal, Date initialDate, Date finalDate) {
+        this.idCompetition = idCompetition;
+        this.description = description;
+        this.goal = goal;
+        this.initialDate = initialDate;
+        this.finalDate = finalDate;
+    }
+
     /**
      * Gets
      */

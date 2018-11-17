@@ -75,6 +75,21 @@ public class Address {
         this.person = person;
     }
 
+    public Address(int idAddress, TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String country, String postalCode, int idPerson) {
+        this.idAddress = idAddress;
+        this.type = type;
+        this.nameAddress = nameAddress;
+        this.numberAddress = numberAddress;
+        this.complement = complement;
+        this.province = province;
+        this.city = city;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.idPerson = idPerson;
+    }
+
+
+
     /**
      * Gets
      */

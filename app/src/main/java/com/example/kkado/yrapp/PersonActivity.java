@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.kkado.yrapp.Enum.Gender;
+import com.example.kkado.yrapp.Enum.TypePerson;
 import com.example.kkado.yrapp.dao.PersonDAO;
 import com.example.kkado.yrapp.dao.SqliteAdapter;
 import com.example.kkado.yrapp.entity.Person;
@@ -30,7 +31,7 @@ import java.util.List;
 public class PersonActivity extends AppCompatActivity {
 
     private ListView lvPerson;
-    private final String TABLE = "Person";
+
     private List<Person> personList = new ArrayList<Person>();
     private ArrayAdapter<Person> arrayAdapterPerson;
 
@@ -55,7 +56,8 @@ public class PersonActivity extends AppCompatActivity {
         PersonDAO dao = new PersonDAO(this);
         personList.clear();
         Date data = new Date();
-        Person person = new Person("Stefano", "Nicotra", data, Gender.masculine);
+                Person person = new Person(0,"Stefano", "Nicotra", data, Gender.masculine,1,"nic17014@byui.edu", "11999999999", null, TypePerson.Leader );
+
         boolean save = dao.save(person);
 
         if (save) {

@@ -3,8 +3,8 @@ package com.example.kkado.yrapp.Enum;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum TypeEmail {
-    Personal(1, "Personal"), Corporate(2, "Corporate");
+public enum TypePerson {
+    Candidate(1, "Candidate"), SalesPerson(2, "SalesPerson"), Leader(3, "Leader"), ZoneManager(4, "ZoneManager");
 
     /**
      * Members
@@ -15,10 +15,10 @@ public enum TypeEmail {
     /**
      * Constructor
      */
-    private TypeEmail() {
+    private TypePerson() {
     }
 
-    private TypeEmail(int id, String description) {
+    private TypePerson(int id, String description) {
         this.id = id;
         this.description = description;
     }
@@ -48,7 +48,7 @@ public enum TypeEmail {
     /**
      * Records the relationships between the description and the value of an enum element
      */
-    private static Map<String, TypeEmail> relations;
+    private static Map<String, TypePerson> relations;
 
     /**
      * Retrieve an enum element from a string
@@ -56,7 +56,7 @@ public enum TypeEmail {
      * @param description
      * @return
      */
-    public static TypeEmail getTypeEmailDescription(String description) {
+    public static TypePerson getTypePersonDescription(String description) {
         return relations.get(description);
     }
 
@@ -64,8 +64,8 @@ public enum TypeEmail {
      * Static block that populates the hashmap with the relations between description and elements of the enum
      */
     static {
-        relations = new HashMap<String, TypeEmail>();
-        for (TypeEmail s : values()) relations.put(s.getDescription(), s);
+        relations = new HashMap<String, TypePerson>();
+        for (TypePerson s : values()) relations.put(s.getDescription(), s);
     }
 }
 

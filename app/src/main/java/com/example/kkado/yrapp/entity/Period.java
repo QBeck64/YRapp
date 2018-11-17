@@ -19,8 +19,10 @@ public class Period {
 
     }
 
-    public Period(int idPeriod, String name, Status status) {
+    public Period(int idPeriod, Date initialDate, Date finalDate) {
         this.idPeriod = idPeriod;
+        this.initialDate = initialDate;
+        this.finalDate = finalDate;
     }
 
     /**

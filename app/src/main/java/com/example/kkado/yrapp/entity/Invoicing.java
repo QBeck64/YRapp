@@ -1,7 +1,5 @@
 package com.example.kkado.yrapp.entity;
 
-import com.example.kkado.yrapp.Enum.StatusCandidate;
-
 public class Invoicing {
 
     /**
@@ -21,57 +19,63 @@ public class Invoicing {
 
     }
 
+    public Invoicing(int idInvoicing, float invoicing, int idPerson, int idPeriod) {
+        this.idInvoicing = idInvoicing;
+        this.invoicing = invoicing;
+        this.period = period;
+        this.person = person;
+        this.idPerson = idPerson;
+        this.idPeriod = idPeriod;
+    }
+
     /**
-     * Gets
+     * Gets and Sets
      */
     public int getIdInvoicing() {
         return idInvoicing;
+    }
+
+    public void setIdInvoicing(int idInvoicing) {
+        this.idInvoicing = idInvoicing;
     }
 
     public float getInvoicing() {
         return invoicing;
     }
 
+    public void setInvoicing(float invoicing) {
+        this.invoicing = invoicing;
+    }
+
     public Period getPeriod() {
         return period;
-    }
-
-    public Person getPerson() {
-        return this.person;
-    }
-
-    public int getIdPeriod() {
-        return idPeriod;
-    }
-
-    public int getIdPerson() {
-        return idPerson;
-    }
-
-    /**
-     * Sets
-     */
-    public void setIdInvoicing(int idInvoicing) {
-        this.idInvoicing = idInvoicing;
     }
 
     public void setPeriod(Period period) {
         this.period = period;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public int getIdPerson() {
+        return idPerson;
     }
 
     public void setIdPerson(int idPerson) {
         this.idPerson = idPerson;
     }
 
-    public void setIdPeriod(int idPeriod) {
-        this.idPeriod = idPeriod;
+    public int getIdPeriod() {
+        return idPeriod;
     }
 
-    public void setInvoicing(float invoicing) {
-        this.invoicing = invoicing;
+    public void setIdPeriod(int idPeriod) {
+        this.idPeriod = idPeriod;
     }
 }
