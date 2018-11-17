@@ -3,22 +3,34 @@ package com.example.kkado.yrapp.dao;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+/**
+ *
+ */
 public class DbGateway {
     private static DbGateway gw;
     private SQLiteDatabase db;
 
-    private DbGateway(Context ctx){
+    private DbGateway(Context ctx) {
         SqliteAdapter helper = new SqliteAdapter(ctx);
         db = helper.getWritableDatabase();
     }
 
-    public static DbGateway getInstance(Context ctx){
-        if(gw == null)
-            gw = new DbGateway(ctx);
+    /**
+     *
+     * @param myContext
+     * @return
+     */
+    public static DbGateway getInstance(Context myContext) {
+        if (gw == null)
+            gw = new DbGateway(myContext);
         return gw;
     }
 
-    public SQLiteDatabase getDatabase(){
+    /**
+     *
+     * @return
+     */
+    public SQLiteDatabase getDatabase() {
         return this.db;
     }
 }

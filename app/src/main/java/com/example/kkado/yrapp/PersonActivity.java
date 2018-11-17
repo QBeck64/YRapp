@@ -1,35 +1,44 @@
 package com.example.kkado.yrapp;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.kkado.yrapp.Enum.Gender;
 import com.example.kkado.yrapp.dao.PersonDAO;
 import com.example.kkado.yrapp.dao.SqliteAdapter;
 import com.example.kkado.yrapp.entity.Person;
+import com.example.kkado.yrapp.helper.Util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PersonActivity extends AppCompatActivity {
-private SqliteAdapter myDataBase;
-private ListView lvPerson;
-private List<Person> personList = new ArrayList<Person>();
-private ArrayAdapter<Person> arrayAdapterPerson;
+
+    private ListView lvPerson;
+    private final String TABLE = "Person";
+    private List<Person> personList = new ArrayList<Person>();
+    private ArrayAdapter<Person> arrayAdapterPerson;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
         initializeResources();
-        initializeDataBase();
         try {
             initializePersonList();
         } catch (Exception e) {
@@ -39,60 +48,31 @@ private ArrayAdapter<Person> arrayAdapterPerson;
     }
 
     private void initializeResources() {
-        lvPerson=(ListView)findViewById(R.id.lvPerson);
+        lvPerson = (ListView) findViewById(R.id.lvPerson);
     }
 
     private void initializePersonList() throws Exception {
-        PersonDAO dao =new PersonDAO(this);
+        PersonDAO dao = new PersonDAO(this);
         personList.clear();
-        personList=dao.select();
-        arrayAdapterPerson=new ArrayAdapter<Person>(this,android.R.layout.simple_list_item_1, personList);
+        Date data = new Date();
+        Person person = new Person("Stefano", "Nicotra", data, Gender.masculine);
+        boolean save = dao.save(person);
+
+        if (save) {
+            alert("Success");
+        } else {
+            alert("Error");
+        }
+        personList = dao.select();
+        arrayAdapterPerson = new ArrayAdapter<Person>(this, android.R.layout.simple_list_item_1, personList);
         lvPerson.setAdapter(arrayAdapterPerson);
     }
 
-    private void initializeDataBase() {
-        myDataBase = new SqliteAdapter(this);
-        File database = getApplicationContext().getDatabasePath(SqliteAdapter.DATABASE_NAME);
-        if(database.exists()==false){
-            myDataBase.getReadableDatabase();
-            if(copyDataBase(this)){
-                alert("Success");
-
-            }else{
-                alert("Error");
-            }
-        }
-    }
-
     private void alert(String error) {
-        Toast.makeText(this,error,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, error, Toast.LENGTH_LONG).show();
     }
 
-    private boolean copyDataBase(Context context) {
-        try {
-            InputStream inputStream = context.getAssets().open(SqliteAdapter.DATABASE_NAME);
-            String outFile = SqliteAdapter.LOCALDB + SqliteAdapter.DATABASE_NAME;
-            OutputStream outputStream = new FileOutputStream(outFile);
-            byte[] buff = new byte[1024];
-            int lenght = 0;
-            while ((lenght = inputStream.read(buff)) > 0) {
-                outputStream.write(buff, 0, lenght);
-
-            }
-            outputStream.flush();
-            outputStream.close();
-            return true;
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-            return false;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-        }
-    }
+}
 
 
 

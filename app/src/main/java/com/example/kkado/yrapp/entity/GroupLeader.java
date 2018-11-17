@@ -27,6 +27,7 @@ public class GroupLeader {
     public int getIdGroupLeader() {
         return idGroupLeader;
     }
+
     public String getName() {
         return name;
     }
@@ -34,9 +35,11 @@ public class GroupLeader {
     public int getIdLeader() {
         return idLeader;
     }
+
     public Date getInitialDate() {
         return initialDate;
     }
+
     public Date getFinalDate() {
         return finalDate;
     }
@@ -47,12 +50,15 @@ public class GroupLeader {
     public void setIdGroupLeader(int idGroupLeader) {
         this.idGroupLeader = idGroupLeader;
     }
+
     public void setIdLeader(int idLeader) {
         this.idLeader = idLeader;
     }
+
     public void setInitialDate(Date initialDate) {
         this.initialDate = initialDate;
     }
+
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
     }

@@ -28,24 +28,31 @@ public class CompetitionParticipant {
     public int getIdCompetitionParticipant() {
         return idCompetitionParticipant;
     }
+
     public int getIdParticipante() {
         return idParticipante;
     }
+
     public int getIdCompetition() {
         return idCompetition;
     }
+
     public Date getInitialDate() {
         return initialDate;
     }
+
     public Date getFinalDate() {
         return finalDate;
     }
+
     public boolean getprizeGiven() {
         return prizeGiven;
     }
+
     public Person getPerson() {
         return person;
     }
+
     public Competition getCompetition() {
         return competition;
     }
@@ -56,24 +63,31 @@ public class CompetitionParticipant {
     public void setIdCompetitionParticipant(int idCompetitionParticipant) {
         this.idCompetitionParticipant = idCompetitionParticipant;
     }
+
     public void setIdParticipante(int idParticipante) {
         this.idParticipante = idParticipante;
     }
+
     public void setIdCompetition(int idCompetition) {
         this.idCompetition = idCompetition;
     }
+
     public void setInitialDate(Date initialDate) {
         this.initialDate = initialDate;
     }
+
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
     }
+
     public void setPrizeGiven(boolean prizeGiven) {
         this.prizeGiven = prizeGiven;
     }
+
     public void setPerson(Person person) {
         this.person = person;
     }
+
     public void setCompetition(Competition competition) {
         this.competition = competition;
     }
