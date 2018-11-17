@@ -1,10 +1,10 @@
 package com.example.kkado.yrapp.Enum;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
-public enum Status {
-    Active(1, "Active"), Inactive(2, "Inactive");
+public enum TypePerson {
+    Candidate(1, "Candidate"), SalesPerson(2, "SalesPerson"), Leader(3, "Leader"), ZoneManager(4, "ZoneManager");
 
     /**
      * Members
@@ -15,10 +15,10 @@ public enum Status {
     /**
      * Constructor
      */
-    private Status() {
+    private TypePerson() {
     }
 
-    private Status(int id, String description) {
+    private TypePerson(int id, String description) {
         this.id = id;
         this.description = description;
     }
@@ -48,7 +48,7 @@ public enum Status {
     /**
      * Records the relationships between the description and the value of an enum element
      */
-    private static Map<String, Status> relations;
+    private static Map<String, TypePerson> relations;
 
     /**
      * Retrieve an enum element from a string
@@ -56,7 +56,7 @@ public enum Status {
      * @param description
      * @return
      */
-    public static Status getStatusDescription(String description) {
+    public static TypePerson getTypePersonDescription(String description) {
         return relations.get(description);
     }
 
@@ -64,8 +64,8 @@ public enum Status {
      * Static block that populates the hashmap with the relations between description and elements of the enum
      */
     static {
-        relations = new HashMap<String, Status>();
-        for (Status s : values()) relations.put(s.getDescription(), s);
+        relations = new HashMap<String, TypePerson>();
+        for (TypePerson s : values()) relations.put(s.getDescription(), s);
     }
 }
 
