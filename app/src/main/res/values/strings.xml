@@ -9,4 +9,18 @@
     <string name="search_title">Cerca…</string>
     <string name="order_by">Ordina per</string>
     <string name="action_test_Lis">Test Lis</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="birthday">Birthday</string>
+    <string name="streetAddress">Address</string>
+    <string name="addressCity">City</string>
+    <string name="addressProvince">Province</string>
+    <string name="addressZip">Postal Code</string>
+    <string name="emailAddress">Email</string>
+    <string name="phoneNumber">Phone</string>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="gender_prompt">Gender</string>
 </resources>

@@ -8,29 +8,45 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.kkado.yrapp.dao.PersonDAO;
+import com.example.kkado.yrapp.entity.Address;
 import com.example.kkado.yrapp.entity.Person;
 
 public class Contact_Add extends AppCompatActivity {
-    EditText edit1, edit2, edit3;
+    EditText editFirst, editLast, editDate, editEmail, editPhone,
+        editStreet, editCity, editProvince, editZip;
     Button b1, b2;
-
-    public static final String MyPREFERENCES = "myPrefs";
-
-    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact__add);
 
-        // Create new "person" object
+    }
+
+    public void newContacts() {
+        // Declare a new Person object
         final Person newContact = new Person();
 
-        edit1= (EditText)findViewById(R.id.firstName);
+        // Convert input to strings and store in Person object
 
-        b1 = (Button)findViewById(R.id.floatingActionButton2);
-        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        newContact.setName(editFirst.getText().toString());
+        newContact.setSurname(editLast.getText().toString());
+        // I don't understand how to get the "Date" and put it in
+        newContact.setEmail(editEmail.getText().toString());
+        newContact.setPhoneNumber(editPhone.getText().toString());
 
+        // Create a new Address Object
+        final Address newAddress = new Address();
 
+        // Fill the Address Object, including person
+        newAddress.setNameAddress(editStreet.getText().toString());
+        newAddress.setCity(editCity.getText().toString());
+        newAddress.setProvince(editProvince.getText().toString());
+        newAddress.setPostalCode(editZip.getText().toString());
+        newAddress.setPerson(newContact);
+
+        // This is where you would save to the database, still a little unclear there. Will review
+        // Lis's document and attempt on Monday.
     }
 }
