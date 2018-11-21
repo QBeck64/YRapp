@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.kkado.yrapp.dao.PersonDAO;
 import com.example.kkado.yrapp.entity.Address;
@@ -46,7 +47,20 @@ public class Contact_Add extends AppCompatActivity {
         newAddress.setPostalCode(editZip.getText().toString());
         newAddress.setPerson(newContact);
 
-        // This is where you would save to the database, still a little unclear there. Will review
-        // Lis's document and attempt on Monday.
+        // Create DAO to store person object.
+        PersonDAO dao = new PersonDAO(this);
+
+        boolean save = dao.save(newContact);
+
+        if (save) {
+            alert("Success");
+        } else {
+            alert("Error");
+        }
+
+
+    }
+    private void alert(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_LONG).show();
     }
 }
