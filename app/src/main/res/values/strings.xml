@@ -23,4 +23,7 @@
         <item>Female</item>
     </string-array>
     <string name="gender_prompt">Gender</string>
+    <string name="Save_Contact">Save</string>
+    <string name="Create_Contact">Create new contact</string>
+    <string name="return_to_contact_book">returnButton</string>
 </resources>

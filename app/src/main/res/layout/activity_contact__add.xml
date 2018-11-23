@@ -13,39 +13,41 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@android:style/ButtonBar"
+        app:layout_constraintBottom_toTopOf="@+id/firstName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@drawable/common_google_signin_btn_icon_light_normal_background" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/back"
-        android:layout_height="40dp"
+    <ImageButton
+        android:id="@+id/returnContacts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginBottom="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toTopOf="@+id/firstName"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
+        android:onClick="returnButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <EditText
         android:id="@+id/firstName"
         android:layout_width="180dp"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/firstName"
+        app:layout_constraintBottom_toTopOf="@+id/birthday"
         app:layout_constraintEnd_toStartOf="@+id/lastName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
+        tools:targetApi="o" />
 
     <EditText
         android:id="@+id/lastName"
@@ -53,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
+        android:layout_marginTop="1dp"
         android:layout_marginBottom="8dp"
         android:autofillHints=""
         android:ems="10"
@@ -61,7 +64,8 @@
         app:layout_constraintBottom_toTopOf="@+id/gender"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/firstName"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
+        tools:targetApi="o" />
 
     <EditText
         android:id="@+id/birthday"
@@ -76,7 +80,8 @@
         android:text="@string/birthday"
         app:layout_constraintEnd_toStartOf="@+id/gender"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstName" />
+        app:layout_constraintTop_toBottomOf="@+id/firstName"
+        android:autofillHints="" tools:targetApi="o" />
 
     <Spinner
         android:id="@+id/gender"
@@ -84,13 +89,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
         android:background="@android:drawable/btn_dropdown"
         android:dropDownWidth="match_parent"
         android:entries="@array/gender"
         android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/streetAddress"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/birthday"
-        app:layout_constraintTop_toBottomOf="@+id/lastName"
         tools:prompt="@string/gender_prompt" />
 
     <android.support.constraint.Barrier
@@ -112,16 +118,21 @@
         android:text="@string/streetAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthday" />
+        app:layout_constraintTop_toBottomOf="@+id/birthday" tools:targetApi="o" />
 
     <EditText
         android:id="@+id/addressCity"
         android:layout_width="149dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:inputType="textPostalAddress"
         android:text="@string/addressCity"
+        app:layout_constraintBottom_toTopOf="@+id/emailAddress"
+        app:layout_constraintEnd_toStartOf="@+id/addressProvince"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/streetAddress" />
 
@@ -134,12 +145,15 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:inputType="textPostalAddress"
         android:text="@string/addressProvince"
+        app:layout_constraintBottom_toTopOf="@+id/emailAddress"
         app:layout_constraintEnd_toStartOf="@+id/addressZip"
         app:layout_constraintStart_toEndOf="@+id/addressCity"
-        app:layout_constraintTop_toBottomOf="@+id/streetAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/streetAddress"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/addressZip"
@@ -148,20 +162,31 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="number"
         android:text="@string/addressZip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addressProvince"
-        app:layout_constraintTop_toBottomOf="@+id/streetAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/streetAddress"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/emailAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="169dp"
+        android:layout_marginRight="169dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:text="@string/emailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/phoneNumber"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addressCity" />
 
@@ -170,27 +195,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="169dp"
+        android:layout_marginRight="169dp"
+        android:layout_marginBottom="141dp"
         android:ems="10"
         android:inputType="phone"
         android:text="@string/phoneNumber"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/saveContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="336dp"
         android:layout_marginLeft="336dp"
-        android:layout_marginTop="200dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:background="@color/colorAccent"
+        android:contentDescription="@string/Save_Contact"
+        android:onClick="addNwContact"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addressZip"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
 </android.support.constraint.ConstraintLayout>

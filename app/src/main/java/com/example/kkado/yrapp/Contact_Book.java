@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 public class Contact_Book extends AppCompatActivity {
 
@@ -13,8 +15,8 @@ public class Contact_Book extends AppCompatActivity {
         setContentView(R.layout.activity_contact__book);
     }
 
-    public void onButtonClick(View v) {
-        Intent myIntent = new Intent(getBaseContext(), Contact_Add.class);
+    public void createContact(View v) {
+        Intent myIntent = new Intent(this, Contact_Add.class);
         startActivity(myIntent);
     }
 }

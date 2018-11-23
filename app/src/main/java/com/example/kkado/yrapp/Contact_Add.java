@@ -1,6 +1,7 @@
 package com.example.kkado.yrapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.kkado.yrapp.dao.AddressDAO;
 import com.example.kkado.yrapp.dao.PersonDAO;
 import com.example.kkado.yrapp.entity.Address;
 import com.example.kkado.yrapp.entity.Person;
@@ -25,7 +27,13 @@ public class Contact_Add extends AppCompatActivity {
 
     }
 
-    public void newContacts() {
+    // Return button, will cancel data inputs and return to contact book
+    public void returnButton(View v) {
+        Intent myIntent = new Intent(this, Contact_Book.class);
+        startActivity(myIntent);
+    }
+
+    public void addNwContact(View v) {
         // Declare a new Person object
         final Person newContact = new Person();
 
@@ -36,6 +44,9 @@ public class Contact_Add extends AppCompatActivity {
         // I don't understand how to get the "Date" and put it in
         newContact.setEmail(editEmail.getText().toString());
         newContact.setPhoneNumber(editPhone.getText().toString());
+
+        // Remember to set the person id to zero
+        newContact.setIdPerson(0);
 
         // Create a new Address Object
         final Address newAddress = new Address();
@@ -53,6 +64,17 @@ public class Contact_Add extends AppCompatActivity {
         boolean save = dao.save(newContact);
 
         if (save) {
+            alert("Success");
+        } else {
+            alert("Error");
+        }
+
+        // Create DAO to store address object.
+        AddressDAO aDao = new AddressDAO(this);
+
+        boolean aSave = aDao.save(newAddress);
+
+        if (aSave) {
             alert("Success");
         } else {
             alert("Error");

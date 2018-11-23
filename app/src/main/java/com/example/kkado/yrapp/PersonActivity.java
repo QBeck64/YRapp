@@ -56,7 +56,7 @@ public class PersonActivity extends AppCompatActivity {
         PersonDAO dao = new PersonDAO(this);
         personList.clear();
         Date data = new Date();
-                Person person = new Person(0,"Stefano", "Nicotra", data, Gender.masculine,1,"nic17014@byui.edu", "11999999999", null, TypePerson.Leader );
+        Person person = new Person(0,"Stefano", "Nicotra", data, Gender.masculine,1,"nic17014@byui.edu", "11999999999", null, TypePerson.Leader );
 
         boolean save = dao.save(person);
 
