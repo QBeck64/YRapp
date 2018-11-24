@@ -44,23 +44,42 @@ public class CompetitionDAO {
     }
 
     /**
-     *
      * @param item
      * @return
      */
     public boolean save(Competition item) {
         ContentValues cv = new ContentValues();
-        cv.put("idCompetition" , item.getIdCompetition());
-        cv.put("description" , item.getDescription());
-        cv.put("goal" , item.getGoal());
-        cv.put("initialDate" , Util.ConvertDateToString(item.getInitialDate()));
-        cv.put("finalDate" , Util.ConvertDateToString(item.getFinalDate()));
+        cv.put("idCompetition", item.getIdCompetition());
+        cv.put("description", item.getDescription());
+        cv.put("goal", item.getGoal());
+        cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));
+        cv.put("finalDate", Util.ConvertDateToString(item.getFinalDate()));
 
 
         if (item.getIdCompetition() > 0)
             return mySQLiteDatabase.update(TABLE, cv, "idCompetition=?", new String[]{item.getIdCompetition() + ""}) > 0;
         else
             return mySQLiteDatabase.insert(TABLE, null, cv) > 0;
+    }
+
+    /**
+     *
+     * @param item
+     * @return
+     */
+    public long saveCompetition(Competition item) {
+        ContentValues cv = new ContentValues();
+        cv.put("idCompetition", item.getIdCompetition());
+        cv.put("description", item.getDescription());
+        cv.put("goal", item.getGoal());
+        cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));
+        cv.put("finalDate", Util.ConvertDateToString(item.getFinalDate()));
+
+
+        if (item.getIdCompetition() > 0)
+            return mySQLiteDatabase.update(TABLE, cv, "idCompetition=?", new String[]{item.getIdCompetition() + ""});
+        else
+            return mySQLiteDatabase.insert(TABLE, null, cv) ;
     }
 
     /**
@@ -82,17 +101,44 @@ public class CompetitionDAO {
 
         while (cursor.moveToNext()) {
             int idCompetition = cursor.getInt(cursor.getColumnIndex("idCompetition"));
-            String  description = cursor.getString(cursor.getColumnIndex("description"));
+            String description = cursor.getString(cursor.getColumnIndex("description"));
             String goal = cursor.getString(cursor.getColumnIndex("goal"));
             Date initialDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("initialDate")));
             Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
 
 
-            competitionList.add(new Competition(  idCompetition,  description,  goal,  initialDate,  finalDate));
+            competitionList.add(new Competition(idCompetition, description, goal, initialDate, finalDate));
         }
         cursor.close();
 
         return competitionList;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Competition selectId(long id) throws Exception {
+        Competition competition = null;
+        String[] params = new String[]{String.valueOf(id)};
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Competition WHERE idCompetition = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idCompetition = cursor.getInt(cursor.getColumnIndex("idCompetition"));
+            String description = cursor.getString(cursor.getColumnIndex("description"));
+            String goal = cursor.getString(cursor.getColumnIndex("goal"));
+            Date initialDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("initialDate")));
+            Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
+
+
+            competition = new Competition(idCompetition, description, goal, initialDate, finalDate);
+        }
+        cursor.close();
+
+        return competition;
     }
 
 }

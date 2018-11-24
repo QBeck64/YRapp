@@ -64,6 +64,25 @@ public class TeamGroupLeaderDAO {
     }
 
     /**
+     *
+     * @param item
+     * @return
+     */
+    public long saveTeamGroupLeader(TeamGroupLeader item) {
+        ContentValues cv = new ContentValues();
+
+        cv.put("idTeamGroupLeader", item.getIdTeamGroupLeader());
+        cv.put("idPerson", item.getIdPerson());
+        cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));
+        cv.put("finalDate", Util.ConvertDateToString(item.getFinalDate()));
+
+        if (item.getIdTeamGroupLeader() > 0)
+            return mySQLiteDatabase.update(TABLE, cv, "idTeamGroupLeader=?", new String[]{item.getIdTeamGroupLeader() + ""}) ;
+        else
+            return mySQLiteDatabase.insert(TABLE, null, cv) ;
+    }
+
+    /**
      * @param id
      * @return
      */
@@ -91,5 +110,29 @@ public class TeamGroupLeaderDAO {
         cursor.close();
 
         return teamGroupLeaderList;
+    }
+
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public TeamGroupLeader selectId(long id) throws Exception {
+        TeamGroupLeader teamGroupLeader = null;
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Invoicing", null);
+
+        while (cursor.moveToNext()) {
+            int idTeamGroupLeader = cursor.getInt(cursor.getColumnIndex("idTeamGroupLeader"));
+            int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
+            Date initialDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("initialDate")));
+            Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
+
+            teamGroupLeader = new TeamGroupLeader(idTeamGroupLeader, initialDate, finalDate, idPerson);
+        }
+        cursor.close();
+
+        return teamGroupLeader;
     }
 }

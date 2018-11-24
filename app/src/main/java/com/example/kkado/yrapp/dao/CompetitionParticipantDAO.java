@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.example.kkado.yrapp.entity.CompetitionParticipant;
 import com.example.kkado.yrapp.helper.Util;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,6 +68,28 @@ public class CompetitionParticipantDAO {
     }
 
     /**
+     *
+     * @param item
+     * @return
+     */
+    public long saveCompetitionParticipant(CompetitionParticipant item) {
+        ContentValues cv = new ContentValues();
+
+        cv.put("idCompetitionParticipant", item.getIdCompetitionParticipant());
+        cv.put("idCompetition", item.getIdCompetition());
+        cv.put("idParticipant", item.getIdParticipant());
+        cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));
+        cv.put("finalDate", Util.ConvertDateToString(item.getFinalDate()));
+        cv.put("prizeGiven", item.isPrizeGiven());
+
+
+        if (item.getIdCompetition() > 0)
+            return mySQLiteDatabase.update(TABLE, cv, "idCompetitionParticipant=?", new String[]{item.getIdCompetitionParticipant() + ""}) ;
+        else
+            return mySQLiteDatabase.insert(TABLE, null, cv) ;
+    }
+
+    /**
      * @param id
      * @return
      */
@@ -95,6 +119,34 @@ public class CompetitionParticipantDAO {
         cursor.close();
 
         return competitionParticipantList;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public CompetitionParticipant selectId(long id) throws Exception {
+        CompetitionParticipant competitionParticipant = null;
+
+        String[] params = new String[]{String.valueOf(id)};
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Competition WHERE idCompetitionParticipant = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idCompetitionParticipant = cursor.getInt(cursor.getColumnIndex("idCompetitionParticipant"));
+            int idParticipant = cursor.getInt(cursor.getColumnIndex("idParticipant"));
+            int idCompetition = cursor.getInt(cursor.getColumnIndex("idCompetition"));
+            Date initialDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("initialDate")));
+            Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
+            boolean prizeGiven = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("prizeGiven")));
+
+            competitionParticipant = new CompetitionParticipant(idCompetitionParticipant, idParticipant, idCompetition, initialDate, finalDate, prizeGiven);
+        }
+        cursor.close();
+
+        return competitionParticipant;
     }
 
 }

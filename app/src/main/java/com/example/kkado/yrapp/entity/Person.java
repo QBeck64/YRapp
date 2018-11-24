@@ -44,6 +44,18 @@ public class Person {
         this.type = type;
     }
 
+    public Person(String name, String surname, Date birthday, Gender gender, int level, String email, String phoneNumber, Integer idPersonParent, TypePerson type) {
+        this.name = name;
+        this.surname = surname;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.level = level;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.idPersonParent = idPersonParent;
+        this.type = type;
+    }
+
     /**
      * Gets and Sets
      */

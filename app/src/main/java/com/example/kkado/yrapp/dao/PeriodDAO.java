@@ -61,6 +61,24 @@ public class PeriodDAO {
     }
 
     /**
+     *
+     * @param item
+     * @return
+     */
+    public long savePeriod(Period item) {
+        ContentValues cv = new ContentValues();
+        cv.put("idPeriod", item.getIdPeriod());
+        cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));
+        cv.put("finalDate", Util.ConvertDateToString(item.getFinalDate()));
+
+
+        if (item.getIdPeriod() > 0)
+            return mySQLiteDatabase.update(TABLE, cv, "idPeriod=?", new String[]{item.getIdPeriod() + ""}) ;
+        else
+            return mySQLiteDatabase.insert(TABLE, null, cv) ;
+    }
+
+    /**
      * @param id
      * @return
      */
@@ -88,6 +106,30 @@ public class PeriodDAO {
         cursor.close();
 
         return periodList;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Period selectId(long id) throws Exception {
+        Period period = null;
+        String[] params = new String[]{String.valueOf(id)};
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Period WHERE idPeriod = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idPeriod = cursor.getInt(cursor.getColumnIndex("idPeriod"));
+            Date initialDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("initialDate")));
+            Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
+
+
+            period = new Period(idPeriod, initialDate, finalDate);
+        }
+        cursor.close();
+
+        return period;
     }
 
 }

@@ -63,6 +63,26 @@ public class InvoicingDAO {
     }
 
     /**
+     *
+     * @param item
+     * @return
+     */
+    public long saveInvoicing(Invoicing item) {
+        ContentValues cv = new ContentValues();
+
+        cv.put("idInvoicing", item.getIdInvoicing());
+        cv.put("invoicing", item.getInvoicing());
+        cv.put("idPerson", item.getIdPerson());
+        cv.put("idPeriod", item.getIdPeriod());
+
+
+        if (item.getIdInvoicing() > 0)
+            return mySQLiteDatabase.update(TABLE, cv, "idInvoicing=?", new String[]{item.getIdInvoicing() + ""}) ;
+        else
+            return mySQLiteDatabase.insert(TABLE, null, cv) ;
+    }
+
+    /**
      * @param id
      * @return
      */
@@ -90,5 +110,30 @@ public class InvoicingDAO {
         cursor.close();
 
         return invoicingList;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Invoicing selectId(long id) throws Exception {
+        Invoicing invoicing = null;
+        String[] params = new String[]{String.valueOf(id)};
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Invoicing WHERE idInvoicing = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idInvoicing = cursor.getInt(cursor.getColumnIndex("idInvoicing"));
+            float invoice = cursor.getFloat(cursor.getColumnIndex("invoicing"));
+            int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
+            int idPeriod = cursor.getInt(cursor.getColumnIndex("idPeriod"));
+
+            invoicing = new Invoicing(idInvoicing, invoice, idPerson, idPeriod);
+        }
+        cursor.close();
+
+        return invoicing;
     }
 }
