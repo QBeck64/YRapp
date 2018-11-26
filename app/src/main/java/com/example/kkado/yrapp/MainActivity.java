@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.kkado.yrapp.entity.Person;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonLis;
@@ -14,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // Making commit for team 2nd change Elisangela
         buttonLis=(Button) findViewById(R.id.buttonLis);
         buttonLis.setOnClickListener(new View.OnClickListener() {

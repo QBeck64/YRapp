@@ -242,7 +242,7 @@
         android:layout_marginBottom="7dp"
         android:ems="10"
         android:hint="@string/addressCompliment"
-        android:inputType="number"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/addressZip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addressNumber"

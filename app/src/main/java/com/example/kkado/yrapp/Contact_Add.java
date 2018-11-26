@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.kkado.yrapp.Enum.Gender;
+import com.example.kkado.yrapp.Enum.TypePerson;
 import com.example.kkado.yrapp.dao.AddressDAO;
 import com.example.kkado.yrapp.dao.PersonDAO;
 import com.example.kkado.yrapp.entity.Address;
@@ -19,6 +22,8 @@ import java.time.Month;
 import java.util.Date;
 
 public class Contact_Add extends AppCompatActivity {
+    private static final String TAG = "ContactAdd";
+
     EditText editFirst;
     EditText editLast;
     EditText editDate;
@@ -46,9 +51,9 @@ public class Contact_Add extends AppCompatActivity {
         startActivity(myIntent);
     }
 
-    public void addNewContact(View v) {
+    public void addNewContact(View v) throws Exception {
         // Declare a new Person object
-        final Person newContact = new Person();
+        Person newContact = new Person();
 
         // Set editText values
         editFirst = (EditText)findViewById(R.id.firstName);
@@ -63,28 +68,43 @@ public class Contact_Add extends AppCompatActivity {
         editCountry = (EditText)findViewById(R.id.addressCountry);
         editZip = (EditText)findViewById(R.id.addressZip);
 
+        Log.d(TAG, "Save input to editText variables");
+
         // For numbers
         String tempV = editNumber.getText().toString();
 
         // Convert input to strings and store in Person object
         newContact.setName(editFirst.getText().toString());
         newContact.setSurname(editLast.getText().toString());
+        newContact.setBirthday(new Date());
+        newContact.setGender(Gender.masculine);
+        newContact.setLevel(1);
+        newContact.setIdPersonParent(null);
         newContact.setEmail(editEmail.getText().toString());
         newContact.setPhoneNumber(editPhone.getText().toString());
+        newContact.setType(TypePerson.Leader);
+
 
         // Remember to set the person id to zero
         newContact.setIdPerson(0);
+
+        Log.d(TAG, "Finish setting all variables inside person object");
 
         // Create DAO to store person object.
         PersonDAO dao = new PersonDAO(this);
 
         long save = dao.savePerson(newContact);
+        Log.d(TAG, "Used savePerson method");
 
-        if (save > 0) {
+        if (save>0) {
             alert("Success");
         } else {
             alert("Error");
         }
+        Log.d(TAG, "Finish saving new person to PersonDAO");
+
+        // Using newly created ID from person, call person object and save into Address
+        Person newPerson = dao.selectId(save);
 
         // Create a new Address Object
         final Address newAddress = new Address();
@@ -98,7 +118,8 @@ public class Contact_Add extends AppCompatActivity {
         newAddress.setProvince(editProvince.getText().toString());
         newAddress.setCountry(editCountry.getText().toString());
         newAddress.setPostalCode(editZip.getText().toString());
-        newAddress.setPerson(newContact);
+        newAddress.setPerson(newPerson);
+        newAddress.setIdPerson(newPerson.getIdPerson());
 
         // Create DAO to store address object.
         AddressDAO aDao = new AddressDAO(this);
@@ -110,7 +131,6 @@ public class Contact_Add extends AppCompatActivity {
         } else {
             alert("Error");
         }
-
 
     }
     private void alert(String error) {
