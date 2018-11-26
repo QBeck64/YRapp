@@ -39,8 +39,8 @@
         android:layout_height="46dp"
         android:autofillHints=""
         android:ems="10"
+        android:hint="@string/firstName"
         android:inputType="textPersonName"
-        android:text="@string/firstName"
         app:layout_constraintBottom_toTopOf="@+id/birthday"
         app:layout_constraintEnd_toStartOf="@+id/lastName"
         app:layout_constraintHorizontal_bias="0.0"
@@ -59,8 +59,8 @@
         android:layout_marginBottom="8dp"
         android:autofillHints=""
         android:ems="10"
+        android:hint="@string/lastName"
         android:inputType="textPersonName"
-        android:text="@string/lastName"
         app:layout_constraintBottom_toTopOf="@+id/gender"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/firstName"
@@ -71,17 +71,14 @@
         android:id="@+id/birthday"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginTop="2dp"
         android:ems="10"
+        android:hint="MM/DD/YEAR"
         android:inputType="date"
         android:selectAllOnFocus="false"
-        android:text="@string/birthday"
-        app:layout_constraintEnd_toStartOf="@+id/gender"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstName"
-        android:autofillHints="" tools:targetApi="o" />
+        tools:targetApi="o" />
 
     <Spinner
         android:id="@+id/gender"
@@ -89,7 +86,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginBottom="5dp"
         android:background="@android:drawable/btn_dropdown"
         android:dropDownWidth="match_parent"
         android:entries="@array/gender"
@@ -107,18 +103,16 @@
 
     <EditText
         android:id="@+id/streetAddress"
-        android:layout_width="360dp"
+        android:layout_width="182dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:autofillHints=""
         android:ems="10"
+        android:hint="@string/streetAddress"
         android:inputType="textPostalAddress"
-        android:text="@string/streetAddress"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthday" tools:targetApi="o" />
+        app:layout_constraintTop_toBottomOf="@+id/birthday"
+        tools:targetApi="o" />
 
     <EditText
         android:id="@+id/addressCity"
@@ -127,11 +121,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
         android:ems="10"
         android:inputType="textPostalAddress"
         android:text="@string/addressCity"
-        app:layout_constraintBottom_toTopOf="@+id/emailAddress"
         app:layout_constraintEnd_toStartOf="@+id/addressProvince"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/streetAddress" />
@@ -178,15 +170,14 @@
         android:id="@+id/emailAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="169dp"
         android:layout_marginRight="169dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:text="@string/emailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/phoneNumber"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addressCity" />
 
@@ -194,17 +185,16 @@
         android:id="@+id/phoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="169dp"
         android:layout_marginRight="169dp"
-        android:layout_marginBottom="141dp"
+        android:layout_marginBottom="60dp"
         android:ems="10"
         android:inputType="phone"
         android:text="@string/phoneNumber"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/saveContact"
@@ -217,10 +207,60 @@
         android:layout_marginBottom="16dp"
         android:background="@color/colorAccent"
         android:contentDescription="@string/Save_Contact"
-        android:onClick="addNwContact"
+        android:onClick="addNewContact"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_add" />
+
+    <EditText
+        android:id="@+id/addressNumber"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginBottom="7dp"
+        android:ems="10"
+        android:hint="@string/number_Addrerss"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/addressProvince"
+        app:layout_constraintEnd_toStartOf="@+id/addressCompliment"
+        app:layout_constraintStart_toEndOf="@+id/streetAddress"
+        app:layout_constraintTop_toBottomOf="@+id/gender" />
+
+    <EditText
+        android:id="@+id/addressCompliment"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="7dp"
+        android:ems="10"
+        android:hint="@string/addressCompliment"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/addressZip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addressNumber"
+        app:layout_constraintTop_toBottomOf="@+id/gender"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/addressCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="169dp"
+        android:layout_marginRight="169dp"
+        android:ems="10"
+        android:hint="@string/addressCountry"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressCity" />
 
 </android.support.constraint.ConstraintLayout>

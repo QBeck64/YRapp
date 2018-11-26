@@ -15,9 +15,22 @@ import com.example.kkado.yrapp.dao.PersonDAO;
 import com.example.kkado.yrapp.entity.Address;
 import com.example.kkado.yrapp.entity.Person;
 
+import java.time.Month;
+import java.util.Date;
+
 public class Contact_Add extends AppCompatActivity {
-    EditText editFirst, editLast, editDate, editEmail, editPhone,
-        editStreet, editCity, editProvince, editZip;
+    EditText editFirst;
+    EditText editLast;
+    EditText editDate;
+    EditText editEmail;
+    EditText editPhone;
+    EditText editStreet;
+    EditText editNumber;
+    EditText editCompl;
+    EditText editCity;
+    EditText editProvince;
+    EditText editCountry;
+    EditText editZip;
     Button b1, b2;
 
     @Override
@@ -33,48 +46,66 @@ public class Contact_Add extends AppCompatActivity {
         startActivity(myIntent);
     }
 
-    public void addNwContact(View v) {
+    public void addNewContact(View v) {
         // Declare a new Person object
         final Person newContact = new Person();
 
-        // Convert input to strings and store in Person object
+        // Set editText values
+        editFirst = (EditText)findViewById(R.id.firstName);
+        editLast = (EditText)findViewById(R.id.lastName);
+        editEmail = (EditText)findViewById(R.id.emailAddress);
+        editPhone = (EditText)findViewById(R.id.phoneNumber);
+        editStreet = (EditText)findViewById(R.id.streetAddress);
+        editNumber = (EditText)findViewById(R.id.addressNumber);
+        editCompl = (EditText)findViewById(R.id.addressCompliment);
+        editCity = (EditText)findViewById(R.id.addressCity);
+        editProvince = (EditText)findViewById(R.id.addressProvince);
+        editCountry = (EditText)findViewById(R.id.addressCountry);
+        editZip = (EditText)findViewById(R.id.addressZip);
 
+        // For numbers
+        String tempV = editNumber.getText().toString();
+
+        // Convert input to strings and store in Person object
         newContact.setName(editFirst.getText().toString());
         newContact.setSurname(editLast.getText().toString());
-        // I don't understand how to get the "Date" and put it in
         newContact.setEmail(editEmail.getText().toString());
         newContact.setPhoneNumber(editPhone.getText().toString());
 
         // Remember to set the person id to zero
         newContact.setIdPerson(0);
 
-        // Create a new Address Object
-        final Address newAddress = new Address();
-
-        // Fill the Address Object, including person
-        newAddress.setNameAddress(editStreet.getText().toString());
-        newAddress.setCity(editCity.getText().toString());
-        newAddress.setProvince(editProvince.getText().toString());
-        newAddress.setPostalCode(editZip.getText().toString());
-        newAddress.setPerson(newContact);
-
         // Create DAO to store person object.
         PersonDAO dao = new PersonDAO(this);
 
-        boolean save = dao.save(newContact);
+        long save = dao.savePerson(newContact);
 
-        if (save) {
+        if (save > 0) {
             alert("Success");
         } else {
             alert("Error");
         }
 
+        // Create a new Address Object
+        final Address newAddress = new Address();
+        newAddress.setIdAddress(0);
+
+        // Fill the Address Object, including person
+        newAddress.setNameAddress(editStreet.getText().toString());
+        newAddress.setNumberAddress(Integer.parseInt(tempV));
+        newAddress.setComplement(editCompl.getText().toString());
+        newAddress.setCity(editCity.getText().toString());
+        newAddress.setProvince(editProvince.getText().toString());
+        newAddress.setCountry(editCountry.getText().toString());
+        newAddress.setPostalCode(editZip.getText().toString());
+        newAddress.setPerson(newContact);
+
         // Create DAO to store address object.
         AddressDAO aDao = new AddressDAO(this);
 
-        boolean aSave = aDao.save(newAddress);
+        long aSave = aDao.saveAddress(newAddress);
 
-        if (aSave) {
+        if (aSave > 0) {
             alert("Success");
         } else {
             alert("Error");

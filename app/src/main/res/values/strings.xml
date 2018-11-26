@@ -26,4 +26,7 @@
     <string name="Save_Contact">Save</string>
     <string name="Create_Contact">Create new contact</string>
     <string name="return_to_contact_book">returnButton</string>
+    <string name="number_Addrerss">Number</string>
+    <string name="addressCompliment">Compl</string>
+    <string name="addressCountry">Country</string>
 </resources>
