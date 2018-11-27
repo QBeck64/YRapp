@@ -4,6 +4,7 @@
     package="com.example.kkado.yrapp">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"

@@ -66,6 +66,27 @@ public class GroupLeaderDAO {
     }
 
     /**
+     *
+     * @param item
+     * @return
+     */
+    public long saveGroupLeader(GroupLeader item) {
+        ContentValues cv = new ContentValues();
+
+        cv.put("idGroupLeader", item.getIdGroupLeader());
+        cv.put("groupName", item.getGroupName());
+        cv.put("idPersonLeader", item.getIdPersonLeader());
+        cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));
+        cv.put("finalDate", Util.ConvertDateToString(item.getFinalDate()));
+
+
+        if (item.getIdGroupLeader() > 0)
+            return mySQLiteDatabase.update(TABLE, cv, "idGroupLeader=?", new String[]{item.getIdGroupLeader() + ""}) ;
+        else
+            return mySQLiteDatabase.insert(TABLE, null, cv) ;
+    }
+
+    /**
      * @param id
      * @return
      */
@@ -94,5 +115,31 @@ public class GroupLeaderDAO {
         cursor.close();
 
         return groupLeaderList;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public GroupLeader selectId(long id) throws Exception {
+        GroupLeader groupLeader = null;
+
+        String[] params = new String[]{String.valueOf(id)};
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM GroupLeader WHERE idCompetition = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idGroupLeader = cursor.getInt(cursor.getColumnIndex("idGroupLeader"));
+            String groupName = cursor.getString(cursor.getColumnIndex("groupName"));
+            int idPersonLeader = cursor.getInt(cursor.getColumnIndex("idPersonLeader"));
+            Date initialDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("initialDate")));
+            Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
+
+            groupLeader = new GroupLeader(idGroupLeader, groupName, idPersonLeader, initialDate, finalDate);
+        }
+        cursor.close();
+
+        return groupLeader;
     }
 }

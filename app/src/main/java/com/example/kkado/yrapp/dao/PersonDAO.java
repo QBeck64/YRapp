@@ -5,10 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.example.kkado.yrapp.Enum.Gender;
 import com.example.kkado.yrapp.Enum.TypePerson;
 import com.example.kkado.yrapp.entity.Person;
 import com.example.kkado.yrapp.helper.Util;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,21 +54,44 @@ public class PersonDAO {
     public boolean save(Person person) {
         ContentValues cv = new ContentValues();
 
-        cv.put("idPerson" , person.getIdPerson());
-        cv.put("name" , person.getName());
-        cv.put("surname" , person.getSurname());
-        cv.put("birthday" ,  Util.ConvertDateToString(person.getBirthday()));
-        cv.put("gender" , person.getGender().getId());
-        cv.put("level" , person.getLevel());
-        cv.put("email" , person.getEmail());
-        cv.put("phoneNumber" , person.getPhoneNumber());
-        cv.put("idPersonParent" , person.getIdPersonParent());
-        cv.put("type" , person.getType().getDescription());
+        cv.put("name", person.getName());
+        cv.put("surname", person.getSurname());
+        cv.put("birthday", Util.ConvertDateToString(person.getBirthday()));
+        cv.put("gender", person.getGender().getId());
+        cv.put("level", person.getLevel());
+        cv.put("email", person.getEmail());
+        cv.put("phoneNumber", person.getPhoneNumber());
+        cv.put("idPersonParent", person.getIdPersonParent());
+        cv.put("type", person.getType().getDescription());
 
         if (person.getIdPerson() > 0)
             return mySQLiteDatabase.update(TABLE, cv, "idPerson=?", new String[]{person.getIdPerson() + ""}) > 0;
         else
             return mySQLiteDatabase.insert(TABLE, null, cv) > 0;
+    }
+
+    /**
+     *
+     * @param person
+     * @return
+     */
+    public long savePerson(Person person) {
+        ContentValues cv = new ContentValues();
+
+        cv.put("name", person.getName());
+        cv.put("surname", person.getSurname());
+        cv.put("birthday", Util.ConvertDateToString(person.getBirthday()));
+        cv.put("gender", person.getGender().getId());
+        cv.put("level", person.getLevel());
+        cv.put("email", person.getEmail());
+        cv.put("phoneNumber", person.getPhoneNumber());
+        cv.put("idPersonParent", person.getIdPersonParent());
+        cv.put("type", person.getType().getDescription());
+
+        if (person.getIdPerson() > 0)
+            return mySQLiteDatabase.update(TABLE, cv, "idPerson=?", new String[]{person.getIdPerson() + ""}) ;
+        else
+            return mySQLiteDatabase.insert(TABLE, null, cv);
     }
 
     /**
@@ -96,12 +121,44 @@ public class PersonDAO {
             String email = cursor.getString(cursor.getColumnIndex("email"));
             String phoneNumber = cursor.getString(cursor.getColumnIndex("phoneNumber"));
             int idPersonParent = cursor.getInt(cursor.getColumnIndex("idPersonParent"));
-            TypePerson type = TypePerson.getTypePersonDescription( cursor.getString(cursor.getColumnIndex("type")));
+            TypePerson type = TypePerson.getTypePersonDescription(cursor.getString(cursor.getColumnIndex("type")));
 
             personList.add(new Person(id, name, surname, birthday, gender, level, email, phoneNumber, idPersonParent, type));
         }
         cursor.close();
 
         return personList;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Person selectId(long id) throws Exception {
+        Person person = null;
+
+        String[] params = new String[]{String.valueOf(id)};
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Person WHERE idPerson = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String surname = cursor.getString(cursor.getColumnIndex("surname"));
+            Date birthday = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("birthday")));
+            Gender gender = Gender.getGenderDescription(cursor.getString(cursor.getColumnIndex("gender")));
+            int level = cursor.getInt(cursor.getColumnIndex("level"));
+            String email = cursor.getString(cursor.getColumnIndex("email"));
+            String phoneNumber = cursor.getString(cursor.getColumnIndex("phoneNumber"));
+            int idPersonParent = cursor.getInt(cursor.getColumnIndex("idPersonParent"));
+            TypePerson type = TypePerson.getTypePersonDescription(cursor.getString(cursor.getColumnIndex("type")));
+
+            person = new Person(idPerson, name, surname, birthday, gender, level, email, phoneNumber, idPersonParent, type);
+        }
+        cursor.close();
+
+        return person;
     }
 }

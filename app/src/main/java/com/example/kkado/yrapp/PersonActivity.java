@@ -58,13 +58,14 @@ public class PersonActivity extends AppCompatActivity {
         Date data = new Date();
         Person person = new Person(0,"Stefano", "Nicotra", data, Gender.masculine,1,"nic17014@byui.edu", "11999999999", null, TypePerson.Leader );
 
-        boolean save = dao.save(person);
+        long save = dao.savePerson(person);
 
-        if (save) {
+        if (save>0) {
             alert("Success");
         } else {
             alert("Error");
         }
+        Person test = dao.selectId(save);
         personList = dao.select();
         arrayAdapterPerson = new ArrayAdapter<Person>(this, android.R.layout.simple_list_item_1, personList);
         lvPerson.setAdapter(arrayAdapterPerson);

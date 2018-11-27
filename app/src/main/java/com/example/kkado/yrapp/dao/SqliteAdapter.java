@@ -4,7 +4,9 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.example.kkado.yrapp.R;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,7 +25,6 @@ public class SqliteAdapter extends SQLiteOpenHelper {
     private boolean mNeedUpdate = false;
 
     /**
-     *
      * @param context
      */
     public SqliteAdapter(Context context) {
@@ -40,7 +41,6 @@ public class SqliteAdapter extends SQLiteOpenHelper {
     }
 
     /**
-     *
      * @throws IOException
      */
     public void updateDataBase() throws IOException {
@@ -56,7 +56,6 @@ public class SqliteAdapter extends SQLiteOpenHelper {
     }
 
     /**
-     *
      * @return
      */
     private boolean checkDataBase() {
@@ -80,12 +79,11 @@ public class SqliteAdapter extends SQLiteOpenHelper {
     }
 
     /**
-     *
      * @throws IOException
      */
     private void copyDBFile() throws IOException {
         // InputStream mInput = myContext.getAssets().open(DATABASE_NAME);
-                InputStream mInput = myContext.getResources().openRawResource(R.raw.yrapp);
+        InputStream mInput = myContext.getResources().openRawResource(R.raw.yrapp);
         OutputStream mOutput = new FileOutputStream(LOCALDB + DATABASE_NAME);
         byte[] mBuffer = new byte[1024];
         int mLength;
@@ -97,7 +95,6 @@ public class SqliteAdapter extends SQLiteOpenHelper {
     }
 
     /**
-     *
      * @return
      * @throws SQLException
      */
@@ -117,7 +114,6 @@ public class SqliteAdapter extends SQLiteOpenHelper {
     }
 
     /**
-     *
      * @param db
      */
     @Override
@@ -125,7 +121,6 @@ public class SqliteAdapter extends SQLiteOpenHelper {
     }
 
     /**
-     *
      * @param db
      * @param oldVersion
      * @param newVersion
