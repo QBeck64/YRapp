@@ -25,8 +25,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Contact_Book" />
         <activity android:name=".Contact_Add" />
-        <activity android:name=".PersonActivity"></activity>
+        <activity android:name=".PersonActivity" />
 
+        <service
+            android:name=".LevelUpdaterService"
+            android:exported="false"></service>
     </application>
 
 </manifest>
