@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="levels">
+        <item>320</item>
+        <item>750</item>
+        <item>1500</item>
+        <item>2000</item>
+    </integer-array>
+</resources>

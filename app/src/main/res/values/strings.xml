@@ -29,4 +29,5 @@
     <string name="number_Addrerss">Number</string>
     <string name="addressCompliment">Compl</string>
     <string name="addressCountry">Country</string>
+    <string name="startupSP">StartupSP</string>
 </resources>

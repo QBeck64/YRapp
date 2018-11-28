@@ -1,5 +1,7 @@
 package com.example.kkado.yrapp;
 
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -7,10 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.kkado.yrapp.entity.Person;
+import static android.app.PendingIntent.getActivity;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        checkAndExecuteStartup();
         // Making commit for team 2nd change Elisangela
         buttonLis=(Button) findViewById(R.id.buttonLis);
         buttonLis.setOnClickListener(new View.OnClickListener() {
@@ -39,5 +39,18 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Contact_Book.class);
         startActivity(intent);
     }
+
+   private void checkAndExecuteStartup()
+   {
+
+       SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+       boolean firstTime = sharedPref.getBoolean(getString(R.string.startupSP), false);
+       if(firstTime) {
+           SharedPreferences.Editor editor = sharedPref.edit();
+           editor.putBoolean(getString(R.string.startupSP), true);
+           editor.apply();
+
+       }
+   }
 
 }
