@@ -152,8 +152,7 @@ public class Person {
      */
     @Override
     public String toString() {
-        return idPerson +
-                " - '" + surname +
+        return surname +
                 ", " + name+
                 " (" + email+
                 ")"

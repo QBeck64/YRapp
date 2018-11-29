@@ -15,7 +15,7 @@
     <string name="streetAddress">Address</string>
     <string name="addressCity">City</string>
     <string name="addressProvince">Province</string>
-    <string name="addressZip">Postal Code</string>
+    <string name="addressZip">Zip</string>
     <string name="emailAddress">Email</string>
     <string name="phoneNumber">Phone</string>
     <string-array name="gender">
@@ -30,4 +30,7 @@
     <string name="addressCompliment">Compl</string>
     <string name="addressCountry">Country</string>
     <string name="startupSP">StartupSP</string>
+    <string name="personParent">Person Parent</string>
+    <string name="typePerson">PersonType</string>
+    <string name="personLevel">Level</string>
 </resources>

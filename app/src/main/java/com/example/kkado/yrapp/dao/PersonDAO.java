@@ -109,7 +109,7 @@ public class PersonDAO {
     public List<Person> select() throws Exception {
         List<Person> personList = new ArrayList<>();
 
-        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Person", null);
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Person ORDER BY surname DESC", null);
 
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex("idPerson"));

@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.kkado.yrapp.Enum.Gender;
@@ -106,9 +108,11 @@ public class Contact_Add extends AppCompatActivity {
         // Using newly created ID from person, call person object and save into Address
         Person newPerson = dao.selectId(save);
 
+        Log.d(TAG, "Create new Person to store in new Address");
         // Create a new Address Object
-        final Address newAddress = new Address();
+        Address newAddress = new Address();
         newAddress.setIdAddress(0);
+        Log.d(TAG, "Create new address and set ID");
 
         // Fill the Address Object, including person
         newAddress.setNameAddress(editStreet.getText().toString());
@@ -121,10 +125,15 @@ public class Contact_Add extends AppCompatActivity {
         newAddress.setPerson(newPerson);
         newAddress.setIdPerson(newPerson.getIdPerson());
 
+
+
+        Log.d(TAG, "Finish setting Address variables");
         // Create DAO to store address object.
         AddressDAO aDao = new AddressDAO(this);
+        Log.d(TAG, "Create DAOAddress");
 
         long aSave = aDao.saveAddress(newAddress);
+        Log.d(TAG, "Execute saveAddress");
 
         if (aSave > 0) {
             alert("Success");

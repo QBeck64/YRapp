@@ -3,7 +3,9 @@ package com.example.kkado.yrapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -15,7 +17,8 @@ import com.example.kkado.yrapp.entity.Person;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Contact_Book extends AppCompatActivity {
+public class Contact_Book extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    private final static String TAG = "ContactBook";
 
     private ListView contactView;
     private List<Person> contacts = new ArrayList<>();
@@ -43,9 +46,18 @@ public class Contact_Book extends AppCompatActivity {
 
         arrayAdapterContact = new ArrayAdapter<Person>(this, android.R.layout.simple_list_item_1, contacts);
         contactView.setAdapter(arrayAdapterContact);
+        contactView.setOnItemClickListener(this);
     }
     public void createContact(View v) {
         Intent myIntent = new Intent(this, Contact_Add.class);
         startActivity(myIntent);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d(TAG, "Hey you clicked me, stop it!!");
+        Person newPP = (Person) parent.getItemAtPosition(position);
+
+        Log.d(TAG, "Person name is " + newPP.getName());
     }
 }
