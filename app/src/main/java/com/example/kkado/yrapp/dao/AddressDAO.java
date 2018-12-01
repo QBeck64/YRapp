@@ -159,4 +159,30 @@ public class AddressDAO {
         return address;
     }
 
+    public Address selectPersonId(long id) throws Exception {
+        Address address = null;
+        String[] params = new String[]{String.valueOf(id)};
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Address WHERE idPerson = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idAddress = cursor.getInt(cursor.getColumnIndex("idAddress"));
+            TypeAddress type = TypeAddress.getTypeAddressDescription(cursor.getString(cursor.getColumnIndex("type")));
+            String nameAddress = cursor.getString(cursor.getColumnIndex("nameAddress"));
+            int numberAddress = cursor.getInt(cursor.getColumnIndex("numberAddress"));
+            String complement = cursor.getString(cursor.getColumnIndex("complement"));
+            String province = cursor.getString(cursor.getColumnIndex("province"));
+            String city = cursor.getString(cursor.getColumnIndex("city"));
+            String country = cursor.getString(cursor.getColumnIndex("country"));
+            String postalCode = cursor.getString(cursor.getColumnIndex("postalCode"));
+            int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
+
+            address = new Address(idAddress, type, nameAddress, numberAddress, complement, province, city, country, postalCode, idPerson);
+        }
+        cursor.close();
+
+        return address;
+    }
+
+
 }
