@@ -65,9 +65,10 @@ public class LevelUpdaterService extends IntentService {
         context.startService(intent);
     }
 
+
     @Override
     protected void onHandleIntent(Intent intent) {
-        if (intent != null) {
+  /*      if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_UPDATE_CDB.equals(action)) {
                 handleActionUpdateCdb();
@@ -79,8 +80,9 @@ public class LevelUpdaterService extends IntentService {
                     e.printStackTrace();
                 }
             }
-        }
+        } */
     }
+
 
     /**
      * Handle action UPDATE_CDB in the provided background thread.

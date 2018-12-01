@@ -15,7 +15,6 @@ public class Address {
     private String city;
     private String country;
     private String postalCode;
-    private Person person;
     private int idPerson;
 
     /**
@@ -25,7 +24,7 @@ public class Address {
 
     }
 
-    public Address(TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String postalCode, Person person) {
+    public Address(TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String postalCode) {
         this.type = type;
         this.nameAddress = nameAddress;
         this.numberAddress = numberAddress;
@@ -34,10 +33,9 @@ public class Address {
         this.province = province;
         this.postalCode = postalCode;
         this.country = "Italia";
-        this.person = person;
     }
 
-    public Address(int idAddress, TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String postalCode, Person person) {
+    public Address(int idAddress, TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String postalCode) {
         this.type = type;
         this.idAddress = idAddress;
         this.nameAddress = nameAddress;
@@ -47,10 +45,9 @@ public class Address {
         this.province = province;
         this.postalCode = postalCode;
         this.country = "Italia";
-        this.person = person;
     }
 
-    public Address(String nameAddress, TypeAddress type, int numberAddress, String complement, String province, String city, String country, String postalCode, Person person) {
+    public Address(String nameAddress, TypeAddress type, int numberAddress, String complement, String province, String city, String country, String postalCode) {
         this.type = type;
         this.nameAddress = nameAddress;
         this.numberAddress = numberAddress;
@@ -59,10 +56,9 @@ public class Address {
         this.province = province;
         this.postalCode = postalCode;
         this.country = country;
-        this.person = person;
     }
 
-    public Address(int idAddress, TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String country, String postalCode, Person person) {
+    public Address(int idAddress, TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String country, String postalCode) {
         this.type = type;
         this.idAddress = idAddress;
         this.nameAddress = nameAddress;
@@ -72,7 +68,6 @@ public class Address {
         this.province = province;
         this.postalCode = postalCode;
         this.country = country;
-        this.person = person;
     }
 
     public Address(int idAddress, TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String country, String postalCode, int idPerson) {
@@ -128,10 +123,6 @@ public class Address {
         return country;
     }
 
-    public Person getPerson() {
-        return person;
-    }
-
     public int getIdPerson() {
         return idPerson;
     }
@@ -175,10 +166,6 @@ public class Address {
         this.country = country;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
     public void setIdPerson(int idPerson) {
         this.idPerson = idPerson;
     }
@@ -196,7 +183,6 @@ public class Address {
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
                 ", postalCode='" + postalCode + '\'' +
-                ", person=" + person +
                 ", idPerson=" + idPerson +
                 '}';
     }
