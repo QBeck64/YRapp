@@ -3,6 +3,18 @@ package com.example.kkado.yrapp;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.Log;
+
+import com.example.kkado.yrapp.dao.InvoicingDAO;
+import com.example.kkado.yrapp.dao.PeriodDAO;
+import com.example.kkado.yrapp.dao.PersonDAO;
+import com.example.kkado.yrapp.entity.Invoicing;
+import com.example.kkado.yrapp.entity.Period;
+import com.example.kkado.yrapp.entity.Person;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -15,8 +27,11 @@ public class LevelUpdaterService extends IntentService {
 
     private static final String ACTION_UPDATE_CDB = "com.example.kkado.yrapp.action.UPDATE_CDB";
     private static final String ACTION_UPDATE_CG = "com.example.kkado.yrapp.action.UPDATE_CG";
+    private final String TAG = "LevelUpdaterService";
 
-
+    private static final String PERIOD_ID = "com.example.kkado.yrapp.extra.PERIOD_ID";
+    private static final String PERIOD_FDATE = "com.example.kkado.yrapp.extra.PERIOD_FDATE";
+    private static final String PERIOD_SDATE = "com.example.kkado.yrapp.extra.PERIOD_SDATE";
     private static final String CG_ID = "com.example.kkado.yrapp.extra.CG_ID";
 
     public LevelUpdaterService() {
@@ -43,7 +58,7 @@ public class LevelUpdaterService extends IntentService {
      * @see IntentService
      */
     // TODO: Customize helper method
-    public static void startActionUpdateCg(Context context, int idCg) {
+    public static void startActionUpdateCg(Context context, long idCg) {
         Intent intent = new Intent(context, LevelUpdaterService.class);
         intent.setAction(ACTION_UPDATE_CG);
         intent.putExtra(CG_ID, idCg);
@@ -57,8 +72,12 @@ public class LevelUpdaterService extends IntentService {
             if (ACTION_UPDATE_CDB.equals(action)) {
                 handleActionUpdateCdb();
             } else if (ACTION_UPDATE_CG.equals(action)) {
-                final int param1 = intent.getIntExtra(CG_ID, 0);
-                handleActionUpdateCg(param1);
+                final long param1 = intent.getLongExtra(CG_ID, 0);
+                try {
+                    handleActionUpdateCg(param1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -74,9 +93,41 @@ public class LevelUpdaterService extends IntentService {
     /*
      * - reset and create also new periods? Maybe it's better to do this in the caller
      * */
-    private void handleActionUpdateCdb() {
+    private void handleActionUpdateCdb(Period period) {
+        //DAO initialization
+        PersonDAO dao = new PersonDAO(this);
+        InvoicingDAO iDao = new InvoicingDAO(this);
+        try {
+            //fetching data
+            List<Person> contacts = dao.select();
+            List<Invoicing> invoicings = iDao.select();
+            Resources res = getResources();
+            int[] invoicingBoundaries = res.getIntArray(R.array.groupSizes);
+            //iteration
+            for (Person p:contacts) {
+                for (Invoicing i:invoicings) {
+                    //check if we found the right invoicing, meaning the one connected to the current
+                    //person and to the current period
+                    if (i.getIdPeriod() == period.getIdPeriod() && i.getIdPerson() == p.getIdPerson()) {
+                        //check invoicing target reached
+                        int newPersonLevel = 0;
+                        for (int c = 0; invoicingBoundaries[c] <= i.getInvoicing() && c < invoicingBoundaries.length; c++)
+                            newPersonLevel++;
 
-        throw new UnsupportedOperationException("Not yet implemented");
+                        //save eventual new person
+                        if (newPersonLevel != p.getLevel()) {
+                            p.setLevel(newPersonLevel);
+                            dao.save(p);
+                        }
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
+        }
+
     }
 
     /**
@@ -88,8 +139,47 @@ public class LevelUpdaterService extends IntentService {
      * if the count satisfies a new requirement.
      * Then the database is updated.
      */
-    private void handleActionUpdateCg(int id) {
+    private void handleActionUpdateCg(long id) {
+        //retrieve person by id
+        try {
+            PersonDAO dao = new PersonDAO(this);
+            Person groupLeader = null;
+            groupLeader = dao.selectId(id);
+            if (groupLeader.getLevel() >= 6 && groupLeader.getLevel() <= 11) {
 
-        throw new UnsupportedOperationException("Not yet implemented");
+                //count group dimension
+                int groupSize = 0;
+                List<Person> contacts = dao.select();
+                for (Person p:contacts)
+                {
+                    if (p.getIdPersonParent().equals(groupLeader.getIdPerson()))
+                        groupSize++;
+                }
+
+                //get group boundaries
+                Resources res = getResources();
+                int[] groupBoundaries = res.getIntArray(R.array.groupSizes);
+                //6 is the lowest group leader level
+                int newGroupLevel = 6;
+                for (int i = 0;groupBoundaries[i] <= groupSize && i < groupBoundaries.length;i++)
+                {
+                    newGroupLevel++;
+                }
+                groupLeader.setLevel(newGroupLevel);
+                if (dao.save(groupLeader))
+                {
+                    Log.i(TAG, "Saved group leader into DB");
+                }
+                else
+                {
+                    Log.e(TAG, "error in saving into DB");
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+            e.printStackTrace();
+        }
+        //check if the level is group leader
+
     }
 }
