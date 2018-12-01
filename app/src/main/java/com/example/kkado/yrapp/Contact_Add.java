@@ -125,7 +125,6 @@ public class Contact_Add extends AppCompatActivity {
         newAddress.setProvince(editProvince.getText().toString());
         newAddress.setCountry(editCountry.getText().toString());
         newAddress.setPostalCode(editZip.getText().toString());
-        newAddress.setPerson(newPerson);
         newAddress.setIdPerson(newPerson.getIdPerson());
 
 
