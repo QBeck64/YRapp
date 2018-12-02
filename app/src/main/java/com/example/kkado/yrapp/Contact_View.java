@@ -16,6 +16,12 @@ import com.example.kkado.yrapp.entity.Person;
 
 import java.util.Date;
 
+/**
+ * Contact_View will receieve the id of a person object saved in the PersonDAO database.
+ * The id is found in the intent sent from Contact_Book. Id is used to fetch person object and address object
+ * from their respective databases. The values of each object are then set to TextView, that correlate with TextView
+ * fields in the Activity. A Return button is also contained to return to Contact_Book.
+ */
 public class Contact_View extends AppCompatActivity {
     static final String TAG = "ContactView";
 
@@ -23,7 +29,10 @@ public class Contact_View extends AppCompatActivity {
     Person personView = new Person();
     Address addressView = new Address();
 
-
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,14 +41,12 @@ public class Contact_View extends AppCompatActivity {
         // Get/set intent which started the activity
         Intent intent = getIntent();
         idPerson = intent.getIntExtra("PersonId", 0);
-
         // Get/set person
         try {
             personView = getPersonView(idPerson);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         // Get/Set address
         try {
             addressView = getAddressView(idPerson);
@@ -47,30 +54,47 @@ public class Contact_View extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Log.d(TAG, "about to display peron");
-        // Display Person and Address details
         displayPerson(personView);
-        Log.d(TAG, "about to display address");
         displayAddress(addressView);
     }
 
+    /**
+     *
+     * @param v
+     */
     public void returnButton(View v) {
         Intent myIntent = new Intent(this, Contact_Book.class);
         startActivity(myIntent);
     }
 
+    /**
+     *
+     * @param id Person object id
+     * @return Person
+     * @throws Exception
+     */
     private Person getPersonView(Integer id) throws Exception {
         // Create PersonDAO
         PersonDAO dao = new PersonDAO(this);
         return dao.selectId(id);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     private Address getAddressView(Integer id) throws Exception {
         // create AddressDAO
         AddressDAO dao = new AddressDAO(this);
         return dao.selectPersonId(id);
     }
 
+    /**
+     *
+     * @param personView
+     */
     private void displayPerson(Person personView) {
         // find and set by id
         TextView viewFirst = (TextView) findViewById(R.id.firstName);
@@ -103,7 +127,12 @@ public class Contact_View extends AppCompatActivity {
         Log.d(TAG, "finished setting texts");
     }
 
+    /**
+     *
+     * @param addressView
+     */
     private void displayAddress(Address addressView) {
+        //find and set id's
         TextView viewStreet = (TextView) findViewById(R.id.streetAddress);
         TextView viewNumber = (TextView) findViewById(R.id.addressNumber);
         TextView viewCompl = (TextView) findViewById(R.id.addressCompliment);
@@ -111,5 +140,15 @@ public class Contact_View extends AppCompatActivity {
         TextView viewProvince = (TextView) findViewById(R.id.addressProvince);
         TextView viewZip = (TextView) findViewById(R.id.addressZip);
         TextView viewCountry = (TextView) findViewById(R.id.addressCountry);
+
+        //setText
+        viewStreet.setText(addressView.getNameAddress());
+        viewNumber.setText(addressView.getNumberAddress());
+        viewCompl.setText(addressView.getComplement());
+        viewCity.setText(addressView.getCity());
+        viewProvince.setText(addressView.getProvince());
+        viewZip.setText(addressView.getPostalCode());
+        viewCountry.setText(addressView.getCountry());
+        Log.d(TAG, "Successfully set address objects in View");
     }
 }

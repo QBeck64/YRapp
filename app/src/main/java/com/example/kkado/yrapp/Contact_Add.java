@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.kkado.yrapp.Enum.Gender;
+import com.example.kkado.yrapp.Enum.TypeAddress;
 import com.example.kkado.yrapp.Enum.TypePerson;
 import com.example.kkado.yrapp.dao.AddressDAO;
 import com.example.kkado.yrapp.dao.PersonDAO;
@@ -29,20 +30,6 @@ import java.util.Date;
 public class Contact_Add extends AppCompatActivity {
     private static final String TAG = "ContactAdd";
 
-    EditText editFirst;
-    EditText editLast;
-    EditText editDate;
-    EditText editEmail;
-    EditText editPhone;
-    EditText editStreet;
-    EditText editNumber;
-    EditText editCompl;
-    EditText editCity;
-    EditText editProvince;
-    EditText editCountry;
-    EditText editZip;
-    Button b1, b2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,100 +37,110 @@ public class Contact_Add extends AppCompatActivity {
 
     }
 
-    // Return button, will cancel data inputs and return to contact book
     public void returnButton(View v) {
         Intent myIntent = new Intent(this, Contact_Book.class);
         startActivity(myIntent);
     }
 
     public void addNewContact(View v) throws Exception {
-        // Declare a new Person object
-        Person newContact = new Person();
+        // Save edit text fields to new Person  and Address Object
+        Person newContact;
+        Address newAddress;
+        newContact = setContactInfo();
+        Log.d(TAG, "Successfully created contact");
+        newAddress = setAddressInfo();
+        Log.d(TAG, "Successfully created address");
 
-        // Set editText values
-        editFirst = (EditText)findViewById(R.id.firstName);
-        editLast = (EditText)findViewById(R.id.lastName);
-        editEmail = (EditText)findViewById(R.id.emailAddress);
-        editPhone = (EditText)findViewById(R.id.phoneNumber);
-        editStreet = (EditText)findViewById(R.id.streetAddress);
-        editNumber = (EditText)findViewById(R.id.addressNumber);
-        editCompl = (EditText)findViewById(R.id.addressCompliment);
-        editCity = (EditText)findViewById(R.id.addressCity);
-        editProvince = (EditText)findViewById(R.id.addressProvince);
-        editCountry = (EditText)findViewById(R.id.addressCountry);
-        editZip = (EditText)findViewById(R.id.addressZip);
+        // Save both objects to their respective databases
+        saveNewContact(newContact, newAddress);
+        Log.d(TAG, "Successfully saved to both databases");
+    }
 
-        Log.d(TAG, "Save input to editText variables");
+    private Person setContactInfo() {
+        Person contactPerson = new Person();
 
-        // For numbers
-        String tempV = editNumber.getText().toString();
+        EditText editFirst = (EditText)findViewById(R.id.firstName);
+        EditText editLast = (EditText)findViewById(R.id.lastName);
+        // Birthday
+        // Gender
+        EditText editPhone = (EditText)findViewById(R.id.phoneNumber);
+        EditText editEmail = (EditText)findViewById(R.id.emailAddress);
+        // Type
+        // Level
+        // Parent
 
         // Convert input to strings and store in Person object
-        newContact.setName(editFirst.getText().toString());
-        newContact.setSurname(editLast.getText().toString());
-        newContact.setBirthday(new Date());
-        newContact.setGender(Gender.masculine);
-        newContact.setLevel(1);
-        newContact.setIdPersonParent(null);
-        newContact.setEmail(editEmail.getText().toString());
-        newContact.setPhoneNumber(editPhone.getText().toString());
-        newContact.setType(TypePerson.Leader);
+        contactPerson.setName(editFirst.getText().toString());
+        contactPerson.setSurname(editLast.getText().toString());
+        contactPerson.setBirthday(new Date());
+        contactPerson.setGender(Gender.masculine);
+        contactPerson.setPhoneNumber(editPhone.getText().toString());
+        contactPerson.setEmail(editEmail.getText().toString());
+        contactPerson.setType(TypePerson.Leader);
+        contactPerson.setLevel(1);
+        contactPerson.setIdPersonParent(null);
+        contactPerson.setIdPerson(0);
 
+        return contactPerson;
+    }
 
-        // Remember to set the person id to zero
-        newContact.setIdPerson(0);
+    private Address setAddressInfo() {
+        Address contactAddress = new Address();
 
-        Log.d(TAG, "Finish setting all variables inside person object");
-
-        // Create DAO to store person object.
-        PersonDAO dao = new PersonDAO(this);
-
-        long save = dao.savePerson(newContact);
-        Log.d(TAG, "Used savePerson method");
-
-        if (save>0) {
-            alert("Success");
-        } else {
-            alert("Error");
-        }
-        Log.d(TAG, "Finish saving new person to PersonDAO");
-
-        // Using newly created ID from person, call person object and save into Address
-        Person newPerson = dao.selectId(save);
-
-        Log.d(TAG, "Create new Person to store in new Address");
-        // Create a new Address Object
-        Address newAddress = new Address();
-        newAddress.setIdAddress(0);
-        Log.d(TAG, "Create new address and set ID");
+        // Set editText values
+        EditText editStreet = (EditText)findViewById(R.id.streetAddress);
+        EditText editNumber = (EditText)findViewById(R.id.addressNumber);
+        EditText editCompl = (EditText)findViewById(R.id.addressCompliment);
+        EditText editCity = (EditText)findViewById(R.id.addressCity);
+        EditText editProvince = (EditText)findViewById(R.id.addressProvince);
+        EditText editZip = (EditText)findViewById(R.id.addressZip);
+        EditText editCountry = (EditText)findViewById(R.id.addressCountry);
 
         // Fill the Address Object, including person
-        newAddress.setNameAddress(editStreet.getText().toString());
-        newAddress.setNumberAddress(Integer.parseInt(tempV));
-        newAddress.setComplement(editCompl.getText().toString());
-        newAddress.setCity(editCity.getText().toString());
-        newAddress.setProvince(editProvince.getText().toString());
-        newAddress.setCountry(editCountry.getText().toString());
-        newAddress.setPostalCode(editZip.getText().toString());
-        newAddress.setIdPerson(newPerson.getIdPerson());
+        contactAddress.setIdAddress(0);
+        contactAddress.setType(TypeAddress.Avenue);
+        contactAddress.setNameAddress(editStreet.getText().toString());
+        // Convert number to string
+        String tempNum = editNumber.getText().toString();
+        contactAddress.setNumberAddress(Integer.parseInt(tempNum));
+        contactAddress.setComplement(editCompl.getText().toString());
+        contactAddress.setCity(editCity.getText().toString());
+        contactAddress.setProvince(editProvince.getText().toString());
+        contactAddress.setCountry(editCountry.getText().toString());
+        contactAddress.setPostalCode(editZip.getText().toString());
 
+        return contactAddress;
+    }
 
+    private void saveNewContact(Person newContact, Address newAddress) {
+        // Create DAO to store person object.
+        PersonDAO dao = new PersonDAO(this);
+        // Save will now represent the newly created id fro the saved person
+        long personSave = dao.savePerson(newContact);
 
-        Log.d(TAG, "Finish setting Address variables");
-        // Create DAO to store address object.
-        AddressDAO aDao = new AddressDAO(this);
-        Log.d(TAG, "Create DAOAddress");
-
-        long aSave = aDao.saveAddress(newAddress);
-        Log.d(TAG, "Execute saveAddress");
-
-        if (aSave > 0) {
+        if (personSave>0) {
             alert("Success");
         } else {
             alert("Error");
         }
 
+        Log.d(TAG,"Saved Person successfully");
+        // Save to newAddress the new id respresenting new contact
+        newAddress.setIdPerson((int) personSave);
+        // Create DAO to store address object.
+        AddressDAO aDao = new AddressDAO(this);
+        Log.d(TAG, "Created new addressDAO");
+        long addressSave = aDao.saveAddress(newAddress);
+        Log.d(TAG, "Execute saveAddress");
+
+        if (addressSave > 0) {
+            alert("Success");
+        } else {
+            alert("Error");
+        }
+        Log.d(TAG, "saved address successfully");
     }
+
     private void alert(String error) {
         Toast.makeText(this, error, Toast.LENGTH_LONG).show();
     }

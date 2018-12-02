@@ -89,7 +89,7 @@ public class AddressDAO {
         if (address.getIdAddress() > 0)
             return mySQLiteDatabase.update(TABLE, cv, "idAddress=?", new String[]{address.getIdAddress() + ""}) ;
         else
-            return mySQLiteDatabase.insert(TABLE, null, cv) ;
+            return mySQLiteDatabase.insert(TABLE, null, cv);
     }
 
     /**
