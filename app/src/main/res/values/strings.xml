@@ -18,10 +18,6 @@
     <string name="addressZip">Zip</string>
     <string name="emailAddress">Email</string>
     <string name="phoneNumber">Phone</string>
-    <string-array name="gender">
-        <item>Male</item>
-        <item>Female</item>
-    </string-array>
     <string name="gender_prompt">Gender</string>
     <string name="Save_Contact">Save</string>
     <string name="Create_Contact">Create new contact</string>

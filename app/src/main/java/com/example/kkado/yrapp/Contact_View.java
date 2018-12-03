@@ -133,7 +133,7 @@ public class Contact_View extends AppCompatActivity {
      */
     private void displayAddress(Address addressView) {
         //find and set id's
-        TextView viewStreet = (TextView) findViewById(R.id.streetAddress);
+        TextView viewStreet = (TextView) findViewById(R.id.addressStreet);
         TextView viewNumber = (TextView) findViewById(R.id.addressNumber);
         TextView viewCompl = (TextView) findViewById(R.id.addressCompliment);
         TextView viewCity = (TextView) findViewById(R.id.addressCity);

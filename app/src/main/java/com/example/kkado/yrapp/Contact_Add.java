@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -22,7 +23,9 @@ import com.example.kkado.yrapp.entity.Address;
 import com.example.kkado.yrapp.entity.Person;
 
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -35,6 +38,16 @@ public class Contact_Add extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact__add);
 
+        List<String> spinnerArray =  new ArrayList<String>();
+        spinnerArray.add(Gender.masculine.getDescription());
+        spinnerArray.add(Gender.feminine.getDescription());
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_list_item_1, spinnerArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner sItems = (Spinner) findViewById(R.id.gender);
+        sItems.setAdapter(adapter);
     }
 
     public void returnButton(View v) {
@@ -62,7 +75,6 @@ public class Contact_Add extends AppCompatActivity {
         EditText editFirst = (EditText)findViewById(R.id.firstName);
         EditText editLast = (EditText)findViewById(R.id.lastName);
         // Birthday
-        // Gender
         EditText editPhone = (EditText)findViewById(R.id.phoneNumber);
         EditText editEmail = (EditText)findViewById(R.id.emailAddress);
         // Type
@@ -88,7 +100,7 @@ public class Contact_Add extends AppCompatActivity {
         Address contactAddress = new Address();
 
         // Set editText values
-        EditText editStreet = (EditText)findViewById(R.id.streetAddress);
+        EditText editStreet = (EditText)findViewById(R.id.addressStreet);
         EditText editNumber = (EditText)findViewById(R.id.addressNumber);
         EditText editCompl = (EditText)findViewById(R.id.addressCompliment);
         EditText editCity = (EditText)findViewById(R.id.addressCity);
@@ -130,8 +142,10 @@ public class Contact_Add extends AppCompatActivity {
         // Create DAO to store address object.
         AddressDAO aDao = new AddressDAO(this);
         Log.d(TAG, "Created new addressDAO");
-        long addressSave = aDao.saveAddress(newAddress);
+        long addressSave = aDao.saveAddress(newAddress); //Currently returning -1
         Log.d(TAG, "Execute saveAddress");
+        Integer test = (int) addressSave;
+        Log.d(TAG, test.toString());
 
         if (addressSave > 0) {
             alert("Success");

@@ -42,7 +42,6 @@
         android:hint="@string/firstName"
         android:inputType="textPersonName"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/birthday"
         app:layout_constraintEnd_toStartOf="@+id/lastName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -56,17 +55,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginBottom="8dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/lastName"
         android:inputType="textPersonName"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/gender"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/firstName"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3"
-        app:layout_constraintVertical_bias="0.0"
         tools:targetApi="o" />
 
     <TextView
@@ -79,8 +75,8 @@
         android:inputType="date"
         android:selectAllOnFocus="false"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/streetAddress"
         app:layout_constraintEnd_toStartOf="@+id/gender"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstName"
         tools:targetApi="o" />
@@ -91,13 +87,15 @@
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:hint="@string/gender_prompt"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/streetAddress"
+        app:layout_constraintBottom_toTopOf="@+id/addressStreet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/birthday"
+        app:layout_constraintTop_toBottomOf="@+id/lastName"
         tools:prompt="@string/gender_prompt" />
 
     <android.support.constraint.Barrier
@@ -105,22 +103,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top" />
-
-    <TextView
-        android:id="@+id/streetAddress"
-        android:layout_width="180dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="8dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/streetAddress"
-        android:inputType="textPostalAddress"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/addressCity"
-        app:layout_constraintEnd_toStartOf="@+id/addressNumber"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthday"
-        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/addressCity"
@@ -131,10 +113,9 @@
         android:hint="@string/addressCity"
         android:inputType="textPostalAddress"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/addressCountry"
         app:layout_constraintEnd_toStartOf="@+id/addressProvince"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/streetAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/addressNumber" />
 
     <TextView
         android:id="@+id/addressProvince"
@@ -202,28 +183,35 @@
         app:layout_constraintTop_toBottomOf="@+id/addressProvince" />
 
     <TextView
+        android:id="@+id/addressStreet"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/streetAddress"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/addressCompliment"
+        app:layout_constraintStart_toEndOf="@+id/addressNumber"
+        app:layout_constraintTop_toBottomOf="@+id/birthday" />
+
+    <TextView
         android:id="@+id/addressNumber"
         android:layout_width="83dp"
         android:layout_height="32dp"
-        android:layout_marginStart="24dp"
-
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/number_Addrerss"
         android:inputType="number"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/addressProvince"
-        app:layout_constraintEnd_toStartOf="@+id/addressCompliment"
-        app:layout_constraintStart_toEndOf="@+id/streetAddress"
-        app:layout_constraintTop_toBottomOf="@+id/gender" />
+        app:layout_constraintBottom_toTopOf="@+id/addressCity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthday" />
 
     <TextView
         android:id="@+id/addressCompliment"
         android:layout_width="78dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/addressCompliment"
@@ -231,7 +219,7 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/addressZip"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addressNumber"
+        app:layout_constraintStart_toEndOf="@+id/addressStreet"
         app:layout_constraintTop_toBottomOf="@+id/gender" />
 
     <TextView
