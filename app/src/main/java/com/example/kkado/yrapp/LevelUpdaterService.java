@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.example.kkado.yrapp.dao.InvoicingDAO;
@@ -68,10 +69,11 @@ public class LevelUpdaterService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-  /*      if (intent != null) {
+        if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_UPDATE_CDB.equals(action)) {
-                handleActionUpdateCdb();
+                Bundle data = intent.getExtras();
+                handleActionUpdateCdb((Period)data.getParcelable("period"));
             } else if (ACTION_UPDATE_CG.equals(action)) {
                 final long param1 = intent.getLongExtra(CG_ID, 0);
                 try {
@@ -80,7 +82,7 @@ public class LevelUpdaterService extends IntentService {
                     e.printStackTrace();
                 }
             }
-        } */
+        }
     }
 
 
