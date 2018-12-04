@@ -161,4 +161,60 @@ public class PersonDAO {
 
         return person;
     }
+
+    public List<Person> selectName(String pName) throws Exception {
+        List<Person> personList = new ArrayList<>();
+        Person person = null;
+
+        String[] params = new String[]{pName};
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Person WHERE name = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String surname = cursor.getString(cursor.getColumnIndex("surname"));
+            Date birthday = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("birthday")));
+            Gender gender = Gender.getGenderDescription(cursor.getString(cursor.getColumnIndex("gender")));
+            int level = cursor.getInt(cursor.getColumnIndex("level"));
+            String email = cursor.getString(cursor.getColumnIndex("email"));
+            String phoneNumber = cursor.getString(cursor.getColumnIndex("phoneNumber"));
+            int idPersonParent = cursor.getInt(cursor.getColumnIndex("idPersonParent"));
+            TypePerson type = TypePerson.getTypePersonDescription(cursor.getString(cursor.getColumnIndex("type")));
+
+            person = new Person(idPerson, name, surname, birthday, gender, level, email, phoneNumber, idPersonParent, type);
+            personList.add(person);
+        }
+        cursor.close();
+
+        return personList;
+    }
+
+    public List<Person> selectFullName(String pName, String pSurname) throws Exception {
+        List<Person> personList = new ArrayList<>();
+        Person person = null;
+
+        String[] params = new String[]{pName, pSurname};
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Person WHERE name = ? AND surname = ?", params);
+
+        while (cursor.moveToNext()) {
+            int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String surname = cursor.getString(cursor.getColumnIndex("surname"));
+            Date birthday = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("birthday")));
+            Gender gender = Gender.getGenderDescription(cursor.getString(cursor.getColumnIndex("gender")));
+            int level = cursor.getInt(cursor.getColumnIndex("level"));
+            String email = cursor.getString(cursor.getColumnIndex("email"));
+            String phoneNumber = cursor.getString(cursor.getColumnIndex("phoneNumber"));
+            int idPersonParent = cursor.getInt(cursor.getColumnIndex("idPersonParent"));
+            TypePerson type = TypePerson.getTypePersonDescription(cursor.getString(cursor.getColumnIndex("type")));
+
+            person = new Person(idPerson, name, surname, birthday, gender, level, email, phoneNumber, idPersonParent, type);
+            personList.add(person);
+        }
+        cursor.close();
+
+        return personList;
+    }
 }
