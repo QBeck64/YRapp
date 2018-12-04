@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.kkado.yrapp.LevelUpdaterService.startActionUpdateCg;
+
 /**
  *
  */
@@ -67,6 +69,10 @@ public class Contact_Add extends AppCompatActivity {
         // Save both objects to their respective databases
         saveNewContact(newContact, newAddress);
         Log.d(TAG, "Successfully saved to both databases");
+
+        //Group Leader updater service. The following code will check if the parent is a group leader
+        //and and update her level if needed
+        startActionUpdateCg(this, newContact.getIdPersonParent());
     }
 
     private Person setContactInfo() {

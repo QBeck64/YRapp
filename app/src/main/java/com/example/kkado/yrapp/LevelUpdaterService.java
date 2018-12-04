@@ -45,10 +45,10 @@ public class LevelUpdaterService extends IntentService {
      *
      * @see IntentService
      */
-    // TODO: Customize helper method
-    public static void startActionUpdateCdb(Context context) {
+    public static void startActionUpdateCdb(Context context, Period period) {
         Intent intent = new Intent(context, LevelUpdaterService.class);
         intent.setAction(ACTION_UPDATE_CDB);
+        intent.putExtra("period", period);
         context.startService(intent);
     }
 
@@ -58,7 +58,6 @@ public class LevelUpdaterService extends IntentService {
      *
      * @see IntentService
      */
-    // TODO: Customize helper method
     public static void startActionUpdateCg(Context context, long idCg) {
         Intent intent = new Intent(context, LevelUpdaterService.class);
         intent.setAction(ACTION_UPDATE_CG);
