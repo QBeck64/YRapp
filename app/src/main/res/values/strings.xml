@@ -29,4 +29,6 @@
     <string name="personParent">Person Parent</string>
     <string name="typePerson">PersonType</string>
     <string name="personLevel">Level</string>
+    <string name="editContact">Edit Contact</string>
+    <string name="deleteContact">Delete Contact</string>
 </resources>

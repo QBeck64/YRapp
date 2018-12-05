@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,6 +29,8 @@ public class Contact_View extends AppCompatActivity {
     static final String TAG = "ContactView";
 
     Integer idPerson;
+    AddressDAO addressDAO;
+    PersonDAO personDAO;
     Person personView = new Person();
     Address addressView = new Address();
 
@@ -43,19 +48,47 @@ public class Contact_View extends AppCompatActivity {
         idPerson = intent.getIntExtra("PersonId", 0);
         // Get/set person
         try {
-            personView = getPersonView(idPerson);
+            personDAO = getPersonView(idPerson);
+            personView = personDAO.selectId(idPerson);
         } catch (Exception e) {
             e.printStackTrace();
         }
         // Get/Set address
         try {
-            addressView = getAddressView(idPerson);
+            addressDAO = getAddressView(idPerson);
+            addressView = addressDAO.selectId(idPerson);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         displayPerson(personView);
-        displayAddress(addressView);
+        //displayAddress(addressView);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.contact_options_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.editContact:
+                // Send person if to new activity to be edited
+                return true;
+            case R.id.deleteContact:
+                personDAO.delete(idPerson);
+                addressDAO.delete(idPerson);
+                returnToContacts();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void returnToContacts() {
+        Intent myIntent = new Intent(this, Contact_Book.class);
+        startActivity(myIntent);
     }
 
     /**
@@ -63,8 +96,7 @@ public class Contact_View extends AppCompatActivity {
      * @param v
      */
     public void returnButton(View v) {
-        Intent myIntent = new Intent(this, Contact_Book.class);
-        startActivity(myIntent);
+       returnToContacts();
     }
 
     /**
@@ -73,10 +105,10 @@ public class Contact_View extends AppCompatActivity {
      * @return Person
      * @throws Exception
      */
-    private Person getPersonView(Integer id) throws Exception {
+    private PersonDAO getPersonView(Integer id) throws Exception {
         // Create PersonDAO
         PersonDAO dao = new PersonDAO(this);
-        return dao.selectId(id);
+        return dao;
     }
 
     /**
@@ -85,10 +117,10 @@ public class Contact_View extends AppCompatActivity {
      * @return
      * @throws Exception
      */
-    private Address getAddressView(Integer id) throws Exception {
+    private AddressDAO getAddressView(Integer id) throws Exception {
         // create AddressDAO
         AddressDAO dao = new AddressDAO(this);
-        return dao.selectPersonId(id);
+        return dao;
     }
 
     /**
