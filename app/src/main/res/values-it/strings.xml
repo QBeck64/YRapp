@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YRapp</string>
+    <string name="tab_text_1">Contatti</string>
+    <string name="tab_text_2">Gruppi</string>
+    <string name="tab_text_3">Gare</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="section_format">Buongiorno Mondo!</string>
+    <string name="title_activity_template">AttivitàTemplate</string>
+    <string name="search_title">Cerca...</string>
+    <string name="order_by">Ordina Per</string>
+    <string name="action_test_Lis">Test Lis</string>
+    <string name="firstName">Nome</string>
+    <string name="lastName">Cognome</string>
+    <string name="birthday">Data di nascita</string>
+    <string name="streetAddress">Indirizzo</string>
+    <string name="addressCity">Citta</string>
+    <string name="addressProvince">Provincia</string>
+    <string name="addressZip">CAP</string>
+    <string name="emailAddress">Email</string>
+    <string name="phoneNumber">Telefono</string>
+    <string name="gender_prompt">Sesso</string>
+    <string name="Save_Contact">Salva</string>
+    <string name="Create_Contact">Crea nuovo contatto</string>
+    <string name="return_to_contact_book">bottoneRitorna</string>
+    <string name="number_Addrerss">Numero</string>
+    <string name="addressCompliment">Interno/Scala</string>
+    <string name="addressCountry">Paese</string>
+    <string name="startupSP">Inizio</string>
+    <string name="personParent">Genitore</string>
+    <string name="typePerson">Tipo</string>
+    <string name="personLevel">Livello</string>
+    <string name="editContact">Modifica contatto</string>
+</resources>
