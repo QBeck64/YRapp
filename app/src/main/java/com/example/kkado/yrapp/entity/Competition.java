@@ -20,8 +20,30 @@ public class Competition {
 
     }
 
+    /**
+     *
+     * @param idCompetition
+     * @param description
+     * @param goal
+     * @param initialDate
+     * @param finalDate
+     */
     public Competition(int idCompetition, String description, String goal, Date initialDate, Date finalDate) {
         this.idCompetition = idCompetition;
+        this.description = description;
+        this.goal = goal;
+        this.initialDate = initialDate;
+        this.finalDate = finalDate;
+    }
+
+    /**
+     *
+     * @param description
+     * @param goal
+     * @param initialDate
+     * @param finalDate
+     */
+    public Competition(String description, String goal, Date initialDate, Date finalDate) {
         this.description = description;
         this.goal = goal;
         this.initialDate = initialDate;
@@ -74,5 +96,10 @@ public class Competition {
         this.finalDate = finalDate;
     }
 
-
+    @Override
+    public String toString() {
+        return "Competition{" +
+                "description='" + description + '\'' +
+                '}';
+    }
 }

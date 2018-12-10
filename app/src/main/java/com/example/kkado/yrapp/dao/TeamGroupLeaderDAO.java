@@ -52,7 +52,6 @@ public class TeamGroupLeaderDAO {
     public boolean save(TeamGroupLeader item) {
         ContentValues cv = new ContentValues();
 
-        cv.put("idTeamGroupLeader", item.getIdTeamGroupLeader());
         cv.put("idPerson", item.getIdPerson());
         cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));
         cv.put("finalDate", Util.ConvertDateToString(item.getFinalDate()));

@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void buttonLisActivity() {
-        Intent intent = new Intent(this, PersonActivity.class);
-        startActivity(intent);
+
     }
 
     public void onClick(View view) {

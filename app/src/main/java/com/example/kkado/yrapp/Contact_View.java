@@ -61,7 +61,7 @@ public class Contact_View extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        displayPerson(personView);
+//        displayPerson(personView);
         //displayAddress(addressView);
     }
 
@@ -140,7 +140,7 @@ public class Contact_View extends AppCompatActivity {
         TextView viewParent = (TextView) findViewById(R.id.parent);
 
         // setText
-        viewFirst.setText(personView.getName());
+//        viewFirst.setText(personView.getName());
         viewLast.setText(personView.getSurname());
         // Remember Birthday is a Date()
         Date bDate = personView.getBirthday();

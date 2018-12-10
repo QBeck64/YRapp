@@ -69,7 +69,6 @@ public class CompetitionDAO {
      */
     public long saveCompetition(Competition item) {
         ContentValues cv = new ContentValues();
-        cv.put("idCompetition", item.getIdCompetition());
         cv.put("description", item.getDescription());
         cv.put("goal", item.getGoal());
         cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));

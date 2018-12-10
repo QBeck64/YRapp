@@ -57,7 +57,7 @@ public class PersonDAO {
         cv.put("name", person.getName());
         cv.put("surname", person.getSurname());
         cv.put("birthday", Util.ConvertDateToString(person.getBirthday()));
-        cv.put("gender", person.getGender().getId());
+        cv.put("gender", person.getGender().getDescription());
         cv.put("level", person.getLevel());
         cv.put("email", person.getEmail());
         cv.put("phoneNumber", person.getPhoneNumber());
@@ -81,7 +81,7 @@ public class PersonDAO {
         cv.put("name", person.getName());
         cv.put("surname", person.getSurname());
         cv.put("birthday", Util.ConvertDateToString(person.getBirthday()));
-        cv.put("gender", person.getGender().getId());
+        cv.put("gender", person.getGender().getDescription());
         cv.put("level", person.getLevel());
         cv.put("email", person.getEmail());
         cv.put("phoneNumber", person.getPhoneNumber());

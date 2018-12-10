@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_person"
+            android:icon="@drawable/ic_menu_person"
+            android:title="@string/menuPerson" />
+        <item
+            android:id="@+id/nav_group"
+            android:icon="@drawable/ic_menu_group"
+            android:title="@string/menuGroup" />
+        <item
+            android:id="@+id/nav_team"
+            android:icon="@drawable/ic_menu_team"
+            android:title="@string/menuTeam" />
+        <item
+            android:id="@+id/nav_invoicing"
+            android:icon="@drawable/ic_menu_invoicing"
+            android:title="@string/menuInvoicing" />
+        <item
+            android:id="@+id/nav_target"
+            android:icon="@drawable/ic_menu_target"
+            android:title="@string/menuTarget" />
+        <item
+            android:id="@+id/nav_competition"
+            android:icon="@drawable/ic_menu_compettition"
+            android:title="@string/menuCompetition" />
+    </group>
+      <!--  <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Import" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Gallery" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Slideshow" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Tools" />
+
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+-->
+</menu>

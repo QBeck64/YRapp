@@ -49,7 +49,6 @@ public class PeriodDAO {
      */
     public boolean save(Period item) {
         ContentValues cv = new ContentValues();
-        cv.put("idPeriod", item.getIdPeriod());
         cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));
         cv.put("finalDate", Util.ConvertDateToString(item.getFinalDate()));
 

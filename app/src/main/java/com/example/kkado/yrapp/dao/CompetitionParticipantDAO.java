@@ -53,7 +53,6 @@ public class CompetitionParticipantDAO {
     public boolean save(CompetitionParticipant item) {
         ContentValues cv = new ContentValues();
 
-        cv.put("idCompetitionParticipant", item.getIdCompetitionParticipant());
         cv.put("idCompetition", item.getIdCompetition());
         cv.put("idParticipant", item.getIdParticipant());
         cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));

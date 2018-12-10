@@ -50,7 +50,6 @@ public class InvoicingDAO {
     public boolean save(Invoicing item) {
         ContentValues cv = new ContentValues();
 
-        cv.put("idInvoicing", item.getIdInvoicing());
         cv.put("invoicing", item.getInvoicing());
         cv.put("idPerson", item.getIdPerson());
         cv.put("idPeriod", item.getIdPeriod());

@@ -31,4 +31,20 @@
     <string name="typePerson">Tipo</string>
     <string name="personLevel">Livello</string>
     <string name="editContact">Modifica contatto</string>
+    <string name="deleteContact">Delete Contact</string>
+    <string name="menuCompetition">Competition</string>
+    <string name="menuTarget">Target</string>
+    <string name="menuInvoicing">Invoicing</string>
+    <string name="menuTeam">Team</string>
+    <string name="menuGroup">Group</string>
+    <string name="menuPerson">Person</string>
+    <string name="nav_header_desc">Person</string>
+    <string name="nav_header_title">Person</string>
+    <string name="nav_header_subtitle">Person</string>
+    <string name="hello_blank_fragment">blank</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="fieldInicialDate">Inicial date</string>
+    <string name="fieldFinalDate">Final date</string>
+    <string name="title_activity_menu">YRapp</string>
 </resources>

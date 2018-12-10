@@ -24,6 +24,18 @@ public class Address {
 
     }
 
+    public Address(TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String postalCode, int idPerson) {
+        this.type = type;
+        this.nameAddress = nameAddress;
+        this.numberAddress = numberAddress;
+        this.complement = complement;
+        this.province = province;
+        this.city = city;
+        this.country = "Italia";
+        this.postalCode = postalCode;
+        this.idPerson = idPerson;
+    }
+
     public Address(TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String postalCode) {
         this.type = type;
         this.nameAddress = nameAddress;

@@ -1,5 +1,8 @@
 package com.example.kkado.yrapp.helper;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,5 +50,9 @@ public class Util {
             throw e;
         }
         return date;
+    }
+
+    public static void alert(String error, Context context) {
+        Toast.makeText(context, error, Toast.LENGTH_LONG).show();
     }
 }

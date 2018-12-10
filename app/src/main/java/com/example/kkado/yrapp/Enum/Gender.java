@@ -1,10 +1,10 @@
 package com.example.kkado.yrapp.Enum;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 public enum Gender {
-    masculine(1, "Masculine"), feminine(2, "Feminine");
+    Masculine(1, "Masculine"), Feminine(2, "Feminine");
 
     /**
      * Members

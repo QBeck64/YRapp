@@ -41,8 +41,8 @@ public class Contact_Add extends AppCompatActivity {
         setContentView(R.layout.activity_contact__add);
 
         List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add(Gender.masculine.getDescription());
-        spinnerArray.add(Gender.feminine.getDescription());
+        spinnerArray.add(Gender.Masculine.getDescription());
+        spinnerArray.add(Gender.Feminine.getDescription());
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_list_item_1, spinnerArray);
