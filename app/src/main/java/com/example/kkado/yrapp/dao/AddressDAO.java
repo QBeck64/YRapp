@@ -19,14 +19,14 @@ public class AddressDAO {
     private SqliteAdapter dbHelper;
     private SQLiteDatabase mySQLiteDatabase;
 
-    /**
+    /**Address data access object using AddressDAO
      * @param myContext
      */
     public AddressDAO(Context myContext) {
         initializeDataBase(myContext);
     }
 
-    /**
+    /**Executes the strategy to initialize the database for the given context.
      * @param myContext
      */
     private void initializeDataBase(Context myContext) {
