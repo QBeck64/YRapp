@@ -45,7 +45,8 @@ public class AddressDAO {
         }
     }
 
-    /**
+    /**Boolean contains multiple field whose type is boolean. In addition, this class provides many methods for converting a boolean 
+      to a String and a String to a boolean, as well as other constants and methods useful when dealing with a boolean.
      * @param address
      * @return
      */
@@ -68,7 +69,7 @@ public class AddressDAO {
     }
 
     /**
-     *
+     *Long saveAddress contains fields whose type is long.
      * @param address
      * @return
      */
@@ -91,7 +92,7 @@ public class AddressDAO {
             return mySQLiteDatabase.insert(TABLE, null, cv);
     }
 
-    /**
+    /**Implement boolean for delete in the mySQLiteDatabase.delete in the table idAddres.
      * @param id
      * @return
      */
@@ -99,7 +100,7 @@ public class AddressDAO {
         return mySQLiteDatabase.delete(TABLE, "idAddress=?", new String[]{id + ""}) > 0;
     }
 
-    /**
+    /**Implement Listto retrieve address and location.
      * @return
      * @throws Exception
      */
@@ -127,7 +128,7 @@ public class AddressDAO {
         return addressList;
     }
 
-    /**
+    /**Use of Address to select and tegorize ID, then identify the address and information
      *
      * @param id
      * @return
