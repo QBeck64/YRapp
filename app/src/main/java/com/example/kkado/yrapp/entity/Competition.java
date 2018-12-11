@@ -1,5 +1,7 @@
 package com.example.kkado.yrapp.entity;
 
+import com.example.kkado.yrapp.helper.Util;
+
 import java.util.Date;
 
 /**
@@ -102,8 +104,11 @@ public class Competition {
      */
     @Override
     public String toString() {
-        return "Competition{" +
-                "description='" + description + '\'' +
-                '}';
+        return  description + " - " +
+                goal + " (" +
+                Util.ConvertDateToString(initialDate) +
+                " - " + Util.ConvertDateToString(finalDate)+")";
     }
+
+
 }

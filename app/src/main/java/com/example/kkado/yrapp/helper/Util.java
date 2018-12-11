@@ -21,7 +21,7 @@ public class Util {
 
         try {
 
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
            stringDate = formatter.format(date);
 
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class Util {
         Date date;
         try {
 
-            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
             date = formatter.parse(stringDate);
 
         } catch (ParseException e) {

@@ -3,7 +3,6 @@ package com.example.kkado.yrapp;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -93,20 +92,20 @@ public class PersonFragment_Book extends Fragment
         itemView.setAdapter(arrayAdapter);
         itemView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            PersonFragment_View personFragment_view = new PersonFragment_View();
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int position, long arg3) {
 
                 Person newPerson = (Person) arg0.getItemAtPosition(position);
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment()).commit();
+//
                 Bundle data = new Bundle();//create bundle instance
-                data.putString("key_value", "String to pass");//put string to pass with a key value
+                data.putInt("personID", newPerson.getIdPerson());//put string to pass with a key value
+                personFragment_view.setArguments(data);
 
-                Intent clickIntent = new Intent(context, PersonFragment.class);
-                clickIntent.putExtra("PersonId", newPerson.getIdPerson());
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_fragment, personFragment_view).commit();
 
-                startActivity(clickIntent);
             }
         });
     }
