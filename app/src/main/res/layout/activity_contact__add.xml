@@ -283,6 +283,7 @@
         android:layout_marginRight="25dp"
         android:background="@android:drawable/btn_dropdown"
         app:layout_constraintEnd_toStartOf="@+id/level"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
 
