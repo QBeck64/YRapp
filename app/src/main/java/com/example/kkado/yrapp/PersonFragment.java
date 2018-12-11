@@ -145,6 +145,9 @@ public class PersonFragment extends Fragment {
         return contactAddress;
     }
 
+    /**
+     *
+     */
     private void saveNewPerson() {
         // Create DAO to store person object.
         PersonDAO personDAO = new PersonDAO(context);

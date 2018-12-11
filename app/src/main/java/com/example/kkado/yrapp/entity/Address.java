@@ -24,6 +24,16 @@ public class Address {
 
     }
 
+    /**
+     * @param type
+     * @param nameAddress
+     * @param numberAddress
+     * @param complement
+     * @param province
+     * @param city
+     * @param postalCode
+     * @param idPerson
+     */
     public Address(TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String postalCode, int idPerson) {
         this.type = type;
         this.nameAddress = nameAddress;
@@ -36,6 +46,15 @@ public class Address {
         this.idPerson = idPerson;
     }
 
+    /**
+     * @param type
+     * @param nameAddress
+     * @param numberAddress
+     * @param complement
+     * @param province
+     * @param city
+     * @param postalCode
+     */
     public Address(TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String postalCode) {
         this.type = type;
         this.nameAddress = nameAddress;
@@ -47,6 +66,16 @@ public class Address {
         this.country = "Italia";
     }
 
+    /**
+     * @param idAddress
+     * @param type
+     * @param nameAddress
+     * @param numberAddress
+     * @param complement
+     * @param province
+     * @param city
+     * @param postalCode
+     */
     public Address(int idAddress, TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String postalCode) {
         this.type = type;
         this.idAddress = idAddress;
@@ -59,6 +88,16 @@ public class Address {
         this.country = "Italia";
     }
 
+    /**
+     * @param nameAddress
+     * @param type
+     * @param numberAddress
+     * @param complement
+     * @param province
+     * @param city
+     * @param country
+     * @param postalCode
+     */
     public Address(String nameAddress, TypeAddress type, int numberAddress, String complement, String province, String city, String country, String postalCode) {
         this.type = type;
         this.nameAddress = nameAddress;
@@ -70,6 +109,17 @@ public class Address {
         this.country = country;
     }
 
+    /**
+     * @param idAddress
+     * @param type
+     * @param nameAddress
+     * @param numberAddress
+     * @param complement
+     * @param province
+     * @param city
+     * @param country
+     * @param postalCode
+     */
     public Address(int idAddress, TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String country, String postalCode) {
         this.type = type;
         this.idAddress = idAddress;
@@ -82,6 +132,18 @@ public class Address {
         this.country = country;
     }
 
+    /**
+     * @param idAddress
+     * @param type
+     * @param nameAddress
+     * @param numberAddress
+     * @param complement
+     * @param province
+     * @param city
+     * @param country
+     * @param postalCode
+     * @param idPerson
+     */
     public Address(int idAddress, TypeAddress type, String nameAddress, int numberAddress, String complement, String province, String city, String country, String postalCode, int idPerson) {
         this.idAddress = idAddress;
         this.type = type;
@@ -183,6 +245,9 @@ public class Address {
     }
 
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return "Address{" +

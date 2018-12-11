@@ -7,6 +7,9 @@ import com.example.kkado.yrapp.Enum.Status;
 
 import java.util.Date;
 
+/**
+ *
+ */
 public class Period implements Parcelable {
     /**
      * Members
@@ -57,9 +60,14 @@ public class Period implements Parcelable {
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
     }
+
+
     //Parcelable implementation
 
 
+    /**
+     * @param in
+     */
     protected Period(Parcel in) {
         idPeriod = in.readInt();
         long tmpInitialDate = in.readLong();
@@ -68,11 +76,18 @@ public class Period implements Parcelable {
         finalDate = tmpFinalDate != -1 ? new Date(tmpFinalDate) : null;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * @param dest
+     * @param flags
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(idPeriod);
@@ -80,6 +95,9 @@ public class Period implements Parcelable {
         dest.writeLong(finalDate != null ? finalDate.getTime() : -1L);
     }
 
+    /**
+     *
+     */
     @SuppressWarnings("unused")
     public static final Parcelable.Creator<Period> CREATOR = new Parcelable.Creator<Period>() {
         @Override
@@ -87,6 +105,11 @@ public class Period implements Parcelable {
             return new Period(in);
         }
 
+        /**
+         *
+         * @param size
+         * @return
+         */
         @Override
         public Period[] newArray(int size) {
             return new Period[size];

@@ -25,24 +25,33 @@ import java.util.List;
 /**
  *
  */
-public class CompetitionFragment_Book extends Fragment
-{
+public class CompetitionFragment_Book extends Fragment {
     View myView;
     private Context context;
     private ListView itemView;
     private List<Competition> itens = new ArrayList<>();
     private ArrayAdapter<Competition> arrayAdapter;
+
+    /**
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         this.context = context;
         super.onAttach(context);
     }
+
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_competition_book, container, false);
 
-        itemView = (ListView)myView.findViewById(R.id.competitionView);
+        itemView = (ListView) myView.findViewById(R.id.competitionView);
         try {
             initializeList();
         } catch (Exception e) {
@@ -53,7 +62,6 @@ public class CompetitionFragment_Book extends Fragment
     }
 
     /**
-     *
      * @param
      */
     public void createCompetition(View v) {
@@ -62,6 +70,9 @@ public class CompetitionFragment_Book extends Fragment
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new CompetitionFragment()).commit();
     }
 
+    /**
+     * @throws Exception
+     */
     private void initializeList() throws Exception {
         CompetitionDAO dao = new CompetitionDAO(context);
         itens.clear();

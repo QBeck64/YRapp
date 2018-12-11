@@ -4,6 +4,9 @@ import com.example.kkado.yrapp.Enum.Status;
 
 import java.util.Date;
 
+/**
+ *
+ */
 public class GroupLeader {
     /**
      * Members
@@ -13,6 +16,7 @@ public class GroupLeader {
     private int idPersonLeader;
     private Date initialDate;
     private Date finalDate;
+    private Person PersonLeader;
 
     /**
      * Constructor
@@ -70,5 +74,26 @@ public class GroupLeader {
 
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
+    }
+
+    public Person getPersonLeader() {
+        return PersonLeader;
+    }
+
+    public void setPersonLeader(Person personLeader) {
+        PersonLeader = personLeader;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "GroupLeader{" +
+                "groupName='" + groupName + '\'' +
+                ", initialDate=" + initialDate +
+                ", finalDate=" + finalDate +
+                ", PersonLeader=" + PersonLeader +
+                '}';
     }
 }

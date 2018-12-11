@@ -153,8 +153,8 @@ public class Person {
     @Override
     public String toString() {
         return surname +
-                ", " + name+
-                " (" + email+
+                ", " + name +
+                " (" + email +
                 ")"
                 ;
     }

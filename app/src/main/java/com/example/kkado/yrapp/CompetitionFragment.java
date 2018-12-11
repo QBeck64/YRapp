@@ -19,6 +19,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ *
+ */
 public class CompetitionFragment extends Fragment
 {
     View myView;
@@ -29,6 +32,14 @@ public class CompetitionFragment extends Fragment
         this.context = context;
         super.onAttach(context);
     }
+
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -47,6 +58,10 @@ public class CompetitionFragment extends Fragment
         return myView;
     }
 
+    /**
+     *
+     * @return
+     */
     private Competition getCompetition(){
 
         EditText edtDescription = myView.findViewById(R.id.edtDescription);
@@ -63,6 +78,12 @@ public class CompetitionFragment extends Fragment
 
         return competition;
     }
+
+    /**
+     *
+     * @param dateText
+     * @return
+     */
     private Date ConvertStringToDate(String dateText){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
@@ -77,6 +98,10 @@ public class CompetitionFragment extends Fragment
         return date;
     }
 
+    /**
+     *
+     * @param newCompetition
+     */
     private void saveNewCompetition(Competition newCompetition) {
         // Create DAO to store person object.
         CompetitionDAO dao = new CompetitionDAO(context);

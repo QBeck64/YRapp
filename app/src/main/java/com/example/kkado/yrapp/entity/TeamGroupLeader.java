@@ -2,6 +2,9 @@ package com.example.kkado.yrapp.entity;
 
 import java.util.Date;
 
+/**
+ *
+ */
 public class TeamGroupLeader {
 
     /**
@@ -22,6 +25,14 @@ public class TeamGroupLeader {
 
     }
 
+    /**
+     * @param idTeamGroupLeader
+     * @param person
+     * @param groupLeader
+     * @param initialDate
+     * @param finalDate
+     * @param idPerson
+     */
     public TeamGroupLeader(int idTeamGroupLeader, Person person, GroupLeader groupLeader, Date initialDate, Date finalDate, int idPerson) {
         this.idTeamGroupLeader = idTeamGroupLeader;
         this.person = person;
@@ -31,6 +42,12 @@ public class TeamGroupLeader {
         this.idPerson = idPerson;
     }
 
+    /**
+     * @param idTeamGroupLeader
+     * @param initialDate
+     * @param finalDate
+     * @param idPerson
+     */
     public TeamGroupLeader(int idTeamGroupLeader, Date initialDate, Date finalDate, int idPerson) {
         this.idTeamGroupLeader = idTeamGroupLeader;
         this.initialDate = initialDate;
@@ -87,5 +104,15 @@ public class TeamGroupLeader {
 
     public void setIdPerson(int idPerson) {
         this.idPerson = idPerson;
+    }
+
+    @Override
+    public String toString() {
+        return "TeamGroupLeader{" +
+                "person=" + person +
+                ", groupLeader=" + groupLeader +
+                ", initialDate=" + initialDate +
+                ", finalDate=" + finalDate +
+                '}';
     }
 }

@@ -15,13 +15,14 @@ import static android.app.PendingIntent.getActivity;
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonLis;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkAndExecuteStartup();
         // Making commit for team 2nd change Elisangela
-        buttonLis=(Button) findViewById(R.id.buttonLis);
+        buttonLis = (Button) findViewById(R.id.buttonLis);
         buttonLis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,17 +40,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-   private void checkAndExecuteStartup()
-   {
+    private void checkAndExecuteStartup() {
 
-       SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-       boolean firstTime = sharedPref.getBoolean(getString(R.string.startupSP), false);
-       if(firstTime) {
-           SharedPreferences.Editor editor = sharedPref.edit();
-           editor.putBoolean(getString(R.string.startupSP), true);
-           editor.apply();
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        boolean firstTime = sharedPref.getBoolean(getString(R.string.startupSP), false);
+        if (firstTime) {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean(getString(R.string.startupSP), true);
+            editor.apply();
 
-       }
-   }
+        }
+    }
 
 }

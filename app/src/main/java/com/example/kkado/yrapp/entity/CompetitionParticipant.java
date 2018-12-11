@@ -2,6 +2,9 @@ package com.example.kkado.yrapp.entity;
 
 import java.util.Date;
 
+/**
+ *
+ */
 public class CompetitionParticipant {
     /**
      * Members
@@ -98,4 +101,20 @@ public class CompetitionParticipant {
     public void setCompetition(Competition competition) {
         this.competition = competition;
     }
+
+    /**
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "CompetitionParticipant{" +
+                "initialDate=" + initialDate +
+                ", finalDate=" + finalDate +
+                ", prizeGiven=" + prizeGiven +
+                ", person=" + person +
+                ", competition=" + competition +
+                '}';
+    }
 }
+
+

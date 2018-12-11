@@ -16,9 +16,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ *
+ */
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +51,9 @@ public class MenuActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /**
+     *
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -55,6 +64,10 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -62,6 +75,10 @@ public class MenuActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -77,6 +94,10 @@ public class MenuActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -84,18 +105,17 @@ public class MenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         // Create new fragment and transaction
-       FragmentManager   fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getFragmentManager();
 
 
 // Abre uma transação e adiciona
-
 
         if (id == R.id.nav_competition) {
             fragmentManager.beginTransaction().replace(R.id.content_fragment, new CompetitionFragment_Book()).commit();
         } else if (id == R.id.nav_group) {
             Intent intent = new Intent(this, Contact_Add.class);
             startActivity(intent);
-        }else if (id == R.id.nav_person) {
+        } else if (id == R.id.nav_person) {
 
             fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment()).commit();
         } else if (id == R.id.nav_team) {
@@ -104,7 +124,7 @@ public class MenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_invoicing) {
 
             fragmentManager.beginTransaction().replace(R.id.content_fragment, new InvoicingFragment()).commit();
-    } else if (id == R.id.nav_target) {
+        } else if (id == R.id.nav_target) {
             fragmentManager.beginTransaction().replace(R.id.content_fragment, new TargetFragment()).commit();
         }
 

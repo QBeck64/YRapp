@@ -2,6 +2,9 @@ package com.example.kkado.yrapp.entity;
 
 import java.util.Date;
 
+/**
+ *
+ */
 public class Competition {
 
     /**
@@ -21,7 +24,6 @@ public class Competition {
     }
 
     /**
-     *
      * @param idCompetition
      * @param description
      * @param goal
@@ -37,7 +39,6 @@ public class Competition {
     }
 
     /**
-     *
      * @param description
      * @param goal
      * @param initialDate
@@ -96,6 +97,9 @@ public class Competition {
         this.finalDate = finalDate;
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         return "Competition{" +

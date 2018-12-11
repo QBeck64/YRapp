@@ -1,5 +1,8 @@
 package com.example.kkado.yrapp.entity;
 
+/**
+ *
+ */
 public class Invoicing {
 
     /**
@@ -19,6 +22,12 @@ public class Invoicing {
 
     }
 
+    /**
+     * @param idInvoicing
+     * @param invoicing
+     * @param idPerson
+     * @param idPeriod
+     */
     public Invoicing(int idInvoicing, float invoicing, int idPerson, int idPeriod) {
         this.idInvoicing = idInvoicing;
         this.invoicing = invoicing;
@@ -77,5 +86,17 @@ public class Invoicing {
 
     public void setIdPeriod(int idPeriod) {
         this.idPeriod = idPeriod;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "Invoicing{" +
+                "invoicing=" + invoicing +
+                ", period=" + period +
+                ", person=" + person +
+                '}';
     }
 }

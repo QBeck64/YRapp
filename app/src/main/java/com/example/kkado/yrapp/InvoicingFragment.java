@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-public class InvoicingFragment extends Fragment implements DatePickerFragment.OnInputSelected{
+public class InvoicingFragment extends Fragment implements DatePickerFragment.OnInputSelected {
     private static final String TAG = "MainFragment";
 
     @Override

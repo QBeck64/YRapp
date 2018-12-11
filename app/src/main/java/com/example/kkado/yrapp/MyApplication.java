@@ -8,8 +8,8 @@ import com.example.kkado.yrapp.entity.Person;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyApplication extends Application{
-     List<Person> contactBookList = new ArrayList<>();
+public class MyApplication extends Application {
+    List<Person> contactBookList = new ArrayList<>();
 
     private void initializeContactList() throws Exception {
         PersonDAO dao = new PersonDAO(this);

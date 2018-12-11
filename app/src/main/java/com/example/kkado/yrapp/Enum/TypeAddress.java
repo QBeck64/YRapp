@@ -3,6 +3,9 @@ package com.example.kkado.yrapp.Enum;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ *
+ */
 public enum TypeAddress {
     Avenue(1, "Avenue"), Boulevard(2, "Boulevard"), Circle(3, "Circle"), Court(4, "Court"), Expressway(5, "Expressway"), Freeway(6, "Freeway"), Lane(7, "Lane"), Parkway(8, "Parkway"), Road(9, "Road"), Square(10, "Square"), Street(11, "Street"), Turnpike(12, "Turnpike"), North(13, "North"), East(14, "East"), South(15, "South"), West(16, "West"), Northeast(17, "Northeast"), Southeast(18, "Southeast");
 

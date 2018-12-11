@@ -3,6 +3,9 @@ package com.example.kkado.yrapp.Enum;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ */
 public enum Gender {
     Masculine(1, "Masculine"), Feminine(2, "Feminine");
 

@@ -3,6 +3,9 @@ package com.example.kkado.yrapp.Enum;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ */
 public enum TypePerson {
     Candidate(1, "Candidate"), SalesPerson(2, "SalesPerson"), Leader(3, "Leader"), ZoneManager(4, "ZoneManager");
 

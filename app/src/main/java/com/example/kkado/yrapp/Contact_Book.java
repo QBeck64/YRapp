@@ -85,7 +85,7 @@ public class Contact_Book extends AppCompatActivity implements AdapterView.OnIte
         Log.d(TAG, "Item clicked, item person saved to new person object");
 
         // Create intent and send clicked person id to Contact_View
-        Intent clickIntent = new Intent(this, Contact_View.class);
+        Intent clickIntent = new Intent(this, PersonFragment.class);
         clickIntent.putExtra("PersonId", newPerson.getIdPerson());
         Log.d(TAG, "Created new intent and sent  " + newPerson.getName() + "'s information to Contact_View");
         startActivity(clickIntent);

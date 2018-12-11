@@ -3,6 +3,9 @@ package com.example.kkado.yrapp.Enum;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ *
+ */
 public enum Status {
     Active(1, "Active"), Inactive(2, "Inactive");
 
