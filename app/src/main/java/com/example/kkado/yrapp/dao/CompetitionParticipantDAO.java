@@ -20,14 +20,14 @@ public class CompetitionParticipantDAO {
     private SqliteAdapter dbHelper;
     private SQLiteDatabase mySQLiteDatabase;
 
-    /**
+    /**CompetitionParticipantDAO uses data base to iniciate getting information
      * @param myContext
      */
     public CompetitionParticipantDAO(Context myContext) {
         initializeDataBase(myContext);
     }
 
-    /**
+    /**CompetitionParticipantDAO integrates data to the data base, using exceptions and invocating SQLite
      * @param myContext
      */
     private void initializeDataBase(Context myContext) {
@@ -46,7 +46,7 @@ public class CompetitionParticipantDAO {
         }
     }
 
-    /**
+    /**CompetitionParticipantDAO using  boolean integrates information and updates respective tables.
      * @param item
      * @return
      */
@@ -66,7 +66,7 @@ public class CompetitionParticipantDAO {
             return mySQLiteDatabase.insert(TABLE, null, cv) > 0;
     }
 
-    /**
+    /**CompetitionParticipantDAO uses Long to update and save Id's in the data base
      *
      * @param item
      * @return
@@ -88,7 +88,7 @@ public class CompetitionParticipantDAO {
             return mySQLiteDatabase.insert(TABLE, null, cv) ;
     }
 
-    /**
+    /**Boolean contrinutes to delition of information fromdatabase 
      * @param id
      * @return
      */
@@ -96,7 +96,7 @@ public class CompetitionParticipantDAO {
         return mySQLiteDatabase.delete(TABLE, "idCompetitionParticipant=?", new String[]{id + ""}) > 0;
     }
 
-    /**
+    /**CompetitionParticipantDAO integrates participants list to database
      * @return
      * @throws Exception
      */
@@ -120,7 +120,7 @@ public class CompetitionParticipantDAO {
         return competitionParticipantList;
     }
 
-    /**
+    /**CCompetition pulls infromation using queries and strings from CompetitionParticipantDAO
      *
      * @param id
      * @return
