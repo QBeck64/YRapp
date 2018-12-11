@@ -17,14 +17,14 @@ public class CompetitionDAO {
     private SqliteAdapter dbHelper;
     private SQLiteDatabase mySQLiteDatabase;
 
-    /**
+    /**CompetitionDAO access information using data source to identify completition.  
      * @param myContext
      */
     public CompetitionDAO(Context myContext) {
         initializeDataBase(myContext);
     }
 
-    /**
+    /**CompetitionDAO iniciates accesing data from different tables. Information gets display with update. 
      * @param myContext
      */
     private void initializeDataBase(Context myContext) {
@@ -43,7 +43,8 @@ public class CompetitionDAO {
         }
     }
 
-    /**
+    /**Using CompetitionDAO and the implementation of boolean can get access to specific information related to 
+    competition. 
      * @param item
      * @return
      */
@@ -62,9 +63,8 @@ public class CompetitionDAO {
             return mySQLiteDatabase.insert(TABLE, null, cv) > 0;
     }
 
-    /**
-     *
-     * @param item
+    /**Long contributes to saveinformation dercribed on SaveCompetition, such as goal
+     * @param item and finanl date.
      * @return
      */
     public long saveCompetition(Competition item) {
@@ -81,7 +81,7 @@ public class CompetitionDAO {
             return mySQLiteDatabase.insert(TABLE, null, cv) ;
     }
 
-    /**
+    /**Boolean  uses a delete methote to update mySQLiteDatabase if information is deleted. 
      * @param id
      * @return
      */
@@ -89,7 +89,7 @@ public class CompetitionDAO {
         return mySQLiteDatabase.delete(TABLE, "idCompetition=?", new String[]{id + ""}) > 0;
     }
 
-    /**
+    /**CompetitionDAO access list using strings describing goal,description, and completion.
      * @return
      * @throws Exception
      */
@@ -99,6 +99,7 @@ public class CompetitionDAO {
         Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Competition", null);
 
         while (cursor.moveToNext()) {
+            
             int idCompetition = cursor.getInt(cursor.getColumnIndex("idCompetition"));
             String description = cursor.getString(cursor.getColumnIndex("description"));
             String goal = cursor.getString(cursor.getColumnIndex("goal"));
@@ -113,7 +114,7 @@ public class CompetitionDAO {
         return competitionList;
     }
 
-    /**
+    /**SelectId is use as identifier to CompetitionDAO, and accessing data base.
      *
      * @param id
      * @return
