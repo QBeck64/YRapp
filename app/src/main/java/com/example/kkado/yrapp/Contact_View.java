@@ -75,7 +75,7 @@ public class Contact_View extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.editContact:
-                // Send person if to new activity to be edited
+                toContactEdit();
                 return true;
             case R.id.deleteContact:
                 personDAO.delete(idPerson);
@@ -89,6 +89,12 @@ public class Contact_View extends AppCompatActivity {
     public void returnToContacts() {
         Intent myIntent = new Intent(this, Contact_Book.class);
         startActivity(myIntent);
+    }
+
+    public void toContactEdit() {
+        Intent newIntent = new Intent(this, Contact_Edit.class);
+        newIntent.putExtra("PersonId", idPerson);
+        startActivity(newIntent);
     }
 
     /**

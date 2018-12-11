@@ -13,40 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-        <!--  <activity android:name=".MainActivity">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-         </activity>
-         -->
-         <activity
-             android:name=".TemplateActivity"
-             android:label="@string/title_activity_template"
-             android:theme="@style/AppTheme.NoActionBar" />
-         <activity android:name=".Contact_Book" />
-         <activity android:name=".Contact_Add" />
-         <activity android:name=".Contact_View" />
-
-         <service
-             android:name=".LevelUpdaterService"
-             android:exported="false" />
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
-             android:name=".MenuActivity"
-             android:label="@string/title_activity_menu"
-             android:theme="@style/AppTheme.NoActionBar">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
+            android:name=".TemplateActivity"
+            android:label="@string/title_activity_template"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Contact_Book" />
+        <activity android:name=".Contact_Add" />
+        <activity android:name=".Contact_View"/>
+        <activity android:name=".PersonActivity" />
 
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-         </activity>
-
-
+        <service
+            android:name=".LevelUpdaterService"
+            android:exported="false" />
     </application>
-
-
 
 </manifest>

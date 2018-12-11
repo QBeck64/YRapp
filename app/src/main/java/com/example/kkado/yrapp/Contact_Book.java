@@ -31,7 +31,8 @@ public class Contact_Book extends AppCompatActivity implements AdapterView.OnIte
     private ArrayAdapter<Person> arrayAdapterContact;
 
     /**
-     *
+     * On creation of Contact_Book, contactView is set to the ListView in the activity. contactView is then initialized
+     * so all Person objects saved in the PersonDAO are shown.
      * @param savedInstanceState
      */
     @Override
@@ -50,7 +51,8 @@ public class Contact_Book extends AppCompatActivity implements AdapterView.OnIte
     }
 
     /**
-     *
+     *PersonDAO object created and "contacts", ArrayList<Person> is filled with PersonDAO. Use ArrayAdapter to set list in
+     * contactView and use onItemClickListener, for when a contact is selected.
      * @throws Exception
      */
     private void initializeContactList() throws Exception {
@@ -64,16 +66,8 @@ public class Contact_Book extends AppCompatActivity implements AdapterView.OnIte
     }
 
     /**
-     *
-     * @param v
-     */
-    public void createContact(View v) {
-        Intent myIntent = new Intent(this, Contact_Add.class);
-        startActivity(myIntent);
-    }
-
-    /**
-     *
+     * Selected Person is set to newly created Person object. New intent is created and will be used
+     * to start the Contact_View activity. Within the intent, the id of the person object will be sent over.
      * @param parent
      * @param view
      * @param position
@@ -90,5 +84,14 @@ public class Contact_Book extends AppCompatActivity implements AdapterView.OnIte
         Log.d(TAG, "Created new intent and sent  " + newPerson.getName() + "'s information to Contact_View");
         startActivity(clickIntent);
         Log.d(TAG, "executed startActivity");
+    }
+
+    /**
+     * Will create new intent to start Contact_Add.
+     * @param v
+     */
+    public void createContact(View v) {
+        Intent myIntent = new Intent(this, Contact_Add.class);
+        startActivity(myIntent);
     }
 }
