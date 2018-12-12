@@ -13,21 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".TemplateActivity"
-            android:label="@string/title_activity_template"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Contact_Book" />
-        <activity android:name=".Contact_Add" />
-        <activity android:name=".Contact_View"/>
-        <activity android:name=".PersonActivity" />
+
 
         <service
             android:name=".LevelUpdaterService"
