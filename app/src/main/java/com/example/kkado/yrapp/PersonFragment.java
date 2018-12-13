@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -213,19 +214,26 @@ public class PersonFragment extends Fragment {
      */
     private Person setPersonInfo() {
         setScreenComponents();
+        Log.d(TAG, "set screen components");
         String name = edtFirstName.getText().toString();
         String surname = edtLastName.getText().toString();
         String dateBirthday = edtBirthday.getText().toString();
         Date birthday = ConvertStringToDate(dateBirthday);
         Gender gender = Gender.getGenderDescription(spnGender.getSelectedItem().toString());
-        Integer level = Integer.parseInt(edtLevel.getText().toString());
+        // Account for no level set
+        Integer level = 0;
+        if(!TextUtils.isEmpty(edtLevel.getText().toString())) {
+            level = Integer.parseInt(edtLevel.getText().toString());
+        }
         String email = edtEmailAddress.getText().toString();
         String phoneNumber = edtPhoneNumber.getText().toString();
-        Integer idPersonParen = parentId;
+        Integer idPersonParen = null;
         // Any value will do, because TypePerson is not important
         TypePerson type = TypePerson.Leader;
 
+        Log.d(TAG, "about to set perosn");
         Person person = new Person(name, surname, birthday, gender, level, email, phoneNumber, idPersonParen, type);
+        Log.d(TAG, "Finsihed seting person");
 
         return person;
     }
@@ -239,7 +247,10 @@ public class PersonFragment extends Fragment {
 
         TypeAddress type = TypeAddress.Boulevard;
         String nameAddress = edtAddressStreet.getText().toString();
-        int numberAddress = Integer.parseInt(edtAddressNumber.getText().toString());
+        Integer numberAddress = 0;
+        if(!TextUtils.isEmpty(edtAddressNumber.getText().toString())) {
+            Integer.parseInt(edtAddressNumber.getText().toString());
+        }
         String complement = edtAddressComplement.getText().toString();
         String province = edtAddressProvince.getText().toString();
         String city = edtAddressCity.getText().toString();
@@ -255,11 +266,14 @@ public class PersonFragment extends Fragment {
      */
     private void saveNewPerson() {
         // Create DAO to store person object.
+        Log.d(TAG, "starting saveperson");
         PersonDAO personDAO = new PersonDAO(context);
         // Save will now represent the newly created id fro the saved person
         Person newPerson = setPersonInfo();
+        Log.d(TAG, "success in setting person in sace");
 
         long personSave = personDAO.savePerson(newPerson);
+        Log.d(TAG, "saving person, getting LOng back");
 
         if (personSave > 0) {
             Util.alert("Success", context);
