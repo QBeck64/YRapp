@@ -1,9 +1,7 @@
 package com.example.kkado.yrapp;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -29,7 +26,6 @@ import com.example.kkado.yrapp.entity.Address;
 import com.example.kkado.yrapp.entity.Person;
 
 import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -87,7 +83,7 @@ public class Contact_Add extends AppCompatActivity {
         ArrayAdapter<Person> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, parentList);
         AutoCompleteTextView parentView = (AutoCompleteTextView)
-                findViewById(R.id.personParent);
+                findViewById(R.id.edtPersonParent);
         parentView.setAdapter(adapter);
 
         parentView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

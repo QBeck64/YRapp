@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".PersonFragment">
 
+    <AutoCompleteTextView
+        android:id="@+id/edtPersonParent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/personParent"
+        app:layout_constraintEnd_toStartOf="@+id/edtLevel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/edtFirstName"
         android:layout_width="180dp"
@@ -13,49 +26,45 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/firstName"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/edtLastName"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spnType"
+        app:layout_constraintTop_toBottomOf="@+id/edtPersonParent"
         tools:targetApi="o" />
 
     <EditText
         android:id="@+id/edtLastName"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
+
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/lastName"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edtFirstName"
         app:layout_constraintTop_toBottomOf="@+id/edtLevel"
         tools:targetApi="o" />
 
-    <EditText
+    <TextView
         android:id="@+id/edtBirthday"
         android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="yyyy/MM/dd"
         android:inputType="date"
         android:selectAllOnFocus="false"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/spnGender"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtFirstName"
         tools:targetApi="o" />
@@ -64,6 +73,8 @@
         android:id="@+id/spnGender"
         android:layout_width="160dp"
         android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -71,6 +82,7 @@
         android:dropDownWidth="match_parent"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edtBirthday"
         app:layout_constraintTop_toBottomOf="@+id/edtLastName"
         tools:prompt="@string/gender_prompt" />
 
@@ -84,22 +96,24 @@
         android:id="@+id/edtAddressCity"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="75dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/addressCity"
         android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toTopOf="@+id/btnSave"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressProvince"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintStart_toEndOf="@+id/edtAddressZip"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressProvince" />
 
     <EditText
         android:id="@+id/edtAddressProvince"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -107,7 +121,8 @@
         android:hint="@string/addressProvince"
         android:inputType="textPostalAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressStreet" />
+        app:layout_constraintStart_toEndOf="@+id/edtAddressComplement"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressNumber" />
 
     <EditText
         android:id="@+id/edtAddressZip"
@@ -116,18 +131,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/addressZip"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/btnSave"
-        app:layout_constraintEnd_toStartOf="@+id/edtAddressCity"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressComplement"
-        app:layout_constraintVertical_bias="0.166" />
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressComplement" />
 
     <EditText
         android:id="@+id/edtEmailAddress"
@@ -135,7 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:ems="10"
         android:hint="@string/emailAddress"
         android:inputType="textEmailAddress"
@@ -148,7 +156,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
@@ -178,14 +186,17 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/number_Addrerss"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmailAddress" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edtAddressStreet"
+        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
 
     <EditText
         android:id="@+id/edtAddressComplement"
@@ -194,20 +205,20 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/addressCompliment"
         android:inputType="text"
         app:layout_constraintEnd_toStartOf="@+id/edtAddressProvince"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressStreet" />
 
     <EditText
         android:id="@+id/edtLevel"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -215,43 +226,21 @@
         android:hint="@string/personLevel"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edtPersonParent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spnType"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:ems="10"
-        android:hint="@string/typePerson"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/edtLevel"
-        app:layout_constraintHorizontal_bias="0.246"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:prompt="@string/gender_prompt" />
 
 
     <EditText
         android:id="@+id/edtAddressStreet"
         android:layout_width="260dp"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/streetAddress"
         android:inputType="textPostalAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.7"
-        app:layout_constraintStart_toEndOf="@+id/edtAddressNumber"
-        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailAddress" />
 
 </android.support.constraint.ConstraintLayout>
