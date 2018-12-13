@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,8 +30,10 @@ import com.example.kkado.yrapp.helper.Util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static com.example.kkado.yrapp.LevelUpdaterService.startActionUpdateCg;
 
@@ -56,6 +60,8 @@ public class PersonFragment extends Fragment {
     Spinner spnType;
     EditText edtAddressStreet;
     TextView mDatePicker;
+    private List<Person> parentList = new ArrayList<>();
+    Integer parentId;
 
 
     /**
@@ -81,6 +87,7 @@ public class PersonFragment extends Fragment {
 
         LoadDropDown();
         createDateListener();
+        setAutoPersonParent();
 
         Button bt = myView.findViewById(R.id.btnSave);
 
@@ -161,6 +168,46 @@ public class PersonFragment extends Fragment {
     }
 
     /**
+     * Using the PersonDAO, an ArrayList will be created and filled with all Persons residing in the PersonDAO.
+     * An arrayadapter will be used to help display the list, and will be set in an AutoCompleteTextView object.
+     * Person names from the List will be displayed and clickable to the user as input is typed. Purpose
+     * is to guarantee that the user enters a valid parent name, so a valid personParentId can be set in the new Contact
+     * being created.
+     */
+    private void setAutoPersonParent() {
+        PersonDAO parentDao = new PersonDAO(context);
+        parentList.clear();
+
+        try {
+            parentList = parentDao.select();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ArrayAdapter<Person> adapter = new ArrayAdapter<>(context,
+                android.R.layout.simple_dropdown_item_1line, parentList);
+        AutoCompleteTextView parentView = (AutoCompleteTextView)
+                myView.findViewById(R.id.edtPersonParent);
+        parentView.setAdapter(adapter);
+
+        parentView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * Create a new person object to save the onItemClick selected object, then save the selected
+             * personId to the private variable, "parentId".
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Person selectPerson = (Person)parent.getItemAtPosition(position);
+                // Set parentId for use in setting Contact
+                parentId = selectPerson.getIdPerson();
+            }
+        });
+    }
+
+    /**
      *
      * @return
      */
@@ -174,8 +221,9 @@ public class PersonFragment extends Fragment {
         Integer level = Integer.parseInt(edtLevel.getText().toString());
         String email = edtEmailAddress.getText().toString();
         String phoneNumber = edtPhoneNumber.getText().toString();
-        Integer idPersonParen = null;
-        TypePerson type = TypePerson.getTypePersonDescription(spnType.getSelectedItem().toString());
+        Integer idPersonParen = parentId;
+        // Any value will do, because TypePerson is not important
+        TypePerson type = TypePerson.Leader;
 
         Person person = new Person(name, surname, birthday, gender, level, email, phoneNumber, idPersonParen, type);
 
@@ -218,7 +266,7 @@ public class PersonFragment extends Fragment {
         } else {
             Util.alert("Error", context);
         }
-        Log.d(TAG, "Saved Person successfully");
+        Log.d(TAG, "Saved Person successfully, is " + personSave);
 
         // Create DAO to store address object.
         AddressDAO addressDAO = new AddressDAO(context);
@@ -234,7 +282,7 @@ public class PersonFragment extends Fragment {
         } else {
             Util.alert("Error", context);
         }
-        Log.d(TAG, "saved address successfully");
+        Log.d(TAG, "saved address successfully, is " + addressSave);
 
         try {
             Person person = personDAO.selectId(personSave);

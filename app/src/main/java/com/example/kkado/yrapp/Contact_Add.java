@@ -301,7 +301,7 @@ public class Contact_Add extends AppCompatActivity {
         if (personSave>0) {
             alert("Success");
         } else {
-            alert("Error");
+            alert("ErrorPerson");
         }
 
         Log.d(TAG,"Saved Person successfully");
@@ -318,7 +318,7 @@ public class Contact_Add extends AppCompatActivity {
         if (addressSave > 0) {
             alert("Success");
         } else {
-            alert("Error");
+            alert("ErrorAddress");
         }
         Log.d(TAG, "saved address successfully");
     }
