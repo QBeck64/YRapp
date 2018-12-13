@@ -28,20 +28,21 @@ public class PersonFragment_View extends Fragment {
     private static final String TAG = "ContactAdd";
     View myView;
     private Context context;
-    EditText edtFirstName;
-    EditText edtLastName;
-    EditText edtBirthday;
-    Spinner spnGender;
-    EditText edtAddressCity;
-    EditText edtAddressProvince;
-    EditText edtAddressZip;
-    EditText edtEmailAddress;
-    EditText edtPhoneNumber;
-    EditText edtAddressNumber;
-    EditText edtAddressComplement;
-    EditText edtLevel;
+    TextView edtFirstName;
+    TextView edtLastName;
+    TextView edtBirthday;
+    TextView spnGender;
+    TextView edtAddressCity;
+    TextView edtAddressProvince;
+    TextView edtAddressZip;
+    TextView edtEmailAddress;
+    TextView edtPhoneNumber;
+    TextView edtAddressNumber;
+    TextView edtAddressComplement;
+    TextView edtLevel;
     Spinner spnType;
-    EditText edtAddressStreet;
+    TextView edtAddressStreet;
+    TextView edtPersonParent;
 
 
     Integer idPerson;
@@ -159,34 +160,24 @@ public class PersonFragment_View extends Fragment {
      */
     private void displayPerson(Person personView) {
         // find and set by id
-        TextView viewFirst = (TextView) myView.findViewById(R.id.firstName);
-        TextView viewLast = (TextView) myView.findViewById(R.id.lastName);
-        TextView viewBirthday = (TextView) myView.findViewById(R.id.birthday);
-        TextView viewGender = (TextView) myView.findViewById(R.id.gender);
-        TextView viewPhone = (TextView) myView.findViewById(R.id.phoneNumber);
-        TextView viewEmail = (TextView) myView.findViewById(R.id.emailAddress);
-        TextView viewType = (TextView) myView.findViewById(R.id.type);
-        TextView viewLevel = (TextView) myView.findViewById(R.id.level);
-        TextView viewParent = (TextView) myView.findViewById(R.id.parent);
+        edtFirstName = (TextView) myView.findViewById(R.id.edtFirstName);
+        edtLastName = (TextView) myView.findViewById(R.id.edtLastName);
+        edtBirthday = (TextView) myView.findViewById(R.id.edtBirthday);
+        spnGender = (TextView) myView.findViewById(R.id.spnGender);
+        edtPhoneNumber = (TextView) myView.findViewById(R.id.edtPhoneNumber);
+        edtEmailAddress = (TextView) myView.findViewById(R.id.edtEmailAddress);
+        edtLevel = (TextView) myView.findViewById(R.id.edtLevel);
+        edtPersonParent = (TextView) myView.findViewById(R.id.edtPersonParent);
 
         // setText
-        viewFirst.setText(personView.getName());
-        viewLast.setText(personView.getSurname());
-        // Remember Birthday is a Date()
-//        Date bDate = personView.getBirthday();
-//        viewBirthday.setText(bDate.toString());
-//        Log.d(TAG, "birthday set");
-//        // Gender is Enum
-//        viewGender.setText("a gender");
-//        Log.d(TAG, "gender set");
-//        viewPhone.setText(personView.getPhoneNumber());
-//        viewEmail.setText(personView.getEmail());
-//        // Person type is an enum
-//        viewType.setText("a type");
-//        Log.d(TAG, "person type set");
-//        viewLevel.setText("a level");
-//        viewParent.setText("a parent");
-//        Log.d(TAG, "finished setting texts");
+        edtFirstName.setText(personView.getName());
+        edtLastName.setText(personView.getSurname());
+        edtBirthday.setText(personView.getBirthday().toString());
+        spnGender.setText(personView.getGender().getDescription());
+        edtPhoneNumber.setText(personView.getPhoneNumber());
+        edtEmailAddress.setText(personView.getEmail());
+        edtLevel.setText(personView.getLevel());
+        edtPersonParent.setText(personView.getPersonParent().toString());
     }
 
     /**
@@ -220,7 +211,7 @@ public class PersonFragment_View extends Fragment {
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment()).commit();
     }
 
-    public void returnToContacts() {
+    public void returnToContacts(View v) {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment_Book()).commit();
