@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CompetitionFragment_Book"
+    tools:context=".GroupFragment_Book"
     tools:layout_editor_absoluteY="81dp">
 
     <EditText
-        android:id="@+id/edtFilterCompetition"
+        android:id="@+id/edtFilterGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -29,20 +29,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/lstViewCompetition"
+        android:id="@+id/lstViewGroup"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@+id/edtFilterCompetition"
-        android:layout_alignBottom="@+id/btnCreateCompetition"
+        android:layout_below="@+id/edtFilterGroup"
+        android:layout_alignBottom="@+id/btnCreateGroup"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateCompetition"
-        app:layout_constraintEnd_toEndOf="@+id/edtFilterCompetition"
-        app:layout_constraintStart_toStartOf="@+id/edtFilterCompetition"
-        app:layout_constraintTop_toBottomOf="@+id/edtFilterCompetition" />
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateGroup"
+        app:layout_constraintEnd_toEndOf="@+id/edtFilterGroup"
+        app:layout_constraintStart_toStartOf="@+id/edtFilterGroup"
+        app:layout_constraintTop_toBottomOf="@+id/edtFilterGroup" />
 
     <ImageButton
-        android:id="@+id/btnCreateCompetition"
+        android:id="@+id/btnCreateGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

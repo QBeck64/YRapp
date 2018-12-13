@@ -12,6 +12,13 @@ public class Invoicing {
     private float invoicing;
     private Period period;
     private Person person;
+
+    public Invoicing(float invoicing, int idPerson, int idPeriod) {
+        this.invoicing = invoicing;
+        this.idPerson = idPerson;
+        this.idPeriod = idPeriod;
+    }
+
     private int idPerson;
     private int idPeriod;
 

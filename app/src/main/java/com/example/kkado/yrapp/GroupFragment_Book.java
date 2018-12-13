@@ -11,31 +11,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.kkado.yrapp.dao.CompetitionDAO;
+import com.example.kkado.yrapp.dao.GroupLeaderDAO;
 import com.example.kkado.yrapp.entity.Competition;
-import com.example.kkado.yrapp.entity.Person;
-import com.example.kkado.yrapp.helper.Util;
+import com.example.kkado.yrapp.entity.GroupLeader;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  *
  */
-public class CompetitionFragment_Book extends Fragment {
+public class GroupFragment_Book extends Fragment {
     View myView;
     private Context context;
     private ListView itemView;
-    private List<Competition> itens = new ArrayList<>();
-    private ArrayAdapter<Competition> arrayAdapter;
+    private List<GroupLeader> itens = new ArrayList<>();
+    private ArrayAdapter<GroupLeader> arrayAdapter;
     private EditText edtFilter;
 
     /**
@@ -55,11 +51,11 @@ public class CompetitionFragment_Book extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_competition_book, container, false);
+        myView = inflater.inflate(R.layout.fragment_group_book, container, false);
 
-        itemView = (ListView) myView.findViewById(R.id.lstViewCompetition);
-        edtFilter = (EditText) myView.findViewById(R.id.edtFilterCompetition);
-        ImageButton bt = (ImageButton)myView.findViewById(R.id.btnCreateCompetition);
+        itemView = (ListView) myView.findViewById(R.id.lstViewGroup);
+        edtFilter = (EditText) myView.findViewById(R.id.edtFilterGroup);
+        ImageButton bt = (ImageButton)myView.findViewById(R.id.btnCreateGroup);
 
         try {
             initializeList();
@@ -88,7 +84,7 @@ public class CompetitionFragment_Book extends Fragment {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createCompetition();
+                createGroup();
             }
         });
         return myView;
@@ -97,37 +93,37 @@ public class CompetitionFragment_Book extends Fragment {
     /**
      * @param
      */
-    public void createCompetition() {
+    public void createGroup() {
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_fragment, new CompetitionFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment()).commit();
     }
 
     /**
      * @throws Exception
      */
     private void initializeList() throws Exception {
-        CompetitionDAO dao = new CompetitionDAO(context);
+        GroupLeaderDAO dao = new GroupLeaderDAO(context);
         itens.clear();
         itens = dao.select();
 
-        arrayAdapter = new ArrayAdapter<Competition>(context, android.R.layout.simple_list_item_1, itens);
+        arrayAdapter = new ArrayAdapter<GroupLeader>(context, android.R.layout.simple_list_item_1, itens);
         itemView.setAdapter(arrayAdapter);
         itemView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            CompetitionFragment_View competitionFragment_view = new CompetitionFragment_View();
+            GroupFragment_View groupFragment_view = new GroupFragment_View();
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int position, long arg3) {
 
-                Competition newCompetition = (Competition) arg0.getItemAtPosition(position);
+                GroupLeader newGroup = (GroupLeader) arg0.getItemAtPosition(position);
 //
                 Bundle data = new Bundle();//create bundle instance
-                data.putInt("idCompetition", newCompetition.getIdCompetition());//put string to pass with a key value
-                competitionFragment_view.setArguments(data);
+                data.putInt("idGroupLeader", newGroup.getIdGroupLeader());//put string to pass with a key value
+                groupFragment_view.setArguments(data);
 
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_fragment, competitionFragment_view).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_fragment, groupFragment_view).commit();
 
             }
         });

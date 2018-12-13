@@ -20,17 +20,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.kkado.yrapp.dao.CompetitionDAO;
 import com.example.kkado.yrapp.dao.GroupLeaderDAO;
-import com.example.kkado.yrapp.dao.InvoicingDAO;
 import com.example.kkado.yrapp.dao.PersonDAO;
-import com.example.kkado.yrapp.entity.Competition;
 import com.example.kkado.yrapp.entity.GroupLeader;
-import com.example.kkado.yrapp.entity.Invoicing;
 import com.example.kkado.yrapp.entity.Person;
 import com.example.kkado.yrapp.helper.Util;
 
-import java.security.acl.Group;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,8 +35,8 @@ import java.util.List;
 /**
  *
  */
-public class InvoicingFragment extends Fragment {
-    private static final String TAG = "InvoicingAdd";
+public class GroupFragment extends Fragment {
+    private static final String TAG = "GroupLeaderAdd";
 
     View myView;
     private Context context;
@@ -51,9 +46,11 @@ public class InvoicingFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener mFinalDateSetListener;
     private Date bInitialDate;
     private Date bFinalDate;
-    private Integer personId;
-    private Integer periodId;
+    private Integer personLeaderId;
 
+    /**
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         this.context = context;
@@ -68,10 +65,10 @@ public class InvoicingFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_invoicing, container, false);
+        myView = inflater.inflate(R.layout.fragment_group, container, false);
 
-        Button btnSave = (Button)myView.findViewById(R.id.btnSave);
-        ImageButton btnReturn = (ImageButton)myView.findViewById(R.id.btnReturn);
+        ImageButton btnSave = (ImageButton) myView.findViewById(R.id.btnSave);
+        ImageButton btnReturn = (ImageButton) myView.findViewById(R.id.btnReturn);
 
         createInitialDateListener();
         createFinalDateListener();
@@ -80,9 +77,7 @@ public class InvoicingFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Invoicing group = getInvoicing();
-                saveNewInvoicing(group);
+                saveNewGroupLeader();
             }
         });
 
@@ -90,7 +85,7 @@ public class InvoicingFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                returnToInvoicing_Book();
+                returnToGroupLeader_Book();
             }
         });
 
@@ -100,38 +95,41 @@ public class InvoicingFragment extends Fragment {
     /**
      * @return
      */
-    private Invoicing getInvoicing() {
+    private GroupLeader getGroupLeader() {
 
-        EditText edtDescription = myView.findViewById(R.id.edtDescription);
-        EditText edtGoal = myView.findViewById(R.id.edtGoal);
+        EditText edtGroupName = myView.findViewById(R.id.edtGroupName);
 
+        String groupName = edtGroupName.getText().toString();
 
-        String groupName = edtDescription.getText().toString();
-        int goal = personId;
         Date initialDate = bInitialDate;
         Date finalDate = bFinalDate;
-float invoicing = (float) 0.0;
-        Invoicing group = new Invoicing(invoicing,personId,  personId);
+        GroupLeader group = null;
+        if (validateFields(groupName, personLeaderId, initialDate, finalDate)) {
+            group = new GroupLeader(groupName, personLeaderId, initialDate, finalDate);
+        }
 
         return group;
     }
 
     /**
-     * @param newInvoicing
+     *
      */
-    private void saveNewInvoicing(Invoicing newInvoicing) {
-        // Create DAO to store person object.
-        InvoicingDAO dao = new InvoicingDAO(context);
-        // Save will now represent the newly created id fro the saved person
-        long InvoicingSave = dao.saveInvoicing(newInvoicing);
+    private void saveNewGroupLeader() {
 
-        if (InvoicingSave > 0) {
-            Util.alert("Success", context);
-            returnToInvoicing_Book();
-        } else {
-            Util.alert("Error", context);
+        GroupLeader newGroupLeader = getGroupLeader();
+        if (newGroupLeader != null) {
+            // Create DAO to store person object.
+            GroupLeaderDAO dao = new GroupLeaderDAO(context);
+            // Save will now represent the newly created id fro the saved person
+            long GroupLeaderSave = dao.saveGroupLeader(newGroupLeader);
+
+            if (GroupLeaderSave > 0) {
+                Util.alert("Success", context);
+                returnToGroupLeader_Book();
+            } else {
+                Util.alert("Error", context);
+            }
         }
-
     }
 
     /**
@@ -222,12 +220,18 @@ float invoicing = (float) 0.0;
         };
     }
 
-    public void returnToInvoicing_Book() {
+    /**
+     *
+     */
+    public void returnToGroupLeader_Book() {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment_Book()).commit();
     }
 
+    /**
+     *
+     */
     private void setAutoPersonLeader() {
         PersonDAO dao = new PersonDAO(context);
         List<Person> parentList = new ArrayList<>();
@@ -255,11 +259,29 @@ float invoicing = (float) 0.0;
              */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Person selectPerson = (Person)parent.getItemAtPosition(position);
+                Person selectPerson = (Person) parent.getItemAtPosition(position);
                 // Set parentId for use in setting Contact
-                personId = selectPerson.getIdPerson();
+                personLeaderId = selectPerson.getIdPerson();
             }
         });
     }
 
+    private boolean validateFields(String groupName, Integer personLeaderId, Date initialDate, Date finalDate) {
+
+        boolean result = true;
+        if (groupName == null || groupName.isEmpty()) {
+            result = false;
+            Util.alert("Please, Group Name is required.", context);
+        } else if (personLeaderId == null || personLeaderId == 0) {
+            result = false;
+            Util.alert("Please, Leader is required.", context);
+        } else if (initialDate == null || initialDate.toString().isEmpty()) {
+            result = false;
+            Util.alert("Please, Initial Date is required.", context);
+        } else if (finalDate == null || finalDate.toString().isEmpty()) {
+            result = false;
+            Util.alert("Please, Final date is required.", context);
+        }
+        return result;
+    }
 }

@@ -20,17 +20,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.kkado.yrapp.dao.CompetitionDAO;
 import com.example.kkado.yrapp.dao.GroupLeaderDAO;
-import com.example.kkado.yrapp.dao.InvoicingDAO;
 import com.example.kkado.yrapp.dao.PersonDAO;
-import com.example.kkado.yrapp.entity.Competition;
 import com.example.kkado.yrapp.entity.GroupLeader;
-import com.example.kkado.yrapp.entity.Invoicing;
 import com.example.kkado.yrapp.entity.Person;
 import com.example.kkado.yrapp.helper.Util;
 
-import java.security.acl.Group;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,8 +35,8 @@ import java.util.List;
 /**
  *
  */
-public class InvoicingFragment extends Fragment {
-    private static final String TAG = "InvoicingAdd";
+public class TeamFragment extends Fragment {
+    private static final String TAG = "GroupLeaderAdd";
 
     View myView;
     private Context context;
@@ -51,8 +46,7 @@ public class InvoicingFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener mFinalDateSetListener;
     private Date bInitialDate;
     private Date bFinalDate;
-    private Integer personId;
-    private Integer periodId;
+    private Integer personLeaderId;
 
     @Override
     public void onAttach(Context context) {
@@ -68,7 +62,7 @@ public class InvoicingFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_invoicing, container, false);
+        myView = inflater.inflate(R.layout.fragment_group, container, false);
 
         Button btnSave = (Button)myView.findViewById(R.id.btnSave);
         ImageButton btnReturn = (ImageButton)myView.findViewById(R.id.btnReturn);
@@ -81,8 +75,8 @@ public class InvoicingFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Invoicing group = getInvoicing();
-                saveNewInvoicing(group);
+                GroupLeader group = getGroupLeader();
+                saveNewGroupLeader(group);
             }
         });
 
@@ -90,7 +84,7 @@ public class InvoicingFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                returnToInvoicing_Book();
+                returnToGroupLeader_Book();
             }
         });
 
@@ -100,34 +94,34 @@ public class InvoicingFragment extends Fragment {
     /**
      * @return
      */
-    private Invoicing getInvoicing() {
+    private GroupLeader getGroupLeader() {
 
         EditText edtDescription = myView.findViewById(R.id.edtDescription);
         EditText edtGoal = myView.findViewById(R.id.edtGoal);
 
 
         String groupName = edtDescription.getText().toString();
-        int goal = personId;
+        int goal = personLeaderId;
         Date initialDate = bInitialDate;
         Date finalDate = bFinalDate;
-float invoicing = (float) 0.0;
-        Invoicing group = new Invoicing(invoicing,personId,  personId);
+
+        GroupLeader group = new GroupLeader(groupName,personLeaderId,  initialDate,  finalDate);
 
         return group;
     }
 
     /**
-     * @param newInvoicing
+     * @param newGroupLeader
      */
-    private void saveNewInvoicing(Invoicing newInvoicing) {
+    private void saveNewGroupLeader(GroupLeader newGroupLeader) {
         // Create DAO to store person object.
-        InvoicingDAO dao = new InvoicingDAO(context);
+        GroupLeaderDAO dao = new GroupLeaderDAO(context);
         // Save will now represent the newly created id fro the saved person
-        long InvoicingSave = dao.saveInvoicing(newInvoicing);
+        long GroupLeaderSave = dao.saveGroupLeader(newGroupLeader);
 
-        if (InvoicingSave > 0) {
+        if (GroupLeaderSave > 0) {
             Util.alert("Success", context);
-            returnToInvoicing_Book();
+            returnToGroupLeader_Book();
         } else {
             Util.alert("Error", context);
         }
@@ -222,7 +216,7 @@ float invoicing = (float) 0.0;
         };
     }
 
-    public void returnToInvoicing_Book() {
+    public void returnToGroupLeader_Book() {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment_Book()).commit();
@@ -257,7 +251,7 @@ float invoicing = (float) 0.0;
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Person selectPerson = (Person)parent.getItemAtPosition(position);
                 // Set parentId for use in setting Contact
-                personId = selectPerson.getIdPerson();
+                personLeaderId = selectPerson.getIdPerson();
             }
         });
     }

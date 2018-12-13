@@ -1,13 +1,10 @@
 package com.example.kkado.yrapp;
 
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-//import android.app.FragmentManager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+//import android.app.FragmentManager;
 
 /**
  *
@@ -110,11 +110,19 @@ public class MenuActivity extends AppCompatActivity
 
 // Abre uma transação e adiciona
 
-        if (id == R.id.nav_competition) {
+        if (id == R.id.nav_person) {
+            fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment()).commit();
+        }
+        else if (id == R.id.nav_group) {
+            fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment_Book()).commit();
+        }
+        else if (id == R.id.nav_team) {
+            fragmentManager.beginTransaction().replace(R.id.content_fragment, new TeamFragment_Book()).commit();
+        }
+        else if (id == R.id.nav_competition) {
             fragmentManager.beginTransaction().replace(R.id.content_fragment, new CompetitionFragment()).commit();
         } else if (id == R.id.nav_group) {
-            Intent intent = new Intent(this, Contact_Add.class);
-            startActivity(intent);
+            fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment()).commit();
         } else if (id == R.id.nav_person) {
 
             fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment()).commit();

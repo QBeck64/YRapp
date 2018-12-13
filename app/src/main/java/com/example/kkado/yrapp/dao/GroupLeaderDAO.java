@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.kkado.yrapp.entity.GroupLeader;
+import com.example.kkado.yrapp.entity.Person;
 import com.example.kkado.yrapp.helper.Util;
 
 import java.io.IOException;
@@ -18,12 +19,14 @@ public class GroupLeaderDAO {
     private final String TABLE = "GroupLeader";
     private SqliteAdapter dbHelper;
     private SQLiteDatabase mySQLiteDatabase;
+    private Context myContext;
 
     /**
      * @param myContext
      */
     public GroupLeaderDAO(Context myContext) {
         initializeDataBase(myContext);
+        this.myContext = myContext;
     }
 
     /**
@@ -65,24 +68,21 @@ public class GroupLeaderDAO {
     }
 
     /**
-     *
      * @param item
      * @return
      */
     public long saveGroupLeader(GroupLeader item) {
         ContentValues cv = new ContentValues();
 
-        cv.put("idGroupLeader", item.getIdGroupLeader());
         cv.put("groupName", item.getGroupName());
         cv.put("idPersonLeader", item.getIdPersonLeader());
         cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));
         cv.put("finalDate", Util.ConvertDateToString(item.getFinalDate()));
 
-
         if (item.getIdGroupLeader() > 0)
-            return mySQLiteDatabase.update(TABLE, cv, "idGroupLeader=?", new String[]{item.getIdGroupLeader() + ""}) ;
+            return mySQLiteDatabase.update(TABLE, cv, "idGroupLeader=?", new String[]{item.getIdGroupLeader() + ""});
         else
-            return mySQLiteDatabase.insert(TABLE, null, cv) ;
+            return mySQLiteDatabase.insert(TABLE, null, cv);
     }
 
     /**
@@ -109,7 +109,10 @@ public class GroupLeaderDAO {
             Date initialDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("initialDate")));
             Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
 
-            groupLeaderList.add(new GroupLeader(idGroupLeader, groupName, idPersonLeader, initialDate, finalDate));
+            PersonDAO personDAO = new PersonDAO(myContext);
+            Person person = personDAO.selectId(idPersonLeader);
+
+            groupLeaderList.add(new GroupLeader(idGroupLeader, groupName, idPersonLeader, initialDate, finalDate, person));
         }
         cursor.close();
 
@@ -117,7 +120,6 @@ public class GroupLeaderDAO {
     }
 
     /**
-     *
      * @param id
      * @return
      * @throws Exception

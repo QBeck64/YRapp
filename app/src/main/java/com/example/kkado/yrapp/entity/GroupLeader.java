@@ -1,6 +1,7 @@
 package com.example.kkado.yrapp.entity;
 
 import com.example.kkado.yrapp.Enum.Status;
+import com.example.kkado.yrapp.helper.Util;
 
 import java.util.Date;
 
@@ -27,6 +28,13 @@ public class GroupLeader {
 
     public GroupLeader(int idGroupLeader, String groupName, int idPersonLeader, Date initialDate, Date finalDate) {
         this.idGroupLeader = idGroupLeader;
+        this.groupName = groupName;
+        this.idPersonLeader = idPersonLeader;
+        this.initialDate = initialDate;
+        this.finalDate = finalDate;
+    }
+
+    public GroupLeader(String groupName, int idPersonLeader, Date initialDate, Date finalDate) {
         this.groupName = groupName;
         this.idPersonLeader = idPersonLeader;
         this.initialDate = initialDate;
@@ -84,16 +92,25 @@ public class GroupLeader {
         PersonLeader = personLeader;
     }
 
+    public GroupLeader(int idGroupLeader, String groupName, int idPersonLeader, Date initialDate, Date finalDate, Person personLeader) {
+        this.idGroupLeader = idGroupLeader;
+        this.groupName = groupName;
+        this.idPersonLeader = idPersonLeader;
+        this.initialDate = initialDate;
+        this.finalDate = finalDate;
+        PersonLeader = personLeader;
+    }
+
     /**
      * @return
      */
     @Override
     public String toString() {
-        return "GroupLeader{" +
-                "groupName='" + groupName + '\'' +
-                ", initialDate=" + initialDate +
-                ", finalDate=" + finalDate +
-                ", PersonLeader=" + PersonLeader +
-                '}';
+        return  groupName + " - " +
+                PersonLeader.getSurname() +
+                ", " +
+                PersonLeader.getName() + " (" +
+                Util.ConvertDateToString(initialDate) +
+                " - " + Util.ConvertDateToString(finalDate)+")";
     }
 }

@@ -11,31 +11,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import com.example.kkado.yrapp.dao.CompetitionDAO;
-import com.example.kkado.yrapp.entity.Competition;
-import com.example.kkado.yrapp.entity.Person;
-import com.example.kkado.yrapp.helper.Util;
+import com.example.kkado.yrapp.dao.InvoicingDAO;
+import com.example.kkado.yrapp.entity.Invoicing;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  *
  */
-public class CompetitionFragment_Book extends Fragment {
+public class InvoicingFragment_Book extends Fragment {
     View myView;
     private Context context;
     private ListView itemView;
-    private List<Competition> itens = new ArrayList<>();
-    private ArrayAdapter<Competition> arrayAdapter;
+    private List<Invoicing> itens = new ArrayList<>();
+    private ArrayAdapter<Invoicing> arrayAdapter;
     private EditText edtFilter;
 
     /**
@@ -55,11 +49,11 @@ public class CompetitionFragment_Book extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_competition_book, container, false);
+        myView = inflater.inflate(R.layout.fragment_invoicing_book, container, false);
 
-        itemView = (ListView) myView.findViewById(R.id.lstViewCompetition);
-        edtFilter = (EditText) myView.findViewById(R.id.edtFilterCompetition);
-        ImageButton bt = (ImageButton)myView.findViewById(R.id.btnCreateCompetition);
+        itemView = (ListView) myView.findViewById(R.id.lstViewInvoicing);
+        edtFilter = (EditText) myView.findViewById(R.id.edtFilterInvoicing);
+        ImageButton bt = (ImageButton)myView.findViewById(R.id.btnCreateInvoicing);
 
         try {
             initializeList();
@@ -88,7 +82,7 @@ public class CompetitionFragment_Book extends Fragment {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createCompetition();
+                createInvoicing();
             }
         });
         return myView;
@@ -97,37 +91,37 @@ public class CompetitionFragment_Book extends Fragment {
     /**
      * @param
      */
-    public void createCompetition() {
+    public void createInvoicing() {
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_fragment, new CompetitionFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_fragment, new InvoicingFragment()).commit();
     }
 
     /**
      * @throws Exception
      */
     private void initializeList() throws Exception {
-        CompetitionDAO dao = new CompetitionDAO(context);
+        InvoicingDAO dao = new InvoicingDAO(context);
         itens.clear();
         itens = dao.select();
 
-        arrayAdapter = new ArrayAdapter<Competition>(context, android.R.layout.simple_list_item_1, itens);
+        arrayAdapter = new ArrayAdapter<Invoicing>(context, android.R.layout.simple_list_item_1, itens);
         itemView.setAdapter(arrayAdapter);
         itemView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            CompetitionFragment_View competitionFragment_view = new CompetitionFragment_View();
+            InvoicingFragment_View invoicingFragment_view = new InvoicingFragment_View();
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int position, long arg3) {
 
-                Competition newCompetition = (Competition) arg0.getItemAtPosition(position);
+                Invoicing newInvoicing = (Invoicing) arg0.getItemAtPosition(position);
 //
                 Bundle data = new Bundle();//create bundle instance
-                data.putInt("idCompetition", newCompetition.getIdCompetition());//put string to pass with a key value
-                competitionFragment_view.setArguments(data);
+                data.putInt("idInvoicing", newInvoicing.getIdInvoicing());//put string to pass with a key value
+                invoicingFragment_view.setArguments(data);
 
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_fragment, competitionFragment_view).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_fragment, invoicingFragment_view).commit();
 
             }
         });

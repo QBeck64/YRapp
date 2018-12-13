@@ -4,20 +4,15 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.kkado.yrapp.dao.AddressDAO;
 import com.example.kkado.yrapp.dao.CompetitionDAO;
-import com.example.kkado.yrapp.dao.PersonDAO;
-import com.example.kkado.yrapp.entity.Address;
+import com.example.kkado.yrapp.dao.GroupLeaderDAO;
 import com.example.kkado.yrapp.entity.Competition;
-import com.example.kkado.yrapp.entity.Person;
+import com.example.kkado.yrapp.entity.GroupLeader;
 import com.example.kkado.yrapp.helper.Util;
 
 import java.text.ParseException;
@@ -27,20 +22,20 @@ import java.util.Date;
 /**
  *
  */
-public class CompetitionFragment_View extends Fragment {
-    private static final String TAG = "CompetitionView";
+public class GroupFragment_View extends Fragment {
+    private static final String TAG = "GroupLeaderView";
     View myView;
     private Context context;
 
     TextView vwvDescription ;
-    TextView vwvGoal;
+    TextView vwvPersonLeader;
     TextView vwvInitialDate  ;
     TextView vwvFinalDate;
 
-    Integer idCompetition;
-    CompetitionDAO competitionDAO;
+    Integer idGroupLeader;
+    GroupLeaderDAO groupLeaderDAO;
 
-    Competition competitionView = new Competition();
+    GroupLeader groupLeaderView = new GroupLeader();
 
     /**
      *
@@ -61,20 +56,20 @@ public class CompetitionFragment_View extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_competition_view, container, false);
+        myView = inflater.inflate(R.layout.fragment_group_view, container, false);
 
         Bundle data = getArguments();
-        idCompetition = data.getInt("idCompetition");
+        idGroupLeader = data.getInt("idGroupLeader");
 
         // Get/set competition
         try {
-            competitionDAO = getCompetitionView(idCompetition);
-            competitionView = competitionDAO.selectId(idCompetition);
+            groupLeaderDAO = getGroupLeaderView(idGroupLeader);
+            groupLeaderView = groupLeaderDAO.selectId(idGroupLeader);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        displayCompetition(competitionView);
+        displayGroupLeader(groupLeaderView);
 
         return myView;
     }
@@ -119,39 +114,39 @@ public class CompetitionFragment_View extends Fragment {
      * @return Person
      * @throws Exception
      */
-    private CompetitionDAO getCompetitionView(Integer id) throws Exception {
+    private GroupLeaderDAO getGroupLeaderView(Integer id) throws Exception {
         // Create PersonDAO
-        CompetitionDAO dao = new CompetitionDAO(context);
+        GroupLeaderDAO dao = new GroupLeaderDAO(context);
         return dao;
     }
 
 
 
-    private void displayCompetition(Competition competitionView) {
+    private void displayGroupLeader(GroupLeader groupLeaderView) {
 
         vwvDescription = (TextView) myView.findViewById(R.id.vwvDescription);
-        vwvGoal=(TextView) myView.findViewById(R.id.vwvGoal);
+        vwvPersonLeader=(TextView) myView.findViewById(R.id.vwvLeaderPerson);
         vwvInitialDate  = (TextView) myView.findViewById(R.id.vwvInitialDate);
         vwvFinalDate=(TextView) myView.findViewById(R.id.vwvFinalDate);
 
-        vwvDescription.setText(competitionView.getDescription());
-        vwvGoal.setText(competitionView.getGoal());
-        vwvInitialDate.setText(Util.ConvertDateToString(competitionView.getInitialDate()));  ;
-        vwvFinalDate.setText(Util.ConvertDateToString( competitionView.getFinalDate()));
+        vwvDescription.setText(groupLeaderView.getGroupName());
+        vwvPersonLeader.setText(groupLeaderView.getIdPersonLeader());
+        vwvInitialDate.setText(Util.ConvertDateToString(groupLeaderView.getInitialDate()));  ;
+        vwvFinalDate.setText(Util.ConvertDateToString( groupLeaderView.getFinalDate()));
 
     }
 
 
 
-    public void createNewCompetition(View v) {
+    public void createNewGroupLeader(View v) {
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_fragment, new CompetitionFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment()).commit();
     }
 
-    public void returnToCompetition_Book() {
+    public void returnToGroup_Book() {
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_fragment, new CompetitionFragment_Book()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment_Book()).commit();
     }
 }

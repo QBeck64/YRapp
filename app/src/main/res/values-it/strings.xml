@@ -47,4 +47,8 @@
     <string name="fieldInicialDate">Inicial date</string>
     <string name="fieldFinalDate">Final date</string>
     <string name="title_activity_menu">YRapp</string>
+    <string name="fieldGroupName">Group Name</string>
+    <string name="fieldFilter">Filter</string>
+    <string name="fieldSave">Save</string>
+    <string name="fieldLeader">Leader</string>
 </resources>

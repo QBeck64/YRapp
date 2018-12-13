@@ -147,6 +147,20 @@ public class Person {
         this.type = type;
     }
 
+    public Person(int idPerson, String name, String surname, Date birthday, Gender gender, int level, String email, String phoneNumber, Integer idPersonParent, Person personParent, TypePerson type) {
+        this.idPerson = idPerson;
+        this.name = name;
+        this.surname = surname;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.level = level;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.idPersonParent = idPersonParent;
+        this.personParent = personParent;
+        this.type = type;
+    }
+
     /**
      * toString represents object Person
      */
