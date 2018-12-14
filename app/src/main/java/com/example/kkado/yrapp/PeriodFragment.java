@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,8 +34,8 @@ import java.util.List;
 /**
  *
  */
-public class TeamFragment extends Fragment {
-    private static final String TAG = "GroupLeaderAdd";
+public class PeriodFragment extends Fragment {
+    private static final String TAG = "PeriodAdd";
 
     View myView;
     private Context context;
@@ -48,6 +47,9 @@ public class TeamFragment extends Fragment {
     private Date bFinalDate;
     private Integer personLeaderId;
 
+    /**
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         this.context = context;
@@ -64,8 +66,8 @@ public class TeamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_group, container, false);
 
-        Button btnSave = (Button)myView.findViewById(R.id.btnSave);
-        ImageButton btnReturn = (ImageButton)myView.findViewById(R.id.btnReturn);
+        ImageButton btnSave = (ImageButton) myView.findViewById(R.id.btnSave);
+        ImageButton btnReturn = (ImageButton) myView.findViewById(R.id.btnReturn);
 
         createInitialDateListener();
         createFinalDateListener();
@@ -74,9 +76,7 @@ public class TeamFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                GroupLeader group = getGroupLeader();
-                saveNewGroupLeader(group);
+                saveNewGroupLeader();
             }
         });
 
@@ -96,36 +96,39 @@ public class TeamFragment extends Fragment {
      */
     private GroupLeader getGroupLeader() {
 
-        EditText edtDescription = myView.findViewById(R.id.edtDescription);
-        EditText edtGoal = myView.findViewById(R.id.edtGoal);
+        EditText edtGroupName = myView.findViewById(R.id.edtGroupName);
 
+        String groupName = edtGroupName.getText().toString();
 
-        String groupName = edtDescription.getText().toString();
-        int goal = personLeaderId;
         Date initialDate = bInitialDate;
         Date finalDate = bFinalDate;
-
-        GroupLeader group = new GroupLeader(groupName,personLeaderId,  initialDate,  finalDate);
+        GroupLeader group = null;
+        if (validateFields(groupName, personLeaderId, initialDate, finalDate)) {
+            group = new GroupLeader(groupName, personLeaderId, initialDate, finalDate);
+        }
 
         return group;
     }
 
     /**
-     * @param newGroupLeader
+     *
      */
-    private void saveNewGroupLeader(GroupLeader newGroupLeader) {
-        // Create DAO to store person object.
-        GroupLeaderDAO dao = new GroupLeaderDAO(context);
-        // Save will now represent the newly created id fro the saved person
-        long GroupLeaderSave = dao.saveGroupLeader(newGroupLeader);
+    private void saveNewGroupLeader() {
 
-        if (GroupLeaderSave > 0) {
-            Util.alert("Success", context);
-            returnToGroupLeader_Book();
-        } else {
-            Util.alert("Error", context);
+        GroupLeader newGroupLeader = getGroupLeader();
+        if (newGroupLeader != null) {
+            // Create DAO to store person object.
+            GroupLeaderDAO dao = new GroupLeaderDAO(context);
+            // Save will now represent the newly created id fro the saved person
+            long GroupLeaderSave = dao.saveGroupLeader(newGroupLeader);
+
+            if (GroupLeaderSave > 0) {
+                Util.alert("Success", context);
+                returnToGroupLeader_Book();
+            } else {
+                Util.alert("Error", context);
+            }
         }
-
     }
 
     /**
@@ -167,8 +170,8 @@ public class TeamFragment extends Fragment {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 bInitialDate = new Date(year - 1900, month, day);
                 SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-                String test = format.format(bInitialDate);
-                mDisplayInitialDate.setText(test);
+                String date = format.format(bInitialDate);
+                mDisplayInitialDate.setText(date);
                 Log.d(TAG, bInitialDate.toString());
             }
         };
@@ -220,12 +223,18 @@ public class TeamFragment extends Fragment {
         };
     }
 
+    /**
+     *
+     */
     public void returnToGroupLeader_Book() {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment_Book()).commit();
     }
 
+    /**
+     *
+     */
     private void setAutoPersonLeader() {
         PersonDAO dao = new PersonDAO(context);
         List<Person> parentList = new ArrayList<>();
@@ -253,11 +262,29 @@ public class TeamFragment extends Fragment {
              */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Person selectPerson = (Person)parent.getItemAtPosition(position);
+                Person selectPerson = (Person) parent.getItemAtPosition(position);
                 // Set parentId for use in setting Contact
                 personLeaderId = selectPerson.getIdPerson();
             }
         });
     }
 
+    private boolean validateFields(String groupName, Integer personLeaderId, Date initialDate, Date finalDate) {
+
+        boolean result = true;
+        if (groupName == null || groupName.isEmpty()) {
+            result = false;
+            Util.alert("Please, Group Name is required.", context);
+        } else if (personLeaderId == null || personLeaderId == 0) {
+            result = false;
+            Util.alert("Please, Leader is required.", context);
+        } else if (initialDate == null || initialDate.toString().isEmpty()) {
+            result = false;
+            Util.alert("Please, Initial Date is required.", context);
+        } else if (finalDate == null || finalDate.toString().isEmpty()) {
+            result = false;
+            Util.alert("Please, Final date is required.", context);
+        }
+        return result;
+    }
 }

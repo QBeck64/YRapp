@@ -144,6 +144,8 @@ float invoicing = (float) 0.0;
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
+                Date date = new Date();
+                cal.set(date.getYear(), date.getMonth(), date.getDay());
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 int year = cal.get(Calendar.YEAR);
@@ -152,7 +154,7 @@ float invoicing = (float) 0.0;
                         context,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mInitialDateSetListener,
-                        month, day, year);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -171,8 +173,8 @@ float invoicing = (float) 0.0;
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 bInitialDate = new Date(year - 1900, month, day);
                 SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-                String test = format.format(bInitialDate);
-                mDisplayInitialDate.setText(test);
+                String date = format.format(bInitialDate);
+                mDisplayInitialDate.setText(date);
                 Log.d(TAG, bInitialDate.toString());
             }
         };
@@ -188,6 +190,8 @@ float invoicing = (float) 0.0;
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
+                Date date = new Date();
+                cal.set(date.getYear(), date.getMonth(), date.getDay());
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 int year = cal.get(Calendar.YEAR);
@@ -196,7 +200,7 @@ float invoicing = (float) 0.0;
                         context,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mFinalDateSetListener,
-                        month, day, year);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -215,8 +219,8 @@ float invoicing = (float) 0.0;
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 bFinalDate = new Date(year - 1900, month, day);
                 SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-                String test = format.format(bFinalDate);
-                mDisplayFinalDate.setText(test);
+                String date = format.format(bFinalDate);
+                mDisplayFinalDate.setText(date);
                 Log.d(TAG, bFinalDate.toString());
             }
         };

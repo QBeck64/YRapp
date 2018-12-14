@@ -111,7 +111,7 @@ public class GroupFragment_Book extends Fragment {
         itemView.setAdapter(arrayAdapter);
         itemView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            GroupFragment_View groupFragment_view = new GroupFragment_View();
+            GroupFragment_View  groupFragment_view = new GroupFragment_View();
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int position, long arg3) {

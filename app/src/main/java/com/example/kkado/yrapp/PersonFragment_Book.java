@@ -23,8 +23,7 @@ import java.util.List;
 /**
  *
  */
-public class PersonFragment_Book extends Fragment
-{
+public class PersonFragment_Book extends Fragment {
     View myView;
     private Context context;
     private ListView itemView;
@@ -33,17 +32,26 @@ public class PersonFragment_Book extends Fragment
 
     private EditText edtFilter;
 
+    /**
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         this.context = context;
         super.onAttach(context);
     }
+
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_person_book, container, false);
 
-        itemView = (ListView)myView.findViewById(R.id.lstViewPerson);
+        itemView = (ListView) myView.findViewById(R.id.lstViewPerson);
         edtFilter = (EditText) myView.findViewById(R.id.edtFilterPerson);
 
         try {
@@ -74,7 +82,6 @@ public class PersonFragment_Book extends Fragment
     }
 
     /**
-     *
      * @param
      */
     public void createNewPerson(View v) {
@@ -83,6 +90,9 @@ public class PersonFragment_Book extends Fragment
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment()).commit();
     }
 
+    /**
+     * @throws Exception
+     */
     private void initializeList() throws Exception {
         PersonDAO dao = new PersonDAO(context);
         itens.clear();
@@ -93,6 +103,7 @@ public class PersonFragment_Book extends Fragment
         itemView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             PersonFragment_View personFragment_view = new PersonFragment_View();
+
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int position, long arg3) {

@@ -4,43 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InvoicingFragment"
+    tools:context=".GroupFragment"
     tools:layout_editor_absoluteY="81dp">
 
     <ImageButton
         android:id="@+id/btnReturn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
-    <AutoCompleteTextView
-        android:id="@+id/actPerson"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:hint="Person"
-        android:inputType="text"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <AutoCompleteTextView
-        android:id="@+id/actPeriod"
+        android:id="@+id/personLeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -48,15 +30,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="Period"
-        app:layout_constraintEnd_toEndOf="@+id/edtInvoicing"
-        app:layout_constraintStart_toStartOf="@+id/edtInvoicing"
-        app:layout_constraintTop_toBottomOf="@+id/edtInvoicing" />
+        android:hint="@string/fieldLeader"
+        app:layout_constraintEnd_toEndOf="@+id/edtGroupName"
+        app:layout_constraintStart_toStartOf="@+id/edtGroupName"
+        app:layout_constraintTop_toBottomOf="@+id/edtGroupName" />
 
     <TextView
-        android:id="@+id/edtInvoicing"
+        android:id="@+id/edtInitialDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -64,14 +46,32 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="8dp"
-        android:hint="Invoicing"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="30dp"
+        android:hint="@string/fieldInicialDate"
         android:inputType="text"
         android:text=""
-        app:layout_constraintEnd_toEndOf="@+id/actPerson"
-        app:layout_constraintStart_toStartOf="@+id/actPerson"
-        app:layout_constraintTop_toBottomOf="@+id/actPerson" />
+        app:layout_constraintEnd_toEndOf="@+id/personLeader"
+        app:layout_constraintStart_toStartOf="@+id/personLeader"
+        app:layout_constraintTop_toBottomOf="@+id/personLeader" />
 
+    <TextView
+        android:id="@+id/edtFinalDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:hint="@string/fieldFinalDate"
+        android:inputType="text"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@+id/edtInitialDate"
+        app:layout_constraintStart_toStartOf="@+id/edtInitialDate"
+        app:layout_constraintTop_toBottomOf="@+id/edtInitialDate" />
 
     <ImageButton
         android:id="@+id/btnSave"
@@ -82,13 +82,13 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorAccent"
+        android:layout_gravity="bottom|end"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/edtFinalDate"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
 </android.support.constraint.ConstraintLayout>

@@ -17,7 +17,7 @@ import java.io.OutputStream;
  *
  */
 public class SqliteAdapter extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "yrapp.db";
+    public static final String DATABASE_NAME = "db_yrapp.db";
     public static String LOCALDB;
     public static final int DATABASE_VERSION = 8;
     private Context myContext;
@@ -83,7 +83,7 @@ public class SqliteAdapter extends SQLiteOpenHelper {
      */
     private void copyDBFile() throws IOException {
         // InputStream mInput = myContext.getAssets().open(DATABASE_NAME);
-        InputStream mInput = myContext.getResources().openRawResource(R.raw.yrapp);
+        InputStream mInput = myContext.getResources().openRawResource(R.raw.db_yrapp);
         OutputStream mOutput = new FileOutputStream(LOCALDB + DATABASE_NAME);
         byte[] mBuffer = new byte[1024];
         int mLength;

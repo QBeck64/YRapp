@@ -52,6 +52,8 @@ public class Util {
         return date;
     }
 
+
+
     public static void alert(String error, Context context) {
         Toast.makeText(context, error, Toast.LENGTH_LONG).show();
     }

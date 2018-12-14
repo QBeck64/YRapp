@@ -128,7 +128,7 @@ public class GroupLeaderDAO {
         GroupLeader groupLeader = null;
 
         String[] params = new String[]{String.valueOf(id)};
-        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM GroupLeader WHERE idCompetition = ? ", params);
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM GroupLeader WHERE idGroupLeader = ? ", params);
 
         while (cursor.moveToNext()) {
             int idGroupLeader = cursor.getInt(cursor.getColumnIndex("idGroupLeader"));
@@ -137,10 +137,14 @@ public class GroupLeaderDAO {
             Date initialDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("initialDate")));
             Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
 
-            groupLeader = new GroupLeader(idGroupLeader, groupName, idPersonLeader, initialDate, finalDate);
+            PersonDAO personDAO = new PersonDAO(myContext);
+            Person   person = personDAO.selectId(groupLeader.getIdPersonLeader());
+
+            groupLeader = new GroupLeader(idGroupLeader, groupName, idPersonLeader, initialDate, finalDate, person);
         }
         cursor.close();
 
         return groupLeader;
     }
+
 }

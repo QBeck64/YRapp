@@ -18,12 +18,14 @@ public class AddressDAO {
     private final String TABLE = "Address";
     private SqliteAdapter dbHelper;
     private SQLiteDatabase mySQLiteDatabase;
+    private Context myContext;
 
     /**Address data access object using AddressDAO
      * @param myContext
      */
     public AddressDAO(Context myContext) {
         initializeDataBase(myContext);
+        this.myContext = myContext;
     }
 
     /**Executes the strategy to initialize the database for the given context.
@@ -120,6 +122,9 @@ public class AddressDAO {
             String country = cursor.getString(cursor.getColumnIndex("country"));
             String postalCode = cursor.getString(cursor.getColumnIndex("postalCode"));
             int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
+
+            PersonDAO personDAO = new PersonDAO(myContext);
+            Person person = personDAO.selectId(idPerson);
 
             addressList.add(new Address(idAddress, type, nameAddress, numberAddress, complement, province, city, country, postalCode, idPerson));
         }

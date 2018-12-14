@@ -143,7 +143,7 @@ public class PersonFragment extends Fragment {
                         context,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
-                        month,day,year);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -158,12 +158,14 @@ public class PersonFragment extends Fragment {
              * @param month
              * @param day
              */
+
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 Date bDate = new Date(year - 1900, month, day);
-                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-                String test = format.format(bDate);
-                mDatePicker.setText(test);
+                SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
+                String date = format.format(bDate);
+                mDatePicker.setText(date);
+                Log.d(TAG, bDate.toString());
             }
         };
     }
