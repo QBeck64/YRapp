@@ -1,5 +1,7 @@
 package com.example.kkado.yrapp.entity;
 
+import com.example.kkado.yrapp.helper.Util;
+
 /**
  *
  */
@@ -10,6 +12,8 @@ public class Invoicing {
      */
     private int idInvoicing;
     private float invoicing;
+    private int idPerson;
+    private int idPeriod;
     private Period period;
     private Person person;
 
@@ -19,8 +23,7 @@ public class Invoicing {
         this.idPeriod = idPeriod;
     }
 
-    private int idPerson;
-    private int idPeriod;
+
 
     /**
      * Constructor
@@ -31,6 +34,7 @@ public class Invoicing {
 
     /**
      * @param idInvoicing
+
      * @param invoicing
      * @param idPerson
      * @param idPeriod
@@ -38,10 +42,17 @@ public class Invoicing {
     public Invoicing(int idInvoicing, float invoicing, int idPerson, int idPeriod) {
         this.idInvoicing = idInvoicing;
         this.invoicing = invoicing;
-        this.period = period;
-        this.person = person;
         this.idPerson = idPerson;
         this.idPeriod = idPeriod;
+    }
+
+    public Invoicing(int idInvoicing, float invoicing, int idPerson, int idPeriod, Period period, Person person) {
+        this.idInvoicing = idInvoicing;
+        this.invoicing = invoicing;
+        this.idPerson = idPerson;
+        this.idPeriod = idPeriod;
+        this.period = period;
+        this.person = person;
     }
 
     /**
@@ -95,15 +106,19 @@ public class Invoicing {
         this.idPeriod = idPeriod;
     }
 
+
+
     /**
      * @return
      */
     @Override
     public String toString() {
-        return "Invoicing{" +
-                "invoicing=" + invoicing +
-                ", period=" + period +
-                ", person=" + person +
-                '}';
+        return person.getSurname() +
+                ", " +
+                person.getName() + " - " +
+                invoicing +
+                " (" +
+                Util.ConvertDateToString(period.getInitialDate()) +
+                " - " + Util.ConvertDateToString(period.getFinalDate())+")";
     }
 }

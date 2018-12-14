@@ -32,14 +32,14 @@ public class MenuActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -111,33 +111,25 @@ public class MenuActivity extends AppCompatActivity
 // Abre uma transação e adiciona
 
         if (id == R.id.nav_person) {
-            fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment()).commit();
-        }
-        else if (id == R.id.nav_group) {
-            fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment_Book()).commit();
-        }
-        else if (id == R.id.nav_team) {
-            fragmentManager.beginTransaction().replace(R.id.content_fragment, new TeamFragment_Book()).commit();
-        }
-        else if (id == R.id.nav_competition) {
-            fragmentManager.beginTransaction().replace(R.id.content_fragment, new CompetitionFragment()).commit();
-        } else if (id == R.id.nav_group) {
-            fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment()).commit();
-        } else if (id == R.id.nav_person) {
-
-            fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment()).commit();
-        } else if (id == R.id.nav_team) {
             fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment_Book()).commit();
+        } else if (id == R.id.nav_group) {
+            fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment_Book()).commit();
+        } else if (id == R.id.nav_team) {
+            fragmentManager.beginTransaction().replace(R.id.content_fragment, new TeamFragment_Book()).commit();
+        } else if (id == R.id.nav_competition) {
+            fragmentManager.beginTransaction().replace(R.id.content_fragment, new CompetitionFragment_Book()).commit();
+
+        } else if (id == R.id.nav_target) {
+            fragmentManager.beginTransaction().replace(R.id.content_fragment, new InvoicingFragment()).commit();
 
         } else if (id == R.id.nav_invoicing) {
-
             fragmentManager.beginTransaction().replace(R.id.content_fragment, new InvoicingFragment()).commit();
-        } else if (id == R.id.nav_target) {
-            fragmentManager.beginTransaction().replace(R.id.content_fragment, new TargetFragment()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

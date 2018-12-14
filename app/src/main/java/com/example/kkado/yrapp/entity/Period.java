@@ -31,6 +31,11 @@ public class Period implements Parcelable {
         this.finalDate = finalDate;
     }
 
+    public Period(Date initialDate, Date finalDate) {
+        this.initialDate = initialDate;
+        this.finalDate = finalDate;
+    }
+
     /**
      * Get
      */

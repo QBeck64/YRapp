@@ -23,10 +23,12 @@ import android.widget.TextView;
 import com.example.kkado.yrapp.dao.CompetitionDAO;
 import com.example.kkado.yrapp.dao.GroupLeaderDAO;
 import com.example.kkado.yrapp.dao.InvoicingDAO;
+import com.example.kkado.yrapp.dao.PeriodDAO;
 import com.example.kkado.yrapp.dao.PersonDAO;
 import com.example.kkado.yrapp.entity.Competition;
 import com.example.kkado.yrapp.entity.GroupLeader;
 import com.example.kkado.yrapp.entity.Invoicing;
+import com.example.kkado.yrapp.entity.Period;
 import com.example.kkado.yrapp.entity.Person;
 import com.example.kkado.yrapp.helper.Util;
 
@@ -70,8 +72,8 @@ public class InvoicingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_invoicing, container, false);
 
-        Button btnSave = (Button)myView.findViewById(R.id.btnSave);
-        ImageButton btnReturn = (ImageButton)myView.findViewById(R.id.btnReturn);
+        ImageButton btnSave = (ImageButton) myView.findViewById(R.id.btnSave);
+        ImageButton btnReturn = (ImageButton) myView.findViewById(R.id.btnReturn);
 
         createInitialDateListener();
         createFinalDateListener();
@@ -80,16 +82,13 @@ public class InvoicingFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Invoicing group = getInvoicing();
-                saveNewInvoicing(group);
+                saveNewInvoicing();
             }
         });
 
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 returnToInvoicing_Book();
             }
         });
@@ -102,24 +101,49 @@ public class InvoicingFragment extends Fragment {
      */
     private Invoicing getInvoicing() {
 
-        EditText edtDescription = myView.findViewById(R.id.edtDescription);
-        EditText edtGoal = myView.findViewById(R.id.edtGoal);
+        EditText edtInvoicing = myView.findViewById(R.id.edtInvoicing);
 
+        Float invoice = Float.parseFloat(edtInvoicing.getText().toString());
 
-        String groupName = edtDescription.getText().toString();
-        int goal = personId;
         Date initialDate = bInitialDate;
         Date finalDate = bFinalDate;
-float invoicing = (float) 0.0;
-        Invoicing group = new Invoicing(invoicing,personId,  personId);
 
-        return group;
+        Invoicing invoicing = null;
+        if (validateFields(invoice, personId, initialDate, finalDate)) {
+            selectIdPeriod(initialDate, finalDate);
+            invoicing = new Invoicing(invoice, personId, periodId);
+        }
+
+        return invoicing;
     }
 
     /**
-     * @param newInvoicing
+     *
+     * @param initialDate
+     * @param finalDate
      */
-    private void saveNewInvoicing(Invoicing newInvoicing) {
+    private void selectIdPeriod(Date initialDate, Date finalDate)  {
+
+        PeriodDAO dao = new PeriodDAO(context);
+        long invoicingSave = 0;
+        try {
+            invoicingSave = dao.selectIdPeriod(initialDate, finalDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (invoicingSave <= 0) {
+            Period newPeriod = new Period(initialDate, finalDate);
+            invoicingSave = dao.savePeriod(newPeriod);
+        }
+        periodId = (int) invoicingSave;
+    }
+
+    /**
+     *
+     */
+    private void saveNewInvoicing() {
+        Invoicing newInvoicing = getInvoicing();
         // Create DAO to store person object.
         InvoicingDAO dao = new InvoicingDAO(context);
         // Save will now represent the newly created id fro the saved person
@@ -131,7 +155,6 @@ float invoicing = (float) 0.0;
         } else {
             Util.alert("Error", context);
         }
-
     }
 
     /**
@@ -144,8 +167,7 @@ float invoicing = (float) 0.0;
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
-                Date date = new Date();
-                cal.set(date.getYear(), date.getMonth(), date.getDay());
+
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 int year = cal.get(Calendar.YEAR);
@@ -190,8 +212,7 @@ float invoicing = (float) 0.0;
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
-                Date date = new Date();
-                cal.set(date.getYear(), date.getMonth(), date.getDay());
+
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 int year = cal.get(Calendar.YEAR);
@@ -229,7 +250,7 @@ float invoicing = (float) 0.0;
     public void returnToInvoicing_Book() {
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment_Book()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_fragment, new InvoicingFragment_Book()).commit();
     }
 
     private void setAutoPersonLeader() {
@@ -245,7 +266,7 @@ float invoicing = (float) 0.0;
         ArrayAdapter<Person> adapter = new ArrayAdapter<Person>(context,
                 android.R.layout.simple_dropdown_item_1line, parentList);
         AutoCompleteTextView parentView = (AutoCompleteTextView)
-                myView.findViewById(R.id.personLeader);
+                myView.findViewById(R.id.actPerson);
         parentView.setAdapter(adapter);
 
         parentView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -259,11 +280,30 @@ float invoicing = (float) 0.0;
              */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Person selectPerson = (Person)parent.getItemAtPosition(position);
+                Person selectPerson = (Person) parent.getItemAtPosition(position);
                 // Set parentId for use in setting Contact
                 personId = selectPerson.getIdPerson();
             }
         });
     }
 
+    private boolean validateFields(Float invoice, Integer personId, Date initialDate, Date
+            finalDate) {
+
+        boolean result = true;
+        if (invoice == null) {
+            result = false;
+            Util.alert("Please, Invoicing is required.", context);
+        } else if (personId == null || personId == 0) {
+            result = false;
+            Util.alert("Please, Person is required.", context);
+        } else if (initialDate == null || initialDate.toString().isEmpty()) {
+            result = false;
+            Util.alert("Please, Initial Date is required.", context);
+        } else if (finalDate == null || finalDate.toString().isEmpty()) {
+            result = false;
+            Util.alert("Please, Final date is required.", context);
+        }
+        return result;
+    }
 }

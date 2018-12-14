@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -66,6 +67,8 @@ public class CompetitionFragment_View extends Fragment {
         Bundle data = getArguments();
         idCompetition = data.getInt("idCompetition");
 
+        ImageButton btnReturn = (ImageButton) myView.findViewById(R.id.btnReturn);
+
         // Get/set competition
         try {
             competitionDAO = getCompetitionView(idCompetition);
@@ -76,41 +79,15 @@ public class CompetitionFragment_View extends Fragment {
 
         displayCompetition(competitionView);
 
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                returnToCompetition_Book();
+            }
+        });
+
         return myView;
     }
-
-
-    /**
-     *
-     * @param dateText
-     * @return
-     */
-    private Date ConvertStringToDate(String dateText) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = null;
-        try {
-            date = format.parse(dateText);
-            System.out.println(date);
-
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-    }
-
-    /**
-     *
-     * @return
-     */
-
-
-
-
-    /**
-     *
-     */
-
 
 
     /**
@@ -126,7 +103,10 @@ public class CompetitionFragment_View extends Fragment {
     }
 
 
-
+    /**
+     *
+     * @param competitionView
+     */
     private void displayCompetition(Competition competitionView) {
 
         vwvDescription = (TextView) myView.findViewById(R.id.vwvDescription);
@@ -141,13 +121,6 @@ public class CompetitionFragment_View extends Fragment {
 
     }
 
-
-
-    public void createNewCompetition(View v) {
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_fragment, new CompetitionFragment()).commit();
-    }
 
     public void returnToCompetition_Book() {
 

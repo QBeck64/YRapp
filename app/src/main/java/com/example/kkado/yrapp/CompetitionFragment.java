@@ -163,8 +163,7 @@ public class CompetitionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
-                Date date = new Date();
-                cal.set(date.getYear(), date.getMonth(), date.getDay());
+
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 int year = cal.get(Calendar.YEAR);
@@ -209,8 +208,7 @@ public class CompetitionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
-                Date date = new Date();
-                cal.set(date.getYear(), date.getMonth(), date.getDay());
+
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 int year = cal.get(Calendar.YEAR);

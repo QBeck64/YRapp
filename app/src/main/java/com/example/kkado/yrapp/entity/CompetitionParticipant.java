@@ -1,5 +1,7 @@
 package com.example.kkado.yrapp.entity;
 
+import com.example.kkado.yrapp.helper.Util;
+
 import java.util.Date;
 
 /**
@@ -32,6 +34,17 @@ public class CompetitionParticipant {
         this.initialDate = initialDate;
         this.finalDate = finalDate;
         this.prizeGiven = prizeGiven;
+        this.competition = competition;
+    }
+
+    public CompetitionParticipant(int idCompetitionParticipant, int idParticipant, int idCompetition, Date initialDate, Date finalDate, boolean prizeGiven, Person person, Competition competition) {
+        this.idCompetitionParticipant = idCompetitionParticipant;
+        this.idParticipant = idParticipant;
+        this.idCompetition = idCompetition;
+        this.initialDate = initialDate;
+        this.finalDate = finalDate;
+        this.prizeGiven = prizeGiven;
+        this.person = person;
         this.competition = competition;
     }
 
@@ -107,13 +120,14 @@ public class CompetitionParticipant {
      */
     @Override
     public String toString() {
-        return "CompetitionParticipant{" +
-                "initialDate=" + initialDate +
-                ", finalDate=" + finalDate +
-                ", prizeGiven=" + prizeGiven +
-                ", person=" + person +
-                ", competition=" + competition +
-                '}';
+        return competition.getDescription() + " - " + competition.getGoal()+ " / " +
+                person.getSurname() +
+                ", " +
+                person.getName()+ " - " +prizeGiven+
+
+                " (" +
+                Util.ConvertDateToString(initialDate) +
+                " - " + Util.ConvertDateToString(finalDate) + ")";
     }
 }
 

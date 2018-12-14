@@ -1,5 +1,7 @@
 package com.example.kkado.yrapp.entity;
 
+import com.example.kkado.yrapp.helper.Util;
+
 import java.util.Date;
 
 /**
@@ -11,12 +13,12 @@ public class TeamGroupLeader {
      * Members
      */
     private int idTeamGroupLeader;
-    private Person person;
-    private GroupLeader groupLeader;
     private Date initialDate;
     private Date finalDate;
     private int idPerson;
     private int idGroupLeader;
+    private Person person;
+    private GroupLeader groupLeader;
 
     /**
      * Constructor
@@ -108,11 +110,14 @@ public class TeamGroupLeader {
 
     @Override
     public String toString() {
-        return "TeamGroupLeader{" +
-                "person=" + person +
-                ", groupLeader=" + groupLeader +
-                ", initialDate=" + initialDate +
-                ", finalDate=" + finalDate +
-                '}';
+        return
+                groupLeader.getGroupName() + " - " +
+                person.getSurname() +
+                ", " +
+                person.getName()+
+
+                 " (" +
+                Util.ConvertDateToString(initialDate) +
+                " - " + Util.ConvertDateToString(finalDate) + ")";
     }
 }

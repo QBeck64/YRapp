@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.kkado.yrapp.entity.Competition;
 import com.example.kkado.yrapp.entity.CompetitionParticipant;
+import com.example.kkado.yrapp.entity.Person;
 import com.example.kkado.yrapp.helper.Util;
 
 import java.io.IOException;
@@ -19,15 +21,21 @@ public class CompetitionParticipantDAO {
     private final String TABLE = "CompetitionParticipant";
     private SqliteAdapter dbHelper;
     private SQLiteDatabase mySQLiteDatabase;
+    private Context myContext;
 
-    /**CompetitionParticipantDAO uses data base to iniciate getting information
+    /**
+     * CompetitionParticipantDAO uses data base to iniciate getting information
+     *
      * @param myContext
      */
     public CompetitionParticipantDAO(Context myContext) {
         initializeDataBase(myContext);
+        this.myContext = myContext;
     }
 
-    /**CompetitionParticipantDAO integrates data to the data base, using exceptions and invocating SQLite
+    /**
+     * CompetitionParticipantDAO integrates data to the data base, using exceptions and invocating SQLite
+     *
      * @param myContext
      */
     private void initializeDataBase(Context myContext) {
@@ -46,7 +54,9 @@ public class CompetitionParticipantDAO {
         }
     }
 
-    /**CompetitionParticipantDAO using  boolean integrates information and updates respective tables.
+    /**
+     * CompetitionParticipantDAO using  boolean integrates information and updates respective tables.
+     *
      * @param item
      * @return
      */
@@ -66,7 +76,8 @@ public class CompetitionParticipantDAO {
             return mySQLiteDatabase.insert(TABLE, null, cv) > 0;
     }
 
-    /**CompetitionParticipantDAO uses Long to update and save Id's in the data base
+    /**
+     * CompetitionParticipantDAO uses Long to update and save Id's in the data base
      *
      * @param item
      * @return
@@ -83,12 +94,14 @@ public class CompetitionParticipantDAO {
 
 
         if (item.getIdCompetition() > 0)
-            return mySQLiteDatabase.update(TABLE, cv, "idCompetitionParticipant=?", new String[]{item.getIdCompetitionParticipant() + ""}) ;
+            return mySQLiteDatabase.update(TABLE, cv, "idCompetitionParticipant=?", new String[]{item.getIdCompetitionParticipant() + ""});
         else
-            return mySQLiteDatabase.insert(TABLE, null, cv) ;
+            return mySQLiteDatabase.insert(TABLE, null, cv);
     }
 
-    /**Boolean contrinutes to delition of information fromdatabase 
+    /**
+     * Boolean contrinutes to delition of information fromdatabase
+     *
      * @param id
      * @return
      */
@@ -96,7 +109,9 @@ public class CompetitionParticipantDAO {
         return mySQLiteDatabase.delete(TABLE, "idCompetitionParticipant=?", new String[]{id + ""}) > 0;
     }
 
-    /**CompetitionParticipantDAO integrates participants list to database
+    /**
+     * CompetitionParticipantDAO integrates participants list to database
+     *
      * @return
      * @throws Exception
      */
@@ -113,14 +128,21 @@ public class CompetitionParticipantDAO {
             Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
             boolean prizeGiven = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("prizeGiven")));
 
-            competitionParticipantList.add(new CompetitionParticipant(idCompetitionParticipant, idParticipant, idCompetition, initialDate, finalDate, prizeGiven));
+            PersonDAO personDAO = new PersonDAO(myContext);
+            Person person = personDAO.selectId(idParticipant);
+
+            CompetitionDAO competitionDAO = new CompetitionDAO(myContext);
+            Competition competition = competitionDAO.selectId(idCompetition);
+
+            competitionParticipantList.add(new CompetitionParticipant(idCompetitionParticipant, idParticipant, idCompetition, initialDate, finalDate, prizeGiven, person, competition));
         }
         cursor.close();
 
         return competitionParticipantList;
     }
 
-    /**CCompetition pulls infromation using queries and strings from CompetitionParticipantDAO
+    /**
+     * CCompetition pulls infromation using queries and strings from CompetitionParticipantDAO
      *
      * @param id
      * @return
@@ -141,7 +163,13 @@ public class CompetitionParticipantDAO {
             Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
             boolean prizeGiven = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("prizeGiven")));
 
-            competitionParticipant = new CompetitionParticipant(idCompetitionParticipant, idParticipant, idCompetition, initialDate, finalDate, prizeGiven);
+            PersonDAO personDAO = new PersonDAO(myContext);
+            Person person = personDAO.selectId(idParticipant);
+
+            CompetitionDAO competitionDAO = new CompetitionDAO(myContext);
+            Competition competition = competitionDAO.selectId(idCompetition);
+
+            competitionParticipant = new CompetitionParticipant(idCompetitionParticipant, idParticipant, idCompetition, initialDate, finalDate, prizeGiven, person, competition);
         }
         cursor.close();
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.kkado.yrapp.dao.CompetitionDAO;
@@ -60,7 +61,7 @@ public class GroupFragment_View extends Fragment {
         Bundle data = getArguments();
         idGroupLeader = data.getInt("idGroupLeader");
 
-        // Get/set competition
+        ImageButton btnReturn = (ImageButton) myView.findViewById(R.id.btnReturn);
         try {
             GroupLeader groupLeaderView =   getGroupLeaderView();
 
@@ -69,14 +70,15 @@ public class GroupFragment_View extends Fragment {
             e.printStackTrace();
         }
 
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                returnToGroup_Book();
+            }
+        });
+
         return myView;
     }
-
-
-    /**
-     *
-     */
-
 
     /***
      *
@@ -93,14 +95,6 @@ public class GroupFragment_View extends Fragment {
         return groupLeaderView;
     }
 
-    private Person getPersonView(long idLeaderPerson) throws Exception {
-
-        PersonDAO personDAO = new PersonDAO(context);
-        Person   personView = personDAO.selectId(idLeaderPerson);
-
-        return personView;
-    }
-
     /**
      *
      * @param groupLeaderView
@@ -115,8 +109,7 @@ public class GroupFragment_View extends Fragment {
 
         vwvDescription.setText(groupLeaderView.getGroupName());
 
-
-        vwvPersonLeader.setText(groupLeaderView.getIdPersonLeader());
+        vwvPersonLeader.setText(groupLeaderView.getPersonLeader().getSurname() + "," + groupLeaderView.getPersonLeader().getName() );
         vwvInitialDate.setText(Util.ConvertDateToString(groupLeaderView.getInitialDate()));  ;
         vwvFinalDate.setText(Util.ConvertDateToString( groupLeaderView.getFinalDate()));
 

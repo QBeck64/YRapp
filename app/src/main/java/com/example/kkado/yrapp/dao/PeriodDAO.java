@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.example.kkado.yrapp.entity.Period;
 import com.example.kkado.yrapp.helper.Util;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,21 +62,20 @@ public class PeriodDAO {
     }
 
     /**
-     *
      * @param item
      * @return
      */
     public long savePeriod(Period item) {
         ContentValues cv = new ContentValues();
-        cv.put("idPeriod", item.getIdPeriod());
+
         cv.put("initialDate", Util.ConvertDateToString(item.getInitialDate()));
         cv.put("finalDate", Util.ConvertDateToString(item.getFinalDate()));
 
 
         if (item.getIdPeriod() > 0)
-            return mySQLiteDatabase.update(TABLE, cv, "idPeriod=?", new String[]{item.getIdPeriod() + ""}) ;
+            return mySQLiteDatabase.update(TABLE, cv, "idPeriod=?", new String[]{item.getIdPeriod() + ""});
         else
-            return mySQLiteDatabase.insert(TABLE, null, cv) ;
+            return mySQLiteDatabase.insert(TABLE, null, cv);
     }
 
     /**
@@ -108,7 +109,6 @@ public class PeriodDAO {
     }
 
     /**
-     *
      * @param id
      * @return
      * @throws Exception
@@ -129,6 +129,27 @@ public class PeriodDAO {
         cursor.close();
 
         return period;
+    }
+
+    /**
+     *
+     * @param initialDate
+     * @param finalDate
+     * @return
+     * @throws Exception
+     */
+    public int selectIdPeriod(Date initialDate, Date finalDate) throws Exception {
+        int idPeriod = 0;
+
+        String[] params = new String[]{String.valueOf(Util.ConvertDateToString(initialDate)), String.valueOf(Util.ConvertDateToString(finalDate))};
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Period WHERE initialDate = ? and finalDate = ?", params);
+
+        while (cursor.moveToNext()) {
+            idPeriod = cursor.getInt(cursor.getColumnIndex("idPeriod"));
+        }
+        cursor.close();
+
+        return idPeriod;
     }
 
 }

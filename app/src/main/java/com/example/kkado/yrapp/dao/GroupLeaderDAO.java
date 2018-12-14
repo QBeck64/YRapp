@@ -138,7 +138,7 @@ public class GroupLeaderDAO {
             Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
 
             PersonDAO personDAO = new PersonDAO(myContext);
-            Person   person = personDAO.selectId(groupLeader.getIdPersonLeader());
+            Person   person = personDAO.selectId(idPersonLeader);
 
             groupLeader = new GroupLeader(idGroupLeader, groupName, idPersonLeader, initialDate, finalDate, person);
         }

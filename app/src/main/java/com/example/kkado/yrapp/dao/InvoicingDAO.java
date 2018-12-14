@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.kkado.yrapp.entity.Competition;
 import com.example.kkado.yrapp.entity.Invoicing;
+import com.example.kkado.yrapp.entity.Period;
+import com.example.kkado.yrapp.entity.Person;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,11 +20,13 @@ public class InvoicingDAO {
     private SqliteAdapter dbHelper;
     private SQLiteDatabase mySQLiteDatabase;
 
+    private Context myContext;
+
     /**
      * @param myContext
      */
     public InvoicingDAO(Context myContext) {
-        initializeDataBase(myContext);
+        initializeDataBase(myContext);  this.myContext = myContext;
     }
 
     /**
@@ -69,7 +74,6 @@ public class InvoicingDAO {
     public long saveInvoicing(Invoicing item) {
         ContentValues cv = new ContentValues();
 
-        cv.put("idInvoicing", item.getIdInvoicing());
         cv.put("invoicing", item.getInvoicing());
         cv.put("idPerson", item.getIdPerson());
         cv.put("idPeriod", item.getIdPeriod());
@@ -104,7 +108,13 @@ public class InvoicingDAO {
             int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
             int idPeriod = cursor.getInt(cursor.getColumnIndex("idPeriod"));
 
-            invoicingList.add(new Invoicing(idInvoicing, invoicing, idPerson, idPeriod));
+            PersonDAO personDAO = new PersonDAO(myContext);
+            Person person = personDAO.selectId(idPerson);
+
+            PeriodDAO periodDAO = new PeriodDAO(myContext);
+            Period period = periodDAO.selectId(idPeriod);
+
+            invoicingList.add(new Invoicing(idInvoicing, invoicing, idPerson, idPeriod, period, person));
         }
         cursor.close();
 
@@ -129,7 +139,13 @@ public class InvoicingDAO {
             int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
             int idPeriod = cursor.getInt(cursor.getColumnIndex("idPeriod"));
 
-            invoicing = new Invoicing(idInvoicing, invoice, idPerson, idPeriod);
+            PersonDAO personDAO = new PersonDAO(myContext);
+            Person person = personDAO.selectId(idPerson);
+
+            PeriodDAO periodDAO = new PeriodDAO(myContext);
+            Period period = periodDAO.selectId(idPeriod);
+
+            invoicing = new Invoicing(idInvoicing, invoice, idPerson, idPeriod, period, person);
         }
         cursor.close();
 
