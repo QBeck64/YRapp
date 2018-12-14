@@ -48,7 +48,7 @@
     <string name="title_activity_menu">YRapp</string>
     <string name="fieldGroupName">Nome gruppo</string>
     <string name="fieldFilter">Filtro</string>
-    <string name="fieldSave">Save</string>
+    <string name="fieldSave">Salva</string>
     <string name="fieldLeader">Capogruppo</string>
     <string name="hello_blank_fragment">vuoto</string>
 </resources>
