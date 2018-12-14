@@ -19,7 +19,7 @@ import java.io.OutputStream;
 public class SqliteAdapter extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "db_yrapp.db";
     public static String LOCALDB;
-    public static final int DATABASE_VERSION = 8;
+    public static final int DATABASE_VERSION = 6;
     private Context myContext;
     private SQLiteDatabase mySQLiteDatabase;
     private boolean mNeedUpdate = false;
