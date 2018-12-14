@@ -36,11 +36,11 @@
     <string name="menuTarget">Obiettivi</string>
     <string name="menuInvoicing">Fatturato</string>
     <string name="menuTeam">Team</string>
-    <string name="menuGroup">Gruppo</string>
-    <string name="menuPerson">Persona</string>
-    <string name="nav_header_desc">Persona</string>
-    <string name="nav_header_title">Persona</string>
-    <string name="nav_header_subtitle">Persona</string>
+    <string name="menuGroup">Gruppi</string>
+    <string name="menuPerson">Persone</string>
+    <string name="nav_header_desc">Persone</string>
+    <string name="nav_header_title">Persone</string>
+    <string name="nav_header_subtitle">Persone</string>
     <string name="navigation_drawer_open">Apri menù navigazione</string>
     <string name="navigation_drawer_close">Chiudi menù navigazione</string>
     <string name="fieldInicialDate">Data inizio</string>
