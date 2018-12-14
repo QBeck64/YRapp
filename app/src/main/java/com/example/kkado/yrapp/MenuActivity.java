@@ -123,7 +123,7 @@ public class MenuActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_fragment, new InvoicingFragment()).commit();
 
         } else if (id == R.id.nav_invoicing) {
-            fragmentManager.beginTransaction().replace(R.id.content_fragment, new InvoicingFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_fragment, new InvoicingFragment_Book()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

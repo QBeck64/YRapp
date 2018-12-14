@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.kkado.yrapp.dao.InvoicingDAO;
 import com.example.kkado.yrapp.entity.Invoicing;
+import com.example.kkado.yrapp.helper.Util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,18 +26,14 @@ public class InvoicingFragment_View extends Fragment {
     View myView;
     private Context context;
 
-    TextView vwvDescription ;
-    TextView vwvPersonLeader;
-    TextView vwvInitialDate  ;
+    TextView vwvInvoicing;
+    TextView vwvPerson;
+    TextView vwvInitialDate;
     TextView vwvFinalDate;
 
     Integer idInvoicing;
-    InvoicingDAO invoicingDAO;
-
-    Invoicing invoicingView = new Invoicing();
 
     /**
-     *
      * @param context
      */
     @Override
@@ -45,7 +43,6 @@ public class InvoicingFragment_View extends Fragment {
     }
 
     /**
-     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -53,97 +50,66 @@ public class InvoicingFragment_View extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_group_view, container, false);
+        myView = inflater.inflate(R.layout.fragment_invoicing_view, container, false);
 
         Bundle data = getArguments();
         idInvoicing = data.getInt("idInvoicing");
 
-        // Get/set competition
+        ImageButton btnReturn = (ImageButton) myView.findViewById(R.id.btnReturn);
+
         try {
-            invoicingDAO = getInvoicingView(idInvoicing);
-            invoicingView = invoicingDAO.selectId(idInvoicing);
+            Invoicing invoicingView = getInvoicingView();
+            displayInvoicing(invoicingView);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        displayInvoicing(invoicingView);
 
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                returnToInvoicing_Book();
+            }
+        });
         return myView;
     }
 
-
     /**
-     *
-     * @param dateText
      * @return
-     */
-    private Date ConvertStringToDate(String dateText) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = null;
-        try {
-            date = format.parse(dateText);
-            System.out.println(date);
-
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-    }
-
-    /**
-     *
-     * @return
-     */
-
-
-
-
-    /**
-     *
-     */
-
-
-
-    /**
-     *
-     * @param id Person object id
-     * @return Person
      * @throws Exception
      */
-    private InvoicingDAO getInvoicingView(Integer id) throws Exception {
-        // Create PersonDAO
-        InvoicingDAO dao = new InvoicingDAO(context);
-        return dao;
+    private Invoicing getInvoicingView() throws Exception {
+
+        InvoicingDAO invoicingDAO = new InvoicingDAO(context);
+        Invoicing invoicingView = invoicingDAO.selectId(idInvoicing);
+
+        return invoicingView;
     }
 
-
-
+    /**
+     * @param invoicingView
+     */
     private void displayInvoicing(Invoicing invoicingView) {
 
-        vwvDescription = (TextView) myView.findViewById(R.id.vwvDescription);
-        vwvPersonLeader=(TextView) myView.findViewById(R.id.vwvLeaderPerson);
-        vwvInitialDate  = (TextView) myView.findViewById(R.id.vwvInitialDate);
-        vwvFinalDate=(TextView) myView.findViewById(R.id.vwvFinalDate);
+        vwvInvoicing = (TextView) myView.findViewById(R.id.vwvInvoicing);
+        vwvPerson = (TextView) myView.findViewById(R.id.vwvPerson);
+        vwvInitialDate = (TextView) myView.findViewById(R.id.vwvInitialDate);
+        vwvFinalDate = (TextView) myView.findViewById(R.id.vwvFinalDate);
 
-//        vwvDescription.setText(invoicingView.getGroupName());
-//        vwvPersonLeader.setText(invoicingView.getIdPersonLeader());
-//        vwvInitialDate.setText(Util.ConvertDateToString(groupLeaderView.getInitialDate()));  ;
-//        vwvFinalDate.setText(Util.ConvertDateToString( groupLeaderView.getFinalDate()));
-
+        vwvInvoicing.setText(Float.toString(invoicingView.getInvoicing()));
+        vwvPerson.setText(invoicingView.getPerson().getSurname() + "," + invoicingView.getPerson().getName());
+        vwvInitialDate.setText(Util.ConvertDateToString(invoicingView.getPeriod().getInitialDate()));
+        ;
+        vwvFinalDate.setText(Util.ConvertDateToString(invoicingView.getPeriod().getFinalDate()));
     }
 
-
-
-    public void createNewInvoicing(View v) {
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment()).commit();
-    }
-
-    public void returnToGroup_Book() {
+    /**
+     *
+     */
+    public void returnToInvoicing_Book() {
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment_Book()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_fragment, new InvoicingFragment_Book()).commit();
     }
 }

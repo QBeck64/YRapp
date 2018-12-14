@@ -88,9 +88,7 @@ public class GroupFragment_View extends Fragment {
     private GroupLeader getGroupLeaderView() throws Exception {
 
         GroupLeaderDAO groupLeaderDAO = new GroupLeaderDAO(context);
-
         GroupLeader   groupLeaderView = groupLeaderDAO.selectId(idGroupLeader);
-
 
         return groupLeaderView;
     }
