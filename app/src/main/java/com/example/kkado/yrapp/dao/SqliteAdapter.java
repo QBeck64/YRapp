@@ -22,7 +22,7 @@ public class SqliteAdapter extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     private Context myContext;
     private SQLiteDatabase mySQLiteDatabase;
-    private boolean mNeedUpdate = false;
+    private boolean mNeedUpdate = true;
 
     /**
      * @param context
