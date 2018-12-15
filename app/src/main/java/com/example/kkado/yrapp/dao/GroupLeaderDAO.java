@@ -21,7 +21,7 @@ public class GroupLeaderDAO {
     private SQLiteDatabase mySQLiteDatabase;
     private Context myContext;
 
-    /**
+    /**GroupLeaderDAO access information using data source to identify completition.  
      * @param myContext
      */
     public GroupLeaderDAO(Context myContext) {
@@ -29,7 +29,7 @@ public class GroupLeaderDAO {
         this.myContext = myContext;
     }
 
-    /**
+    /** GroupLeaderDAO iniciates accesing data from different tables. Information gets display with update. 
      * @param myContext
      */
     private void initializeDataBase(Context myContext) {
@@ -48,7 +48,8 @@ public class GroupLeaderDAO {
         }
     }
 
-    /**
+    /**GroupLeaderDAO Using CompetitionDAO and the implementation of boolean can get access to specific information related to 
+    competition
      * @param item
      * @return
      */
@@ -67,7 +68,7 @@ public class GroupLeaderDAO {
             return mySQLiteDatabase.insert(TABLE, null, cv) > 0;
     }
 
-    /**
+    /**Long contributes to saveinformation dercribed on SaveCompetition, such as goal
      * @param item
      * @return
      */
@@ -85,7 +86,7 @@ public class GroupLeaderDAO {
             return mySQLiteDatabase.insert(TABLE, null, cv);
     }
 
-    /**
+    /**Boolean  uses a delete methote to update mySQLiteDatabase if information is deleted. 
      * @param id
      * @return
      */
@@ -93,7 +94,7 @@ public class GroupLeaderDAO {
         return mySQLiteDatabase.delete(TABLE, "idPeriod=?", new String[]{id + ""}) > 0;
     }
 
-    /**
+    /**GroupLeader access list using strings describing goal,description, and completion
      * @return
      * @throws Exception
      */
@@ -119,7 +120,7 @@ public class GroupLeaderDAO {
         return groupLeaderList;
     }
 
-    /**
+    /**SelectId is use as identifier to CompetitionDAO, and accessing data base.
      * @param id
      * @return
      * @throws Exception
