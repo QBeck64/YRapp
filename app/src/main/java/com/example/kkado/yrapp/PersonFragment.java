@@ -2,6 +2,7 @@ package com.example.kkado.yrapp;
 
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -63,6 +64,7 @@ public class PersonFragment extends Fragment {
     TextView mDatePicker;
     private List<Person> parentList = new ArrayList<>();
     Integer parentId;
+    Date bDate;
 
 
     /**
@@ -162,10 +164,11 @@ public class PersonFragment extends Fragment {
              */
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                Date bDate = new Date(year - 1900, month, day);
+                bDate = new Date(year - 1900, month, day);
                 SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                 String test = format.format(bDate);
                 mDatePicker.setText(test);
+                Log.d(TAG, bDate.toString());
             }
         };
     }
@@ -220,7 +223,7 @@ public class PersonFragment extends Fragment {
         String name = edtFirstName.getText().toString();
         String surname = edtLastName.getText().toString();
         String dateBirthday = edtBirthday.getText().toString();
-        Date birthday = ConvertStringToDate(dateBirthday);
+        Date birthday = bDate;
         Gender gender = Gender.getGenderDescription(spnGender.getSelectedItem().toString());
         // Account for no level set
         Integer level = 0;
@@ -306,6 +309,8 @@ public class PersonFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //Return to the book
+        returnToContacts();
 
     }
 
@@ -335,5 +340,11 @@ public class PersonFragment extends Fragment {
         edtAddressProvince = (EditText) myView.findViewById(R.id.edtAddressProvince);
         edtAddressCity = (EditText) myView.findViewById(R.id.edtAddressCity);
         edtAddressZip = (EditText) myView.findViewById(R.id.edtAddressZip);
+    }
+
+    public void returnToContacts() {
+
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment_Book()).commit();
     }
 }

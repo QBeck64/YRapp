@@ -17,6 +17,7 @@ import com.example.kkado.yrapp.dao.AddressDAO;
 import com.example.kkado.yrapp.dao.PersonDAO;
 import com.example.kkado.yrapp.entity.Address;
 import com.example.kkado.yrapp.entity.Person;
+import com.example.kkado.yrapp.helper.Util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -165,7 +166,7 @@ public class PersonFragment_View extends Fragment {
         // setText
         edtFirstName.setText(personView.getName());
         edtLastName.setText(personView.getSurname());
-        edtBirthday.setText(personView.getBirthday().toString());
+        edtBirthday.setText(Util.ConvertDateToString(personView.getBirthday()));
         spnGender.setText(personView.getGender().getDescription());
         edtPhoneNumber.setText(personView.getPhoneNumber());
         edtEmailAddress.setText(personView.getEmail());
