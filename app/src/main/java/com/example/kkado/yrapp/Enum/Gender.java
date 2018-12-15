@@ -3,19 +3,19 @@ package com.example.kkado.yrapp.Enum;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
+/**enum access infromation rearding gender 
  *
  */
 public enum Gender {
     Masculine(1, "Masculine"), Feminine(2, "Feminine");
 
-    /**
+    /**Access id infromation and description
      * Members
      */
     private int id;
     private String description;
 
-    /**
+    /**Costructor integrates id nad description
      * Constructor
      */
     private Gender() {
@@ -26,7 +26,7 @@ public enum Gender {
         this.description = description;
     }
 
-    /**
+    /**Access id and description 
      * Gets
      */
     public int getId() {
@@ -37,7 +37,7 @@ public enum Gender {
         return description;
     }
 
-    /**
+    /**Access id and description
      * Sets
      */
     public void setId(int id) {
@@ -48,12 +48,12 @@ public enum Gender {
         this.description = description;
     }
 
-    /**
+    /**Map uses gender
      * Records the relationships between the description and the value of an enum element
      */
     private static Map<String, Gender> relations;
 
-    /**
+    /**Gets decription from string
      * Retrieve an enum element from a string
      *
      * @param description
