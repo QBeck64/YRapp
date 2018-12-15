@@ -28,10 +28,10 @@
     <string name="personParent">Person Parent</string>
     <string name="typePerson">PersonType</string>
     <string name="personLevel">Level</string>
-    <string name="editContact">Edit Contact</string>
+    <string name="editContact">Edit Person</string>
     <string name="tab_text_1">Contacts</string>
 
-    <string name="deleteContact">Delete Contact</string>
+    <string name="deleteContact">Delete Person</string>
     <string name="menuCompetition">Competition</string>
     <string name="menuTarget">Target</string>
     <string name="menuInvoicing">Invoicing</string>

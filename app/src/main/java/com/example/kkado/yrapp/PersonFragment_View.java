@@ -4,10 +4,15 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -74,6 +79,8 @@ public class PersonFragment_View extends Fragment {
         Bundle data = getArguments();
         idPerson = data.getInt("personID");
         ImageButton btnReturn = (ImageButton) myView.findViewById(R.id.btnReturn);
+        Button btEdit = myView.findViewById(R.id.btnEdit);
+        Button btDelete = myView.findViewById(R.id.btnDelete);
 
         // Get/set person
         try {
@@ -99,6 +106,13 @@ public class PersonFragment_View extends Fragment {
             displayPerson(personView);
         if (addressView != null)
             displayAddress(addressView);
+
+        // Edit and delete buttons
+        btDelete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                deleteContact();
+            }
+        });
 
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,5 +217,10 @@ public class PersonFragment_View extends Fragment {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment_Book()).commit();
+    }
+
+    public void deleteContact() {
+        personDAO.delete(idPerson);
+        returnToContacts();
     }
 }
