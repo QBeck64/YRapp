@@ -24,9 +24,7 @@ public class SqliteAdapter extends SQLiteOpenHelper {
     private SQLiteDatabase mySQLiteDatabase;
     private boolean mNeedUpdate = false;
 
-    /**
-     * @param context
-     */
+   
     public SqliteAdapter(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         if (android.os.Build.VERSION.SDK_INT >= 17)
@@ -40,7 +38,7 @@ public class SqliteAdapter extends SQLiteOpenHelper {
         this.getReadableDatabase();
     }
 
-    /**
+    /**SqliteAdapter iniciates accesing data from different tables. Information gets display with update.
      * @throws IOException
      */
     public void updateDataBase() throws IOException {
@@ -55,7 +53,8 @@ public class SqliteAdapter extends SQLiteOpenHelper {
         }
     }
 
-    /**
+    /**SqliteAdapter Using CompetitionDAO and the implementation of boolean can get access to specific information related to 
+    competition.
      * @return
      */
     private boolean checkDataBase() {
@@ -63,7 +62,7 @@ public class SqliteAdapter extends SQLiteOpenHelper {
         return dbFile.exists();
     }
 
-    /**
+    /**SqliteAdapter uses copy data base 
      *
      */
     private void copyDataBase() {
@@ -78,7 +77,7 @@ public class SqliteAdapter extends SQLiteOpenHelper {
         }
     }
 
-    /**
+    /**SqliteAdapter uses copy data base file
      * @throws IOException
      */
     private void copyDBFile() throws IOException {
@@ -94,7 +93,7 @@ public class SqliteAdapter extends SQLiteOpenHelper {
         mInput.close();
     }
 
-    /**
+    /**Boolean uses methote to update openDataBase if information is deleted
      * @return
      * @throws SQLException
      */
@@ -103,7 +102,7 @@ public class SqliteAdapter extends SQLiteOpenHelper {
         return mySQLiteDatabase != null;
     }
 
-    /**
+    /**SqliteAdapter uses the SQLite toaccess information
      *
      */
     @Override
@@ -113,14 +112,14 @@ public class SqliteAdapter extends SQLiteOpenHelper {
         super.close();
     }
 
-    /**
+    /**SqliteAdapter access SQL data base
      * @param db
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
     }
 
-    /**
+    /**SqliteAdapter and onUpgrade access the data base
      * @param db
      * @param oldVersion
      * @param newVersion
