@@ -21,14 +21,14 @@ public class PersonDAO {
     private SqliteAdapter dbHelper;
     private SQLiteDatabase mySQLiteDatabase;
 
-    /**
+    /**PersonDAO access information using data source to identify completition.
      * @param myContext
      */
     public PersonDAO(Context myContext) {
         initializeDataBase(myContext);
     }
 
-    /**
+    /**PersonDAO iniciates accesing data from different tables. Information gets display with update.
      * @param myContext
      */
     private void initializeDataBase(Context myContext) {
@@ -47,7 +47,8 @@ public class PersonDAO {
         }
     }
 
-    /**
+    /**PersonDAO and the implementation of boolean can get access to specific information related to 
+    competition. 
      * @param person
      * @return
      */
@@ -70,7 +71,7 @@ public class PersonDAO {
             return mySQLiteDatabase.insert(TABLE, null, cv) > 0;
     }
 
-    /**
+    /**Long contributes to saveinformation dercribed on SaveCompetition, such as goal
      *
      * @param person
      * @return
@@ -94,7 +95,7 @@ public class PersonDAO {
             return mySQLiteDatabase.insert(TABLE, null, cv);
     }
 
-    /**
+    /**Boolean  uses a delete methote to update mySQLiteDatabase if information is deleted. 
      * @param id
      * @return
      */
@@ -102,7 +103,7 @@ public class PersonDAO {
         return mySQLiteDatabase.delete(TABLE, "idPerson=?", new String[]{id + ""}) > 0;
     }
 
-    /**
+    /**PersonDAO access list using strings describing goal,description, and completion.
      * @return
      * @throws Exception
      */
@@ -130,7 +131,7 @@ public class PersonDAO {
         return personList;
     }
 
-    /**
+    /**SelectId is use as identifier to CompetitionDAO, and accessing data base.
      *
      * @param id
      * @return
