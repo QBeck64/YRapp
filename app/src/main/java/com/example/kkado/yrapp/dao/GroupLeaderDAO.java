@@ -91,7 +91,7 @@ public class GroupLeaderDAO {
      * @return
      */
     public boolean delete(int id) {
-        return mySQLiteDatabase.delete(TABLE, "idPeriod=?", new String[]{id + ""}) > 0;
+        return mySQLiteDatabase.delete(TABLE, "idGroupLeader=?", new String[]{id + ""}) > 0;
     }
 
     /**GroupLeader access list using strings describing goal,description, and completion

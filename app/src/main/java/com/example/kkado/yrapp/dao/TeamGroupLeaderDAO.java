@@ -120,8 +120,29 @@ public class TeamGroupLeaderDAO {
      */
     public TeamGroupLeader selectId(long id) throws Exception {
         TeamGroupLeader teamGroupLeader = null;
+        String[] params = new String[]{String.valueOf(id)};
 
-        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Invoicing", null);
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM TeamGroupLeader WHERE idTeamGroupLeader = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idTeamGroupLeader = cursor.getInt(cursor.getColumnIndex("idTeamGroupLeader"));
+            int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
+            Date initialDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("initialDate")));
+            Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
+
+            teamGroupLeader = new TeamGroupLeader(idTeamGroupLeader, initialDate, finalDate, idPerson);
+        }
+        cursor.close();
+
+        return teamGroupLeader;
+    }
+
+    public TeamGroupLeader selectPersonId(long idPersonIndex) throws Exception {
+        TeamGroupLeader teamGroupLeader = null;
+        String[] params = new String[]{String.valueOf(idPersonIndex)};
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM TeamGroupLeader WHERE idPerson = ? ", params);
+
 
         while (cursor.moveToNext()) {
             int idTeamGroupLeader = cursor.getInt(cursor.getColumnIndex("idTeamGroupLeader"));

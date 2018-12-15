@@ -20,9 +20,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.kkado.yrapp.dao.AddressDAO;
+import com.example.kkado.yrapp.dao.CompetitionParticipantDAO;
+import com.example.kkado.yrapp.dao.InvoicingDAO;
+import com.example.kkado.yrapp.dao.PeriodDAO;
 import com.example.kkado.yrapp.dao.PersonDAO;
+import com.example.kkado.yrapp.dao.TeamGroupLeaderDAO;
 import com.example.kkado.yrapp.entity.Address;
+import com.example.kkado.yrapp.entity.CompetitionParticipant;
+import com.example.kkado.yrapp.entity.Invoicing;
+import com.example.kkado.yrapp.entity.Period;
 import com.example.kkado.yrapp.entity.Person;
+import com.example.kkado.yrapp.entity.TeamGroupLeader;
 import com.example.kkado.yrapp.helper.Util;
 
 import java.text.ParseException;
@@ -228,19 +236,41 @@ public class PersonFragment_View extends Fragment {
     }
 
     public void deleteContact() {
-        personDAO.delete(idPerson);
-        returnToContacts();
+        if (validateIsCanDelete()) {
+            addressDAO.delete(idPerson);
+            personDAO.delete(idPerson);
+            returnToContacts();
+        }
+    }
+
+    private boolean validateIsCanDelete() {
+        CompetitionParticipantDAO competitionParticipantDAO = new CompetitionParticipantDAO(context);
+        CompetitionParticipant competitionParticipant = new CompetitionParticipant();
+        InvoicingDAO invoicingDAO = new InvoicingDAO(context);
+        Invoicing invoicing = new Invoicing();
+        TeamGroupLeaderDAO teamGroupLeaderDAO = new TeamGroupLeaderDAO(context);
+        TeamGroupLeader teamGroupLeader = new TeamGroupLeader();
+
+        Boolean result = false;
+        try {
+            
+            return competitionParticipantDAO.selectPersonId(idPerson) == null || invoicingDAO.selectPersonId(idPerson) == null || teamGroupLeaderDAO.selectPersonId(idPerson) == null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public void editContact() {
         personView.setEmail(edtEmailAddress.getText().toString());
         personView.setPhoneNumber(edtPhoneNumber.getText().toString());
-        if(!TextUtils.isEmpty(edtLevel.getText().toString())) {
+        if (!TextUtils.isEmpty(edtLevel.getText().toString())) {
             personView.setLevel(Integer.parseInt(edtLevel.getText().toString()));
         }
 
         addressView.setNameAddress(edtAddressStreet.getText().toString());
-        if(!TextUtils.isEmpty(edtAddressNumber.getText().toString())) {
+        if (!TextUtils.isEmpty(edtAddressNumber.getText().toString())) {
             addressView.setNumberAddress(Integer.parseInt(edtAddressNumber.getText().toString()));
         }
         addressView.setComplement(edtAddressComplement.getText().toString());

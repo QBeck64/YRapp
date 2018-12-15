@@ -152,4 +152,30 @@ public class InvoicingDAO {
 
         return invoicing;
     }
+
+    public Invoicing selectPersonId(long idPersonIndex) throws Exception {
+        Invoicing invoicing = null;
+        String[] params = new String[]{String.valueOf(idPersonIndex)};
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Invoicing WHERE idPerson = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idInvoicing = cursor.getInt(cursor.getColumnIndex("idInvoicing"));
+            float invoice = cursor.getFloat(cursor.getColumnIndex("invoicing"));
+            int idPerson = cursor.getInt(cursor.getColumnIndex("idPerson"));
+            int idPeriod = cursor.getInt(cursor.getColumnIndex("idPeriod"));
+
+            PersonDAO personDAO = new PersonDAO(myContext);
+            Person person = personDAO.selectId(idPerson);
+
+            PeriodDAO periodDAO = new PeriodDAO(myContext);
+            Period period = periodDAO.selectId(idPeriod);
+
+            invoicing = new Invoicing(idInvoicing, invoice, idPerson, idPeriod, period, person);
+        }
+        cursor.close();
+
+        return invoicing;
+    }
+
 }

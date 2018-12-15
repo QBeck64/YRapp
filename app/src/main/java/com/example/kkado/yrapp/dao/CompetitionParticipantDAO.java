@@ -176,4 +176,32 @@ public class CompetitionParticipantDAO {
         return competitionParticipant;
     }
 
+    public CompetitionParticipant selectPersonId(long idPerson) throws Exception {
+        CompetitionParticipant competitionParticipant = null;
+
+        String[] params = new String[]{String.valueOf(idPerson)};
+
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Competition WHERE idParticipante = ? ", params);
+
+        while (cursor.moveToNext()) {
+            int idCompetitionParticipant = cursor.getInt(cursor.getColumnIndex("idCompetitionParticipant"));
+            int idParticipant = cursor.getInt(cursor.getColumnIndex("idParticipant"));
+            int idCompetition = cursor.getInt(cursor.getColumnIndex("idCompetition"));
+            Date initialDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("initialDate")));
+            Date finalDate = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("finalDate")));
+            boolean prizeGiven = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("prizeGiven")));
+
+            PersonDAO personDAO = new PersonDAO(myContext);
+            Person person = personDAO.selectId(idParticipant);
+
+            CompetitionDAO competitionDAO = new CompetitionDAO(myContext);
+            Competition competition = competitionDAO.selectId(idCompetition);
+
+            competitionParticipant = new CompetitionParticipant(idCompetitionParticipant, idParticipant, idCompetition, initialDate, finalDate, prizeGiven, person, competition);
+        }
+        cursor.close();
+
+        return competitionParticipant;
+    }
+
 }
