@@ -17,7 +17,7 @@ public class Person {
     private String surname;
     private Date birthday;
     private Gender gender;
-    private int level;
+    private Integer level;
     private String email;
     private String phoneNumber;
     private Integer idPersonParent;
@@ -31,7 +31,7 @@ public class Person {
 
     }
 
-    public Person(int idPerson, String name, String surname, Date birthday, Gender gender, int level, String email, String phoneNumber, Integer idPersonParent, TypePerson type) {
+    public Person(int idPerson, String name, String surname, Date birthday, Gender gender, Integer level, String email, String phoneNumber, Integer idPersonParent, TypePerson type) {
         this.idPerson = idPerson;
         this.name = name;
         this.surname = surname;
@@ -44,7 +44,7 @@ public class Person {
         this.type = type;
     }
 
-    public Person(String name, String surname, Date birthday, Gender gender, int level, String email, String phoneNumber, Integer idPersonParent, TypePerson type) {
+    public Person(String name, String surname, Date birthday, Gender gender, Integer level, String email, String phoneNumber, Integer idPersonParent, TypePerson type) {
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
@@ -99,11 +99,11 @@ public class Person {
         this.gender = gender;
     }
 
-    public int getLevel() {
+    public Integer getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
@@ -147,7 +147,7 @@ public class Person {
         this.type = type;
     }
 
-    public Person(int idPerson, String name, String surname, Date birthday, Gender gender, int level, String email, String phoneNumber, Integer idPersonParent, Person personParent, TypePerson type) {
+    public Person(int idPerson, String name, String surname, Date birthday, Gender gender, Integer level, String email, String phoneNumber, Integer idPersonParent, Person personParent, TypePerson type) {
         this.idPerson = idPerson;
         this.name = name;
         this.surname = surname;

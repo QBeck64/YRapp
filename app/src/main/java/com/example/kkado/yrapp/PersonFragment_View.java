@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ import java.util.Date;
  *
  */
 public class PersonFragment_View extends Fragment {
-    private static final String TAG = "ContactAdd";
+    private static final String TAG = "ContactView";
     View myView;
     private Context context;
     TextView edtFirstName;
@@ -44,14 +45,13 @@ public class PersonFragment_View extends Fragment {
     TextView edtAddressStreet;
     TextView edtPersonParent;
 
-
     Integer idPerson;
     AddressDAO addressDAO;
     PersonDAO personDAO;
     Person personView = new Person();
     Address addressView = new Address();
+
     /**
-     *
      * @param context
      */
     @Override
@@ -61,7 +61,6 @@ public class PersonFragment_View extends Fragment {
     }
 
     /**
-     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -69,36 +68,47 @@ public class PersonFragment_View extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_person_view, container, false);
+        myView = inflater.inflate(R.layout.fragment_persons_view, container, false);
 
         Bundle data = getArguments();
         idPerson = data.getInt("personID");
+        ImageButton btnReturn = (ImageButton) myView.findViewById(R.id.btnReturn);
 
         // Get/set person
         try {
+
             personDAO = getPersonView(idPerson);
             personView = personDAO.selectId(idPerson);
+            if (personView.getIdPersonParent() > 0) {
+                personView.setPersonParent(personDAO.selectId(personView.getIdPersonParent()));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         // Get/Set address
         try {
             addressDAO = getAddressView(idPerson);
-            addressView = addressDAO.selectId(idPerson);
+            addressView = addressDAO.selectPersonId(idPerson);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        displayPerson(personView);
-        displayAddress(addressView);
+        if (personView != null)
+            displayPerson(personView);
+        if (addressView != null)
+            displayAddress(addressView);
 
-
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                returnToContacts();
+            }
+        });
         return myView;
     }
 
-
     /**
-     *
      * @param dateText
      * @return
      */
@@ -117,21 +127,6 @@ public class PersonFragment_View extends Fragment {
     }
 
     /**
-     *
-     * @return
-     */
-
-
-
-
-    /**
-     *
-     */
-
-
-
-    /**
-     *
      * @param id Person object id
      * @return Person
      * @throws Exception
@@ -143,7 +138,6 @@ public class PersonFragment_View extends Fragment {
     }
 
     /**
-     *
      * @param id
      * @return
      * @throws Exception
@@ -155,7 +149,6 @@ public class PersonFragment_View extends Fragment {
     }
 
     /**
-     *
      * @param personView
      */
     private void displayPerson(Person personView) {
@@ -176,42 +169,36 @@ public class PersonFragment_View extends Fragment {
         spnGender.setText(personView.getGender().getDescription());
         edtPhoneNumber.setText(personView.getPhoneNumber());
         edtEmailAddress.setText(personView.getEmail());
-        edtLevel.setText(personView.getLevel());
-        edtPersonParent.setText(personView.getPersonParent().toString());
+        edtLevel.setText(Integer.toString(personView.getLevel()));
+        if (personView.getIdPersonParent() > 0)
+            edtLastName.setText(personView.getPersonParent().toString());
     }
 
     /**
-     *
      * @param addressView
      */
     private void displayAddress(Address addressView) {
         //find and set id's
-        TextView viewStreet = (TextView) myView.findViewById(R.id.addressStreet);
-        TextView viewNumber = (TextView) myView.findViewById(R.id.addressNumber);
-        TextView viewCompl = (TextView) myView.findViewById(R.id.addressCompliment);
-        TextView viewCity = (TextView) myView.findViewById(R.id.addressCity);
-        TextView viewProvince = (TextView) myView.findViewById(R.id.addressProvince);
-        TextView viewZip = (TextView) myView.findViewById(R.id.addressZip);
-        TextView viewCountry = (TextView) myView.findViewById(R.id.addressCountry);
+        TextView viewStreet = (TextView) myView.findViewById(R.id.edtAddressStreet);
+        TextView viewNumber = (TextView) myView.findViewById(R.id.edtAddressNumber);
+        TextView viewCompl = (TextView) myView.findViewById(R.id.edtAddressComplement);
+        TextView viewCity = (TextView) myView.findViewById(R.id.edtAddressCity);
+        TextView viewProvince = (TextView) myView.findViewById(R.id.edtAddressProvince);
+        TextView viewZip = (TextView) myView.findViewById(R.id.edtAddressZip);
 
         //setText
         viewStreet.setText(addressView.getNameAddress());
-//        viewNumber.setText(addressView.getNumberAddress());
-//        viewCompl.setText(addressView.getComplement());
-//        viewCity.setText(addressView.getCity());
-//        viewProvince.setText(addressView.getProvince());
-//        viewZip.setText(addressView.getPostalCode());
-//        viewCountry.setText(addressView.getCountry());
+        viewNumber.setText(Integer.toString(addressView.getNumberAddress()));
+        viewCompl.setText(addressView.getComplement());
+        viewCity.setText(addressView.getCity());
+        viewProvince.setText(addressView.getProvince());
+        viewZip.setText(addressView.getPostalCode());
+
         Log.d(TAG, "Successfully set address objects in View");
     }
 
-    public void createNewPerson(View v) {
 
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment()).commit();
-    }
-
-    public void returnToContacts(View v) {
+    public void returnToContacts() {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment_Book()).commit();

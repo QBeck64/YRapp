@@ -51,4 +51,5 @@
     <string name="fieldLeader">Leader</string>
     <string name="fieldSave">Save</string>
     <string name="title_activity_menu">YRapp</string>
+    <string name="fieldPerson">Person</string>
 </resources>

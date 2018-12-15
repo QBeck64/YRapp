@@ -22,8 +22,10 @@ import android.widget.TextView;
 
 import com.example.kkado.yrapp.dao.GroupLeaderDAO;
 import com.example.kkado.yrapp.dao.PersonDAO;
+import com.example.kkado.yrapp.dao.TeamGroupLeaderDAO;
 import com.example.kkado.yrapp.entity.GroupLeader;
 import com.example.kkado.yrapp.entity.Person;
+import com.example.kkado.yrapp.entity.TeamGroupLeader;
 import com.example.kkado.yrapp.helper.Util;
 
 import java.text.SimpleDateFormat;
@@ -36,7 +38,7 @@ import java.util.List;
  *
  */
 public class TeamFragment extends Fragment {
-    private static final String TAG = "GroupLeaderAdd";
+    private static final String TAG = "TeamGroupLeaderAdd";
 
     View myView;
     private Context context;
@@ -62,7 +64,7 @@ public class TeamFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_group, container, false);
+        myView = inflater.inflate(R.layout.fragment_team, container, false);
 
         Button btnSave = (Button)myView.findViewById(R.id.btnSave);
         ImageButton btnReturn = (ImageButton)myView.findViewById(R.id.btnReturn);
@@ -75,8 +77,8 @@ public class TeamFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                GroupLeader group = getGroupLeader();
-                saveNewGroupLeader(group);
+                TeamGroupLeader  team= getTeamGroupLeader();
+                saveNewTeamGroupLeader(team);
             }
         });
 
@@ -84,7 +86,7 @@ public class TeamFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                returnToGroupLeader_Book();
+                returnToTeamGroupLeader_Book();
             }
         });
 
@@ -94,7 +96,7 @@ public class TeamFragment extends Fragment {
     /**
      * @return
      */
-    private GroupLeader getGroupLeader() {
+    private TeamGroupLeader getTeamGroupLeader() {
 
         EditText edtDescription = myView.findViewById(R.id.edtDescription);
         EditText edtGoal = myView.findViewById(R.id.edtGoal);
@@ -105,23 +107,23 @@ public class TeamFragment extends Fragment {
         Date initialDate = bInitialDate;
         Date finalDate = bFinalDate;
 
-        GroupLeader group = new GroupLeader(groupName,personLeaderId,  initialDate,  finalDate);
+        TeamGroupLeader team = new TeamGroupLeader();
 
-        return group;
+        return team;
     }
 
     /**
-     * @param newGroupLeader
+     * @param newTeamGroupLeader
      */
-    private void saveNewGroupLeader(GroupLeader newGroupLeader) {
+    private void saveNewTeamGroupLeader(TeamGroupLeader newTeamGroupLeader) {
         // Create DAO to store person object.
-        GroupLeaderDAO dao = new GroupLeaderDAO(context);
+        TeamGroupLeaderDAO dao = new TeamGroupLeaderDAO(context);
         // Save will now represent the newly created id fro the saved person
-        long GroupLeaderSave = dao.saveGroupLeader(newGroupLeader);
+        long TeamGroupLeaderSave = dao.saveTeamGroupLeader(newTeamGroupLeader);
 
-        if (GroupLeaderSave > 0) {
+        if (TeamGroupLeaderSave > 0) {
             Util.alert("Success", context);
-            returnToGroupLeader_Book();
+            returnToTeamGroupLeader_Book();
         } else {
             Util.alert("Error", context);
         }
@@ -220,10 +222,10 @@ public class TeamFragment extends Fragment {
         };
     }
 
-    public void returnToGroupLeader_Book() {
+    public void returnToTeamGroupLeader_Book() {
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_fragment, new GroupFragment_Book()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_fragment, new TeamFragment_Book()).commit();
     }
 
     private void setAutoPersonLeader() {

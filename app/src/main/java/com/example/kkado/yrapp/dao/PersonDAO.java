@@ -118,7 +118,7 @@ public class PersonDAO {
             String surname = cursor.getString(cursor.getColumnIndex("surname"));
             Date birthday = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("birthday")));
             Gender gender = Gender.getGenderDescription(cursor.getString(cursor.getColumnIndex("gender")));
-            int level = cursor.getInt(cursor.getColumnIndex("level"));
+            Integer level = cursor.getInt(cursor.getColumnIndex("level"));
             String email = cursor.getString(cursor.getColumnIndex("email"));
             String phoneNumber = cursor.getString(cursor.getColumnIndex("phoneNumber"));
             int idPersonParent = cursor.getInt(cursor.getColumnIndex("idPersonParent"));
@@ -150,7 +150,7 @@ public class PersonDAO {
             String surname = cursor.getString(cursor.getColumnIndex("surname"));
             Date birthday = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("birthday")));
             Gender gender = Gender.getGenderDescription(cursor.getString(cursor.getColumnIndex("gender")));
-            int level = cursor.getInt(cursor.getColumnIndex("level"));
+            Integer level = cursor.getInt(cursor.getColumnIndex("level"));
             String email = cursor.getString(cursor.getColumnIndex("email"));
             String phoneNumber = cursor.getString(cursor.getColumnIndex("phoneNumber"));
             int idPersonParent = cursor.getInt(cursor.getColumnIndex("idPersonParent"));
@@ -177,7 +177,7 @@ public class PersonDAO {
             String surname = cursor.getString(cursor.getColumnIndex("surname"));
             Date birthday = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("birthday")));
             Gender gender = Gender.getGenderDescription(cursor.getString(cursor.getColumnIndex("gender")));
-            int level = cursor.getInt(cursor.getColumnIndex("level"));
+            Integer level = cursor.getInt(cursor.getColumnIndex("level"));
             String email = cursor.getString(cursor.getColumnIndex("email"));
             String phoneNumber = cursor.getString(cursor.getColumnIndex("phoneNumber"));
             int idPersonParent = cursor.getInt(cursor.getColumnIndex("idPersonParent"));
@@ -205,7 +205,7 @@ public class PersonDAO {
             String surname = cursor.getString(cursor.getColumnIndex("surname"));
             Date birthday = Util.ConvertStringToDate(cursor.getString(cursor.getColumnIndex("birthday")));
             Gender gender = Gender.getGenderDescription(cursor.getString(cursor.getColumnIndex("gender")));
-            int level = cursor.getInt(cursor.getColumnIndex("level"));
+            Integer level = cursor.getInt(cursor.getColumnIndex("level"));
             String email = cursor.getString(cursor.getColumnIndex("email"));
             String phoneNumber = cursor.getString(cursor.getColumnIndex("phoneNumber"));
             int idPersonParent = cursor.getInt(cursor.getColumnIndex("idPersonParent"));

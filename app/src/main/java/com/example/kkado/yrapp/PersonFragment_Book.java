@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.kkado.yrapp.dao.PersonDAO;
@@ -53,7 +54,7 @@ public class PersonFragment_Book extends Fragment {
 
         itemView = (ListView) myView.findViewById(R.id.lstViewPerson);
         edtFilter = (EditText) myView.findViewById(R.id.edtFilterPerson);
-
+        ImageButton bt = (ImageButton)myView.findViewById(R.id.btnCreatePerson);
         try {
             initializeList();
         } catch (Exception e) {
@@ -77,14 +78,19 @@ public class PersonFragment_Book extends Fragment {
 
             }
         });
-
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createNewPerson();
+            }
+        });
         return myView;
     }
 
     /**
      * @param
      */
-    public void createNewPerson(View v) {
+    public void createNewPerson() {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment()).commit();

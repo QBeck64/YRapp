@@ -100,7 +100,6 @@ public class InvoicingFragment_View extends Fragment {
         vwvInvoicing.setText(Float.toString(invoicingView.getInvoicing()));
         vwvPerson.setText(invoicingView.getPerson().getSurname() + "," + invoicingView.getPerson().getName());
         vwvInitialDate.setText(Util.ConvertDateToString(invoicingView.getPeriod().getInitialDate()));
-        ;
         vwvFinalDate.setText(Util.ConvertDateToString(invoicingView.getPeriod().getFinalDate()));
     }
 
