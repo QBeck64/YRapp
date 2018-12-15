@@ -85,42 +85,42 @@
         style="@android:style/Widget.EditText"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/addressCity"
         android:inputType="textPostalAddress"
-        app:layout_constraintStart_toEndOf="@+id/edtAddressZip"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressStreet" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressProvince" />
 
     <TextView
         android:id="@+id/edtAddressProvince"
         style="@android:style/Widget.EditText"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/addressProvince"
         android:inputType="textPostalAddress"
-        app:layout_constraintEnd_toEndOf="@+id/edtAddressComplement"
-        app:layout_constraintHorizontal_bias="0.965"
-        app:layout_constraintStart_toEndOf="@+id/edtAddressCity"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressComplement" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressNumber" />
 
     <TextView
         android:id="@+id/edtAddressZip"
         style="@android:style/Widget.EditText"
         android:layout_width="76dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/addressZip"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/edtAddressNumber"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressNumber" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressComplement" />
 
     <TextView
         android:id="@+id/edtEmailAddress"
@@ -153,15 +153,18 @@
     <TextView
         android:id="@+id/edtAddressNumber"
         style="@android:style/Widget.EditText"
-        android:layout_width="64dp"
+        android:layout_width="0dp"
 
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/number_Addrerss"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/edtEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmailAddress" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edtAddressStreet"
+        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
 
     <TextView
         android:id="@+id/edtAddressComplement"
@@ -174,9 +177,8 @@
         android:ems="10"
         android:hint="@string/addressCompliment"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/edtPhoneNumber"
-        app:layout_constraintStart_toEndOf="@+id/edtAddressStreet"
-        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressStreet" />
 
     <TextView
         android:id="@+id/edtLevel"
@@ -206,7 +208,7 @@
         android:ems="10"
         android:hint="@string/streetAddress"
         android:inputType="textPostalAddress"
-        app:layout_constraintStart_toEndOf="@+id/edtAddressNumber"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtEmailAddress" />
 
     <ImageButton
@@ -223,33 +225,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressCity"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressComplement"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <Button
         android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="171dp"
-        android:layout_marginBottom="65dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginBottom="60dp"
         android:text="@string/editContact"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressCity" />
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressZip" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="174dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="63dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="60dp"
         android:text="@string/deleteContact"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressProvince" />
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressCity" />
 
 </android.support.constraint.ConstraintLayout>

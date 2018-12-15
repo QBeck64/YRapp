@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -114,6 +115,13 @@ public class PersonFragment_View extends Fragment {
             }
         });
 
+        btEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editContact();
+            }
+        });
+
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,20 +202,20 @@ public class PersonFragment_View extends Fragment {
      */
     private void displayAddress(Address addressView) {
         //find and set id's
-        TextView viewStreet = (TextView) myView.findViewById(R.id.edtAddressStreet);
-        TextView viewNumber = (TextView) myView.findViewById(R.id.edtAddressNumber);
-        TextView viewCompl = (TextView) myView.findViewById(R.id.edtAddressComplement);
-        TextView viewCity = (TextView) myView.findViewById(R.id.edtAddressCity);
-        TextView viewProvince = (TextView) myView.findViewById(R.id.edtAddressProvince);
-        TextView viewZip = (TextView) myView.findViewById(R.id.edtAddressZip);
+        edtAddressStreet = (TextView) myView.findViewById(R.id.edtAddressStreet);
+        edtAddressNumber = (TextView) myView.findViewById(R.id.edtAddressNumber);
+        edtAddressComplement = (TextView) myView.findViewById(R.id.edtAddressComplement);
+        edtAddressCity = (TextView) myView.findViewById(R.id.edtAddressCity);
+        edtAddressProvince = (TextView) myView.findViewById(R.id.edtAddressProvince);
+        edtAddressZip = (TextView) myView.findViewById(R.id.edtAddressZip);
 
         //setText
-        viewStreet.setText(addressView.getNameAddress());
-        viewNumber.setText(Integer.toString(addressView.getNumberAddress()));
-        viewCompl.setText(addressView.getComplement());
-        viewCity.setText(addressView.getCity());
-        viewProvince.setText(addressView.getProvince());
-        viewZip.setText(addressView.getPostalCode());
+        edtAddressStreet.setText(addressView.getNameAddress());
+        edtAddressNumber.setText(Integer.toString(addressView.getNumberAddress()));
+        edtAddressComplement.setText(addressView.getComplement());
+        edtAddressCity.setText(addressView.getCity());
+        edtAddressProvince.setText(addressView.getProvince());
+        edtAddressZip.setText(addressView.getPostalCode());
 
         Log.d(TAG, "Successfully set address objects in View");
     }
@@ -222,5 +230,41 @@ public class PersonFragment_View extends Fragment {
     public void deleteContact() {
         personDAO.delete(idPerson);
         returnToContacts();
+    }
+
+    public void editContact() {
+        personView.setEmail(edtEmailAddress.getText().toString());
+        personView.setPhoneNumber(edtPhoneNumber.getText().toString());
+        if(!TextUtils.isEmpty(edtLevel.getText().toString())) {
+            personView.setLevel(Integer.parseInt(edtLevel.getText().toString()));
+        }
+
+        addressView.setNameAddress(edtAddressStreet.getText().toString());
+        if(!TextUtils.isEmpty(edtAddressNumber.getText().toString())) {
+            addressView.setNumberAddress(Integer.parseInt(edtAddressNumber.getText().toString()));
+        }
+        addressView.setComplement(edtAddressComplement.getText().toString());
+        addressView.setProvince(edtAddressProvince.getText().toString());
+        addressView.setCity(edtAddressCity.getText().toString());
+        addressView.setPostalCode(edtAddressZip.getText().toString());
+
+        long personSave = personDAO.savePerson(personView);
+        Log.d(TAG, "saving person, getting LOng back");
+
+        if (personSave > 0) {
+            Util.alert("Success", context);
+        } else {
+            Util.alert("Error", context);
+        }
+
+        long addressSave = addressDAO.saveAddress(addressView);
+
+        Log.d(TAG, String.valueOf(addressSave));
+        if (addressSave > 0) {
+            Util.alert("Success", context);
+        } else {
+            Util.alert("Error", context);
+        }
+        Log.d(TAG, "saved address successfully, is " + addressSave);
     }
 }
