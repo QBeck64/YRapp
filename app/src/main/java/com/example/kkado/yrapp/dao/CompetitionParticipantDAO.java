@@ -181,7 +181,7 @@ public class CompetitionParticipantDAO {
 
         String[] params = new String[]{String.valueOf(idPerson)};
 
-        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM Competition WHERE idParticipante = ? ", params);
+        Cursor cursor = mySQLiteDatabase.rawQuery("SELECT * FROM CompetitionParticipant WHERE idParticipante = ? ", params);
 
         while (cursor.moveToNext()) {
             int idCompetitionParticipant = cursor.getInt(cursor.getColumnIndex("idCompetitionParticipant"));

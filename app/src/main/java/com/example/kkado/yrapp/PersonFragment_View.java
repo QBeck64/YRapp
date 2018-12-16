@@ -239,22 +239,30 @@ public class PersonFragment_View extends Fragment {
         if (validateIsCanDelete()) {
             addressDAO.delete(idPerson);
             personDAO.delete(idPerson);
+            Util.alert("Registration successfully deleted.", context);
             returnToContacts();
         }
+        else {
+            Util.alert("Deletion of this record can not be performed.", context);
+        }
+
     }
 
     private boolean validateIsCanDelete() {
         CompetitionParticipantDAO competitionParticipantDAO = new CompetitionParticipantDAO(context);
-        CompetitionParticipant competitionParticipant = new CompetitionParticipant();
+        CompetitionParticipant competitionParticipant = null;
         InvoicingDAO invoicingDAO = new InvoicingDAO(context);
-        Invoicing invoicing = new Invoicing();
+        Invoicing invoicing = null;
         TeamGroupLeaderDAO teamGroupLeaderDAO = new TeamGroupLeaderDAO(context);
-        TeamGroupLeader teamGroupLeader = new TeamGroupLeader();
+        TeamGroupLeader teamGroupLeader = null;
 
         Boolean result = false;
         try {
-            
-            return competitionParticipantDAO.selectPersonId(idPerson) == null || invoicingDAO.selectPersonId(idPerson) == null || teamGroupLeaderDAO.selectPersonId(idPerson) == null;
+            competitionParticipant = competitionParticipantDAO.selectPersonId(idPerson);
+            invoicing = invoicingDAO.selectPersonId(idPerson);
+            teamGroupLeader = teamGroupLeaderDAO.selectPersonId(idPerson);
+
+            result =  competitionParticipant == null && invoicing == null && teamGroupLeader == null;
         } catch (Exception e) {
             e.printStackTrace();
         }
