@@ -40,7 +40,10 @@ import java.util.List;
 import static com.example.kkado.yrapp.LevelUpdaterService.startActionUpdateCg;
 
 /**
- *
+ * All input recieved from the screen will be saved into Person and Address objects respectfully. then each wil be saved in the crrect DAO.
+ * In addition, a datePicker will be created in a dateListener class to be implemented when the Birthday TextView field is selected. The PersonParent
+ * field on the screen is an AutoCompleteTextView field, and options from the PersonDAO will be displayed to accurately select the
+ * correct parent id/name.
  */
 public class PersonFragment extends Fragment {
     private static final String TAG = "ContactAdd";
@@ -267,7 +270,8 @@ public class PersonFragment extends Fragment {
     }
 
     /**
-     *
+     * Save Person and Address objects to the respective databases. setPersonInfo() and setAddressInfo() will be used to set the objects
+     * before being saved in the DAO's.
      */
     private void saveNewPerson() {
         // Create DAO to store person object.
@@ -315,7 +319,7 @@ public class PersonFragment extends Fragment {
     }
 
     /**
-     *
+     * Purpose is to load and populate the Gender spinner
      */
     private void LoadDropDown() {
         Spinner mySpinnerGender = (Spinner) myView.findViewById(R.id.spnGender);
@@ -323,7 +327,7 @@ public class PersonFragment extends Fragment {
     }
 
     /**
-     *
+     * Will set all screen components to the editText variables. This will allow for easy use of retrieving information from the activity.
      */
     private void setScreenComponents() {
         edtFirstName = (EditText) myView.findViewById(R.id.edtFirstName);
@@ -342,6 +346,9 @@ public class PersonFragment extends Fragment {
         edtAddressZip = (EditText) myView.findViewById(R.id.edtAddressZip);
     }
 
+    /**
+     * Using FragmentManager, a transaction will begin to return to the PersonFragment_Book
+     */
     public void returnToContacts() {
 
         FragmentManager fragmentManager = getFragmentManager();

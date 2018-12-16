@@ -28,7 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Using the PersonDAO databses, a ListView is created and an ArrayList is used to display
+ * all the persons currently stored in the PersonDAO. An onItemClick function can occur if a person is selected, hwich will then start the
+ * PersonFragment_View Activity.
  */
 public class PersonFragment_Book extends Fragment {
     View myView;

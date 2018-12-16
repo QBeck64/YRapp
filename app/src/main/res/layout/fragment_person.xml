@@ -15,7 +15,6 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/personParent"
-        app:layout_constraintEnd_toStartOf="@+id/edtLevel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +29,6 @@
         android:ems="10"
         android:hint="@string/firstName"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/edtLastName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtPersonParent"
         tools:targetApi="o" />
@@ -39,8 +37,6 @@
         android:id="@+id/edtLastName"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
 
         android:layout_marginEnd="8dp"
@@ -50,7 +46,6 @@
         android:hint="@string/lastName"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edtFirstName"
         app:layout_constraintTop_toBottomOf="@+id/edtLevel"
         tools:targetApi="o" />
 
@@ -58,27 +53,26 @@
         android:id="@+id/edtBirthday"
         android:layout_width="160dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:background="?attr/editTextBackground"
         android:ems="10"
+        android:gravity="center_vertical"
         android:hint="yyyy/MM/dd"
         android:inputType="date"
         android:selectAllOnFocus="false"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textColor="?attr/editTextColor"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/spnGender"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtFirstName"
-        tools:targetApi="o"
-        android:textColor="?attr/editTextColor"
-        android:background="?attr/editTextBackground"
-        android:gravity="center_vertical"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"/>
+        tools:targetApi="o" />
 
     <Spinner
         android:id="@+id/spnGender"
         android:layout_width="160dp"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -86,7 +80,6 @@
         android:dropDownWidth="match_parent"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edtBirthday"
         app:layout_constraintTop_toBottomOf="@+id/edtLastName"
         tools:prompt="@string/gender_prompt" />
 
@@ -100,8 +93,6 @@
         android:id="@+id/edtAddressCity"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginLeft="75dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -109,15 +100,12 @@
         android:hint="@string/addressCity"
         android:inputType="textPostalAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edtAddressZip"
         app:layout_constraintTop_toBottomOf="@+id/edtAddressProvince" />
 
     <EditText
         android:id="@+id/edtAddressProvince"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -125,7 +113,6 @@
         android:hint="@string/addressProvince"
         android:inputType="textPostalAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edtAddressComplement"
         app:layout_constraintTop_toBottomOf="@+id/edtAddressNumber" />
 
     <EditText
@@ -158,8 +145,6 @@
         android:id="@+id/edtPhoneNumber"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -167,8 +152,6 @@
         android:hint="@string/phoneNumber"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/edtEmailAddress"
         app:layout_constraintTop_toBottomOf="@+id/spnGender" />
 
     <Button
@@ -190,8 +173,6 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -199,7 +180,6 @@
         android:hint="@string/number_Addrerss"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edtAddressStreet"
         app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
 
     <EditText
@@ -212,17 +192,12 @@
         android:ems="10"
         android:hint="@string/addressCompliment"
         android:inputType="text"
-        app:layout_constraintEnd_toStartOf="@+id/edtAddressProvince"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtAddressStreet" />
 
     <EditText
         android:id="@+id/edtLevel"
-        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"

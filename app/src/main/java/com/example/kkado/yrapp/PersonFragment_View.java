@@ -38,7 +38,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
+ * PersonFragment_View will display all of the information stored in the Person and Address object. The pseronId, sent from PersonFragment_Book,
+ * allows the program to access the correct Person and Address objects from the DAO. All information will be set in the TextView fields on the
+ * activity page. In addition, a return button, delet person button, and edit person button are used.
  */
 public class PersonFragment_View extends Fragment {
     private static final String TAG = "ContactView";
@@ -228,13 +230,20 @@ public class PersonFragment_View extends Fragment {
         Log.d(TAG, "Successfully set address objects in View");
     }
 
-
+    /**
+     * Uses fragmentManager to begin a transaction returning the user to the PersonFragment_Book activity.
+     */
     public void returnToContacts() {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_fragment, new PersonFragment_Book()).commit();
     }
 
+    /**
+     * Will first perform validations before deleting a contact, because a missing contact can disrupt other portions of the program.
+     * If it is possible to delete, a message will appear successful, however, if not possible a message will appear stating it is not
+     * currently possible.
+     */
     public void deleteContact() {
         if (validateIsCanDelete()) {
             addressDAO.delete(idPerson);
@@ -248,6 +257,10 @@ public class PersonFragment_View extends Fragment {
 
     }
 
+    /**
+     * Will review the other databases to determine if it possible to delete the requested contact.
+     * @return
+     */
     private boolean validateIsCanDelete() {
         CompetitionParticipantDAO competitionParticipantDAO = new CompetitionParticipantDAO(context);
         CompetitionParticipant competitionParticipant = null;
@@ -270,6 +283,10 @@ public class PersonFragment_View extends Fragment {
         return result;
     }
 
+    /**
+     * Able to successfully save any changes made to some of the editable person fields. However, saving changes made to the
+     * address fields is currently not possible.
+     */
     public void editContact() {
         personView.setEmail(edtEmailAddress.getText().toString());
         personView.setPhoneNumber(edtPhoneNumber.getText().toString());
@@ -295,7 +312,7 @@ public class PersonFragment_View extends Fragment {
             Util.alert("Error", context);
         }
 
-        long addressSave = addressDAO.saveAddress(addressView);
+        /*long addressSave = addressDAO.saveAddress(addressView);
 
         Log.d(TAG, String.valueOf(addressSave));
         if (addressSave > 0) {
@@ -303,6 +320,6 @@ public class PersonFragment_View extends Fragment {
         } else {
             Util.alert("Error", context);
         }
-        Log.d(TAG, "saved address successfully, is " + addressSave);
+        Log.d(TAG, "saved address successfully, is " + addressSave);*/
     }
 }
